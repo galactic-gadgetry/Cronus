@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cronus.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class StartScreenViewModel : ViewModelBase
     {
-
-        public ViewModelBase? CurrentContentViewModel { get; set; } = new StartScreenViewModel();
     }
 }

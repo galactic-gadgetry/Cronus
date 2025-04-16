@@ -4,13 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cronus.Views"
+        xmlns:vm="clr-namespace:Cronus.ViewModels"
         mc:Ignorable="d"
         Style="{StaticResource DefaultWindowStyle}"
         MinHeight="510" MinWidth="950"
         WindowStartupLocation="CenterScreen">
     
     <Grid>
-        <Label Content="Main view placeholder"/>
+        <Border>
+
+            <ContentControl Content="{Binding CurrentContentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type vm:StartScreenViewModel}">
+                        <local:StartScreenView/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+            
+        </Border>
     </Grid>
     
 </Window>

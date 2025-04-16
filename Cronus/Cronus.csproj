@@ -9,11 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Logos\fast-time.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LadleUI\LadleUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\fast-time.png" />
   </ItemGroup>
 
 </Project>

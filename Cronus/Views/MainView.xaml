@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cronus.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Style="{StaticResource DefaultWindowStyle}"
+        MinHeight="510" MinWidth="950"
+        WindowStartupLocation="CenterScreen">
+    
     <Grid>
         <Label Content="Main view placeholder"/>
     </Grid>
+    
 </Window>

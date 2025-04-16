@@ -1,0 +1,223 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <!--
+    Base Tan:       #EFD9B4
+    Base Pink:      #D6A692
+    Base Brown:     #A39081
+    Base Blue:      #4D6160
+    Base Black:     #292522
+    -->
+
+    <!-- #Colors -->
+    <!--
+    <Color x:Key="BlueBase">#4D6160</Color>
+    <Color x:Key="BlueLighten15">#5F7170</Color>
+    
+    <Color x:Key="BlackBase">#292522</Color>
+    <Color x:Key="BlackLighten15">#3E3B38</Color>
+
+    <Color x:Key="SolidControlColorPrimary">#BFBEBD</Color>
+
+    <Color x:Key="TextFillColorPrimary">#FDFEFE</Color>
+
+    <Color x:Key="TextFillColorSecondary">#FFFFFF</Color>
+
+    <Color x:Key="WindowBackgroundColor">#292522</Color>
+    -->
+    <Color x:Key="WindowBackgroundColorPrimary100">#313338</Color>
+    <Color x:Key="WindowBackgroundColorPrimary90">#36363D</Color>
+
+    <Color x:Key="SolidControlFillColorPrimary80">#80848E</Color>
+    <Color x:Key="SolidControlFillColorPrimary90">#6D6D76</Color>
+    <Color x:Key="SolidControlFillColorPrimary100">#4E5058</Color>
+    <Color x:Key="SolidControlFillColorPrimary120">#404249</Color>
+    <Color x:Key="SolidControlFillColorPrimary130">#2B2D31</Color>
+    <Color x:Key="SolidControlFillColorPrimary140">#1E1E22</Color>
+    <Color x:Key="SolidControlFillColorPrimary170">#1A1B1E</Color>
+    <Color x:Key="SolidControlFillColorPrimaryDisabled">#494A50</Color>
+
+    <Color x:Key="SolidControlFillColorSecondary100">#5865F2</Color>
+    <Color x:Key="SolidControlFillColorSecondary110">#4752C4</Color>
+    <Color x:Key="SolidControlFillColorSecondary120">#3C45A5</Color>
+    <Color x:Key="SolidControlFillColorSecondaryDisabled">#424991</Color>
+
+    <Color x:Key="AlertControlFillColorPrimary100">#DA373C</Color>
+    <Color x:Key="AlertControlFillColorPrimary110">#BC2F32</Color>
+    <Color x:Key="AlertControlFillColorPrimary120">#8F2022</Color>
+    <Color x:Key="AlertControlFillColorPrimaryDisabled">#DA373E</Color>
+
+    <Color x:Key="TextControlFillColorPrimary90">#BCBEC2</Color>
+    <Color x:Key="TextControlFillColorPrimary100">#383A40</Color>
+
+    <Color x:Key="TextFillColorPrimary80">#C1C3C7</Color>
+    <Color x:Key="TextFillColorPrimary90">#B5BAC1</Color>
+    <Color x:Key="TextFillColorPrimary100">#828790</Color>
+    <Color x:Key="TextFillColorPrimaryDisabled">#66686C</Color>
+
+    <Color x:Key="TextFillColorSecondary100">#FFFFFF</Color>
+    <Color x:Key="TextFillColorSecondary120">#E0E1E3</Color>
+    <Color x:Key="TextFillColorSecondaryDisabled">#A3A4A7</Color>
+
+    <!-- #Brushes -->
+    <SolidColorBrush x:Key="ControlBackgroundFillColorBrush1" Color="{StaticResource SolidControlFillColorPrimary140}"/>
+    <SolidColorBrush x:Key="ControlBackgroundFillColorBrush2" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ControlBackgroundFillColorBrush3" Color="{StaticResource SolidControlFillColorPrimary170}"/>
+
+    <SolidColorBrush x:Key="LayerFillColorBrush1" Color="{StaticResource WindowBackgroundColorPrimary100}"/>
+    <SolidColorBrush x:Key="LayerFillColorBrush2" Color="{StaticResource SolidControlFillColorPrimary130}"/>
+
+    <SolidColorBrush x:Key="LayerAccentFillColorBrush1" Color="{StaticResource SolidControlFillColorSecondary100}"/>
+
+    <SolidColorBrush x:Key="TextFillColorBrush1" Color="{StaticResource TextFillColorPrimary80}"/>
+
+    <SolidColorBrush x:Key="TextAccentFillColorBrush1" Color="{StaticResource TextFillColorPrimary90}"/>
+
+    <SolidColorBrush x:Key="TextControlTextColorBrush1" Color="{StaticResource TextFillColorSecondary120}"/>
+
+    <SolidColorBrush x:Key="WindowBackgroundFillColorBrush1" Color="{StaticResource WindowBackgroundColorPrimary90}"/>
+
+
+    <!-- #Elevation Border Brushes -->
+    <SolidColorBrush x:Key="TextControlElevationBorderBrush" Color="Transparent"/>
+
+
+    <!-- #Button -->
+    <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ButtonBackgroundMouseOver" Color="{StaticResource SolidControlFillColorPrimary90}"/>
+    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{StaticResource SolidControlFillColorPrimary80}"/>
+    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{StaticResource SolidControlFillColorPrimaryDisabled}"/>
+    <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{StaticResource TextFillColorSecondaryDisabled}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrush" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushMouseOver" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{StaticResource TextFillColorSecondaryDisabled}"/>
+
+    <SolidColorBrush x:Key="AccentButtonBackground" Color="{StaticResource SolidControlFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="AccentButtonBackgroundMouseOver" Color="{StaticResource SolidControlFillColorSecondary110}"/>
+    <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="{StaticResource SolidControlFillColorSecondary120}"/>
+    <SolidColorBrush x:Key="AccentButtonBackgroundDisabled" Color="{StaticResource SolidControlFillColorSecondaryDisabled}"/>
+    <SolidColorBrush x:Key="AccentButtonBorderBrushMouseOver" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="AccentButtonBorderBrushPressed" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="AccentButtonBorderBrushDisabled" Color="{StaticResource TextFillColorSecondaryDisabled}"/>
+
+    <SolidColorBrush x:Key="DeleteButtonBackground" Color="{StaticResource AlertControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="DeleteButtonBackgroundMouseOver" Color="{StaticResource AlertControlFillColorPrimary110}"/>
+    <SolidColorBrush x:Key="DeleteButtonBackgroundPressed" Color="{StaticResource AlertControlFillColorPrimary120}"/>
+    <SolidColorBrush x:Key="DeleteButtonBackgroundDisabled" Color="{StaticResource AlertControlFillColorPrimaryDisabled}"/>
+    <SolidColorBrush x:Key="DeleteButtonBorderBrushMouseOver" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="DeleteButtonBorderBrushPressed" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="DeleteButtonBorderBrushDisabled" Color="{StaticResource TextFillColorSecondaryDisabled}"/>
+
+    <SolidColorBrush x:Key="EmptyDeleteButtonBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="EmptyDeleteButtonBackgroundMouseOver" Color="{StaticResource AlertControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="EmptyDeleteButtonBackgroundPressed" Color="{StaticResource AlertControlFillColorPrimary110}"/>
+    <SolidColorBrush x:Key="EmptyDeleteButtonBackgroundDisabled" Color="{StaticResource AlertControlFillColorPrimaryDisabled}"/>
+    <SolidColorBrush x:Key="EmptyDeleteButtonBorderBrush" Color="{StaticResource AlertControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="EmptyDeleteButtonBorderBrushMouseOver" Color="{StaticResource AlertControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="EmptyDeleteButtonBorderBrushPressed" Color="{StaticResource AlertControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="EmptyDeleteButtonBorderBrushDisabled" Color="{StaticResource AlertControlFillColorPrimary100}"/>
+
+    <SolidColorBrush x:Key="NavigationBarButtonBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="NavigationBarButtonBackgroundMouseOver" Color="{StaticResource WindowBackgroundColorPrimary90}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonBackgroundPressed" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonBackgroundDisabled" Color="{StaticResource SolidControlFillColorPrimaryDisabled}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonBackgroundHighlighted" Color="{StaticResource SolidControlFillColorPrimary120}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonForeground" Color="{StaticResource TextFillColorPrimary80}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonForegroundMouseOver" Color="{StaticResource TextFillColorSecondary120}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonForegroundPressed" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonForegroundDisabled" Color="{StaticResource TextFillColorSecondaryDisabled}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonForegroundHighlighted" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonBorderBrush" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonBorderBrushMouseOver" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonBorderBrushPressed" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="NavigationBarButtonBorderBrushDisabled" Color="{StaticResource TextFillColorSecondaryDisabled}"/>
+
+
+    <!-- #Hyperlink -->
+    <SolidColorBrush x:Key="HyperlinkForeground" Color="{StaticResource SolidControlFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="HyperlinkForegroundDisabled" Color="{StaticResource TextFillColorSecondaryDisabled}"/>
+
+
+    <!-- #Label -->
+    <SolidColorBrush x:Key="LabelForeground" Color="{StaticResource TextFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="HeaderLabelForeground" Color="{StaticResource TextFillColorPrimary90}"/>
+
+
+    <!-- #TextBlock -->
+    <SolidColorBrush x:Key="TextBlockForeground" Color="{StaticResource TextFillColorPrimary90}"/>
+
+
+    <!-- #TextBox -->
+    <SolidColorBrush x:Key="TextBoxBackground" Color="{StaticResource TextControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundDisabled" Color="{StaticResource SolidControlFillColorPrimaryDisabled}"/>
+    <SolidColorBrush x:Key="TextBoxForeground" Color="{StaticResource TextControlFillColorPrimary90}"/>
+    <SolidColorBrush x:Key="TextBoxForegroundDisabled" Color="{StaticResource TextFillColorPrimaryDisabled}"/>
+    <SolidColorBrush x:Key="TextBoxSelectionBrush" Color="{StaticResource SolidControlFillColorPrimary90}"/>
+    <SolidColorBrush x:Key="TextBoxSelectionTextBrush" Color="{StaticResource TextFillColorSecondary100}"/>
+
+
+    <!-- #Window -->
+    <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource WindowBackgroundColorPrimary100}"/>
+    <SolidColorBrush x:Key="WindowForeground" Color="{StaticResource TextFillColorPrimary100}"/>
+
+
+
+
+
+
+
+    <!-- DELETE DELETE DELETE -->
+    <Color x:Key="AcrylicBackgroundColor100">#2C2C2C</Color>
+
+    <!--
+    <Color x:Key="WindowBackgroundColorPrimary100">#313338</Color>
+    <Color x:Key="WindowBackgroundColorPrimary90">#36363D</Color>
+    -->
+
+    <Color x:Key="SolidControlColorPrimary170">#1A1B1E</Color>
+    <Color x:Key="SolidControlColorPrimary160">#111214</Color>
+    <Color x:Key="SolidControlColorPrimary150">#232428</Color>
+    <Color x:Key="SolidControlColorPrimary140">#1E1E22</Color>
+    <Color x:Key="SolidControlColorPrimary130">#2B2D31</Color>
+    <Color x:Key="SolidControlColorPrimary125">#3B3D44</Color>
+    <Color x:Key="SolidControlColorPrimary120">#404249</Color>
+    <Color x:Key="SolidControlColorPrimary100">#4E5058</Color>
+    <Color x:Key="SolidControlColorPrimary90">#6D6D76</Color>
+    <Color x:Key="SolidControlColorPrimary80">#80848E</Color>
+    <Color x:Key="SolidControlColorPrimaryDisabled">#494A50</Color>
+
+    <Color x:Key="SolidControlColorSecondary100">#5865F2</Color>
+    <Color x:Key="SolidControlColorSecondary110">#4752C4</Color>
+    <Color x:Key="SolidControlColorSecondary120">#3C45A5</Color>
+    <Color x:Key="SolidControlColorSecondaryDisabled">#424991</Color>
+
+    <Color x:Key="SolidControlAccentColorPrimary100">#A3A4A7</Color>
+
+    <Color x:Key="ControlAlertColorPrimary100">#DA373C</Color>
+    <Color x:Key="ControlAlertColorPrimary110">#BC2F32</Color>
+    <Color x:Key="ControlAlertColorPrimary120">#8F2022</Color>
+    <Color x:Key="ControlAlertColorPrimaryDisabled">#DA373E</Color>
+
+    <Color x:Key="ControlAlertColorSecondary100">#F0B132</Color>
+
+    <Color x:Key="TextControlColorPrimary100">#383A40</Color>
+    <Color x:Key="TextControlColorPrimary90">#BCBEC2</Color>
+
+    <Color x:Key="TextColorPrimary100">#828790</Color>
+    <Color x:Key="TextColorPrimary90">#B5BAC1</Color>
+    <Color x:Key="TextColorPrimary80">#C1C3C7</Color>
+    <Color x:Key="TextColorPrimaryDisabled">#66686C</Color>
+
+    <Color x:Key="TextColorSecondary100">#FFFFFF</Color>
+    <Color x:Key="TextColorSecondary110">#FDFEFE</Color>
+    <Color x:Key="TextColorSecondary120">#E0E1E3</Color>
+    <Color x:Key="TextColorSecondaryDisabled">#A3A4A7</Color>
+
+    <Color x:Key="TextOnAccentColorPrimary100">#000000</Color>
+
+    <Color x:Key="SurfaceStrokeColorFlyout">#33000000</Color>
+
+</ResourceDictionary>

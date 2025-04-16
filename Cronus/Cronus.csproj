@@ -12,4 +12,8 @@
     <ProjectReference Include="..\LadleUI\LadleUI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

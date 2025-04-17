@@ -70,24 +70,6 @@ namespace Cronus.ViewModels
 
 
         /// <summary>
-        /// Handles the New Log Book button clicked event.
-        /// </summary>
-        /// <param name="obj"></param>
-        public void OnNewLogBookButtonClicked(object? obj)
-        {
-            CreateNewLogBookDialog dlg = DialogService.PromptUserWithCreateNewLogBookDialog();
-
-            if (dlg.DialogResult == true)
-            {
-                CreateNewLogBookRequested(dlg);
-            }
-
-            // Navigate to the Book Details view.
-            NavigateBookDetailsView();
-        }
-
-
-        /// <summary>
         /// Usese information from the dialog window to create a new
         /// <see cref="Book"/> instance.
         /// </summary>
@@ -98,6 +80,7 @@ namespace Cronus.ViewModels
             // as the book store's current book.
             BookDTO dto = new() { Name = dlg.NameText };
             BookService.CreateNewCurrentBook(_bookStore, dto);
+            BookService.SaveCurrentBookToJson(_bookStore);
 
             // Update info bar.
             if (!_bookStore.CurrentBook.IsBookVoid)
@@ -114,6 +97,24 @@ namespace Cronus.ViewModels
         {
             _layoutNavigationService.Navigate();
             _bookDetailsNavigationService.Navigate();
+        }
+
+
+        /// <summary>
+        /// Handles the New Log Book button clicked event.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnNewLogBookButtonClicked(object? obj)
+        {
+            CreateNewLogBookDialog dlg = DialogService.PromptUserWithCreateNewLogBookDialog();
+
+            if (dlg.DialogResult == true)
+            {
+                CreateNewLogBookRequested(dlg);
+            }
+
+            // Navigate to the Book Details view.
+            NavigateBookDetailsView();
         }
     }
 }

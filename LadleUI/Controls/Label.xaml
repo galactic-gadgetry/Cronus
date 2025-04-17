@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+
+    <sys:Double x:Key="HeaderThemeFontSize">12</sys:Double>
+
+
+    <Style x:Key="DefaultLabelStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource LabelForeground}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource ControlContentThemeFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0,0,0,4"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
+
+
+    <Style x:Key="AccentLabelStyle" TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource AccentLabelForeground}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+
+    <Style x:Key="HeaderLabelStyle" TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource HeaderLabelForeground}"/>
+        <Setter Property="FontSize" Value="{DynamicResource HeaderThemeFontSize}"/>
+    </Style>
+
+
+    <Style TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}"/>
+    
+</ResourceDictionary>

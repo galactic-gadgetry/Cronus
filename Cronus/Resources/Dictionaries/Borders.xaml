@@ -22,4 +22,12 @@
         <Setter Property="CornerRadius" Value="4"/>
     </Style>
 
+    <Style x:Key="ViewBorderStyle" TargetType="Border">
+        <Setter Property="MinWidth" Value="705"/>
+        <Setter Property="Margin" Value="20,30,20,20"/>
+        <Setter Property="Padding" Value="25"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
 </ResourceDictionary>

@@ -12,6 +12,13 @@ namespace Cronus.Models
         private string name = string.Empty;
 
 
+        public DateTime CreatedDateTime { get; init; }
+
+
+        public string CreatedDateString =>
+            CreatedDateTime.ToString("dd MMMM yyyy");
+
+
         public bool IsBookVoid { get; set; } = false;
 
 
@@ -22,6 +29,13 @@ namespace Cronus.Models
             {
                 name = value;
             }
+        }
+
+
+
+        public Book()
+        {
+            CreatedDateTime = DateTime.Now;
         }
     }
 }

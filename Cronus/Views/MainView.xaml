@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cronus.Views"
+        xmlns:ui="clr-namespace:Cronus.UIComponents"
         xmlns:vm="clr-namespace:Cronus.ViewModels"
         mc:Ignorable="d"
         Style="{StaticResource DefaultWindowStyle}"
@@ -15,6 +16,9 @@
 
             <ContentControl Content="{Binding CurrentContentViewModel}">
                 <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
+                        <ui:Layout/>
+                    </DataTemplate>
                     <DataTemplate DataType="{x:Type vm:StartScreenViewModel}">
                         <local:StartScreenView/>
                     </DataTemplate>

@@ -7,6 +7,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/LadleUI;component/LadleUI.xaml"/>
+
+                <ResourceDictionary Source="Resources/Dictionaries/Borders.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionaries/TextControls.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionaries/Variables.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
          

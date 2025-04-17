@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style x:Key="DialogInputFieldTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundFillColorBrush1}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextControlTextColorBrush1}"/>
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+    
+</ResourceDictionary>

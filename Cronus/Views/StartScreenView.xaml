@@ -41,7 +41,8 @@
                         </TextBlock>
 
                         <Button
-                            Content="New log book"/>
+                            Content="New log book"
+                            Command="{Binding NewLogBookButtonClickedCommand}"/>
 
                         <Button
                             Content="Load existing log book"/>

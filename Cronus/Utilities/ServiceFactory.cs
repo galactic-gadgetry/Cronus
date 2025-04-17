@@ -20,7 +20,7 @@ namespace Cronus.Utilities
                 case "start screen":
                     return new NavigationService<StartScreenViewModel>(
                         navigationStore,
-                        () => new StartScreenViewModel());
+                        () => new StartScreenViewModel(bookStore));
                 default:
                     throw new NotImplementedException();
             }

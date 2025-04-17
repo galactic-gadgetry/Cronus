@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using System.Windows.Controls;
 using Cronus.Services;
 using Cronus.Stores;
 using Cronus.Utilities;
@@ -14,10 +15,14 @@ namespace Cronus
     /// </summary>
     public partial class App : Application
     {
-
+        /// <summary>
+        /// Used to manage the current <see cref="Book"/>.
+        /// </summary>
         private readonly BookStore _bookStore;
 
-
+        /// <summary>
+        /// Used to determine the app's navigation state.
+        /// </summary>
         private readonly NavigationStore _navigationStore;
 
 
@@ -49,7 +54,23 @@ namespace Cronus
             };
             MainWindow.Show();
 
+            // Catches the TextBox control's GotFocus event.
+            EventManager.RegisterClassHandler(typeof(TextBox),
+                TextBox.GotFocusEvent,
+                new RoutedEventHandler(TextBox_GotFocus));
+
             base.OnStartup(e);
+        }
+
+
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox? textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                textBox.SelectAll();
+            }
         }
     }
 

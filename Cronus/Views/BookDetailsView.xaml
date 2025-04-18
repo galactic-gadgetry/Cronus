@@ -60,7 +60,8 @@
                                         Grid.Column="1"
                                         Content="Edit Book Details"
                                         Style="{StaticResource AccentButtonStyle}"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center"
+                                        Command="{Binding EditBookDetailsButtonClickedCommand}"/>
                                 </Grid>
 
                                 <Border
@@ -97,7 +98,8 @@
                                         </StackPanel>
                                         <Button
                                             Grid.Column="1" Grid.Row="0"
-                                            Content="Edit"/>
+                                            Content="Edit"
+                                            Command="{Binding NameEditButtonClickedCommand}"/>
 
                                         <StackPanel Grid.Column="0" Grid.Row="1">
                                             <Label
@@ -128,10 +130,12 @@
                                     <Button
                                         Content="Archive Book"
                                         Style="{StaticResource DeleteButtonStyle}"
-                                        Margin="0,0,15,0"/>
+                                        Margin="0,0,15,0"
+                                        Command="{Binding ArchiveBookButtonClickedCommand}"/>
                                     <Button
                                         Content="Delete Book"
-                                        Style="{StaticResource EmptyDeleteButtonStyle}"/>
+                                        Style="{StaticResource EmptyDeleteButtonStyle}"
+                                        Command="{Binding DeleteBookButtonClickedCommand}"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>

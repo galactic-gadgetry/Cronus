@@ -107,10 +107,17 @@ namespace Cronus.Services
             return book;
         }
 
-        
+        /// <summary>
+        /// Deletes the book and book header files.
+        /// </summary>
+        /// <param name="book"></param>
         public static void DeleteBook(Book book)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+
+            // Delete the book and book header files.
+            FileService.DeleteFile(book.SaveFilePath);
+            FileService.DeleteFile(book.HeaderSaveFilePath);
         }
 
         /// <summary>
@@ -126,6 +133,22 @@ namespace Cronus.Services
 
             FileService.DeleteFile(header.BookSaveFilePath);
             FileService.DeleteFile(header.SaveFilePath);
+            SetBookStoreCurrentBookToVoidState(bookStore);
+        }
+
+        /// <summary>
+        /// Deletes the book store's current book file and sets
+        /// a void state book as the new current book.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        public static void DeleteCurrentBook(BookStore bookStore)
+        {
+            ArgumentNullException.ThrowIfNull(bookStore, nameof(bookStore));
+
+            DeleteBook(bookStore.CurrentBook);
+
+            // Set the book store's current book to a void state
+            // book.
             SetBookStoreCurrentBookToVoidState(bookStore);
         }
 
@@ -147,6 +170,15 @@ namespace Cronus.Services
             }
 
             return headers;
+        }
+
+
+        public static void EditBookDetails(BookDTO dto, Book book)
+        {
+            ArgumentNullException.ThrowIfNull(dto, nameof(dto));
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+
+            book.Name = dto.Name;
         }
 
         /// <summary>

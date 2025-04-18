@@ -28,7 +28,7 @@ namespace Cronus.ViewModels
         private readonly BookStore _bookStore;
 
         /// <summary>
-        /// Used to navigate the Main content to the Layout UI
+        /// Used to navigate to the Main content to the Layout UI
         /// component.
         /// </summary>
         private readonly INavigate _layoutNavigationService;
@@ -39,6 +39,14 @@ namespace Cronus.ViewModels
         /// </summary>
         private readonly NavigationStore _navigationStore;
 
+        /// <summary>
+        /// Used to navigate to the Saved Books view.
+        /// </summary>
+        private readonly INavigate _saveBooksNavigationService;
+
+
+
+        public ICommand LoadExistingLogBookButtonClickedCommand { get; }
 
         /// <summary>
         /// Executed when the New Log Book button is clicked.
@@ -53,6 +61,8 @@ namespace Cronus.ViewModels
             _bookStore = bookStore;
             _navigationStore = navigationStore;
 
+            LoadExistingLogBookButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnLoadExistingLogBookButtonClicked));
             NewLogBookButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnNewLogBookButtonClicked));
 
@@ -64,6 +74,11 @@ namespace Cronus.ViewModels
             _layoutNavigationService =
                 ServiceFactory.CreateNavigationService(
                     "layout",
+                    _bookStore,
+                    _navigationStore);
+            _saveBooksNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "saved books",
                     _bookStore,
                     _navigationStore);
         }
@@ -99,6 +114,12 @@ namespace Cronus.ViewModels
             _bookDetailsNavigationService.Navigate();
         }
 
+
+        private void OnLoadExistingLogBookButtonClicked(object? obj)
+        {
+            _layoutNavigationService.Navigate();
+            _saveBooksNavigationService.Navigate();
+        }
 
         /// <summary>
         /// Handles the New Log Book button clicked event.

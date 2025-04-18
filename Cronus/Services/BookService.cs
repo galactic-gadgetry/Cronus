@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,6 +67,58 @@ namespace Cronus.Services
             return book;
         }
 
+        
+        public static void DeleteBook(Book book)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Deletes the book header and associated book files and
+        /// sets the book store's current book to a void-state
+        /// book.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="header"></param>
+        public static void DeleteBook(BookStore bookStore, BookHeader header)
+        {
+            ArgumentNullException.ThrowIfNull(header, nameof(header));
+
+            FileService.DeleteFile(header.BookSaveFilePath);
+            FileService.DeleteFile(header.SaveFilePath);
+            SetBookStoreCurrentBookToVoidState(bookStore);
+        }
+
+        /// <summary>
+        /// Retrieves the saved book headers on file.
+        /// </summary>
+        /// <returns></returns>
+        public static ObservableCollection<BookHeader> GetSavedBookHeaders()
+        {
+            string[] files = FileService.GetSaveFiles();
+
+            IEnumerable<string> headerFiles =
+                files.Where<string>(f => f.Contains("_head"));
+
+            ObservableCollection<BookHeader> headers = new();
+            foreach (string filePath in headerFiles)
+            {
+                headers.Add(LoadBookHeaderFromJson(filePath));
+            }
+
+            return headers;
+        }
+
+        /// <summary>
+        /// Loads a <see cref="BookHeader"/> instance from a JSON file.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static BookHeader LoadBookHeaderFromJson(string filePath)
+        {
+            return JsonService.LoadBookHeaderFromJsonFile(filePath);
+        }
+
         /// <summary>
         /// Saves the book and its associated header to file.
         /// </summary>
@@ -119,6 +172,12 @@ namespace Cronus.Services
             ArgumentNullException.ThrowIfNull(book, nameof(book));
 
             bookStore.CurrentBook = book;
+        }
+
+
+        private static void SetBookStoreCurrentBookToVoidState(BookStore bookStore)
+        {
+            SetBookStoreCurrentBook(bookStore, new Book() { IsBookVoid = true });
         }
     }
 }

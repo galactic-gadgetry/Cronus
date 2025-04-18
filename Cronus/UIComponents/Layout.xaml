@@ -49,6 +49,9 @@
                                 <DataTemplate DataType="{x:Type vm:BookDetailsViewModel}">
                                     <view:BookDetailsView/>
                                 </DataTemplate>
+                                <DataTemplate DataType="{x:Type vm:SavedBooksViewModel}">
+                                    <view:SavedBooksView/>
+                                </DataTemplate>
                             </ScrollViewer.Resources>
                         </ScrollViewer>
                     </Grid>

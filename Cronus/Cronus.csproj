@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Icons\Calendar\calendar_accent_green.png" />
     <None Remove="Resources\Images\Icons\X\x_text_control_color_primary90.png" />
     <None Remove="Resources\Images\Icons\X\x_white.png" />
     <None Remove="Resources\Images\Logos\fast-time.png" />
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\Icons\Calendar\calendar_accent_green.png" />
     <Resource Include="Resources\Images\Icons\X\x_text_control_color_primary90.png" />
     <Resource Include="Resources\Images\Icons\X\x_white.png" />
     <Resource Include="Resources\Images\Logos\fast-time.png" />

@@ -45,7 +45,8 @@
                             Command="{Binding NewLogBookButtonClickedCommand}"/>
 
                         <Button
-                            Content="Load existing log book"/>
+                            Content="Load existing log book"
+                            Command="{Binding LoadExistingLogBookButtonClickedCommand}"/>
                     </StackPanel>
 
                     <!-- #Logo -->

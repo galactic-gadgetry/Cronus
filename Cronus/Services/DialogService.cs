@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Effects;
+using Cronus.Models;
 using Cronus.UIComponents.Dialogs;
 
 namespace Cronus.Services
@@ -37,6 +38,38 @@ namespace Cronus.Services
             dlg.NameText = "New log book";
 
             // Dim the window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
+        /// Displays the <see cref="ConfirmationDialog"/> window.
+        /// </summary>
+        /// <param name="model">Model instance to be deleted</param>
+        /// <returns>The Confirmation Dialog window</returns>
+        public static ConfirmationDialog PromptUserWithDeleteConfirmationDialog(
+            IConfirmDeletion model)
+        {
+            ArgumentNullException.ThrowIfNull(model, nameof(model));
+
+            ConfirmationDialog dlg = new("DELETE");
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.TitleText = $"Delete {model.GetModelTypeString()}";
+            dlg.ConfirmationMessageText = "Are you sure that you " +
+                $"want to delete this {model.GetModelTypeString().ToLower()}? " +
+                "This action cannot be undone.";
+            dlg.ConfirmationControlLabelText = "TYPE 'DELETE' TO " +
+                "CONFIRM";
+            dlg.DialogAcceptButtonText = $"Delete {model.GetModelTypeString()}";
+
+            // Dim the main window.
             DimWindowVisuals(mainWindow);
 
             dlg.ShowDialog();

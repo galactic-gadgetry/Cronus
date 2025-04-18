@@ -16,7 +16,7 @@ namespace Cronus.Models
         Archived,
     }
 
-    public class Book : INotifyPropertyChanged
+    public class Book : IConfirmDeletion, INotifyPropertyChanged
     {
         // Backing Fields
         private bool hasUnsavedChanges = false;
@@ -97,6 +97,12 @@ namespace Cronus.Models
                 ID.ToString() + ".json");
         }
 
+
+
+        public string GetModelTypeString()
+        {
+            return "Log Book";
+        }
 
 
         private void OnPropertyChanged(string propertyName)

@@ -45,7 +45,10 @@ namespace Cronus.ViewModels
         private readonly INavigate _saveBooksNavigationService;
 
 
-
+        /// <summary>
+        /// Executed when the Load Existing Log Book button is
+        /// clicked.
+        /// </summary>
         public ICommand LoadExistingLogBookButtonClickedCommand { get; }
 
         /// <summary>
@@ -114,7 +117,10 @@ namespace Cronus.ViewModels
             _bookDetailsNavigationService.Navigate();
         }
 
-
+        /// <summary>
+        /// Handles the Load Existing Log Book button click event.
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnLoadExistingLogBookButtonClicked(object? obj)
         {
             _layoutNavigationService.Navigate();

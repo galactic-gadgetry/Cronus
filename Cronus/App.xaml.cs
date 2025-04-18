@@ -1,5 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.IO;
+using System.Security.AccessControl;
 using System.Windows;
 using System.Windows.Controls;
 using Cronus.Services;
@@ -29,7 +31,7 @@ namespace Cronus
 
         public App()
         {
-            _bookStore = StoreFactory.CreateBookStore();
+            _bookStore = InitializeBookStore();
             _navigationStore = StoreFactory.CreateNavigationStore();
         }
 
@@ -39,15 +41,32 @@ namespace Cronus
         {
             // If the book store's current book is void state, navigate to
             // the Start Screen, otherwise navigate to the Book Details view.
+            if (_bookStore.CurrentBook.IsBookVoid)
+            {
+                INavigate startScreenNavigationService =
+                    ServiceFactory.CreateNavigationService(
+                        "start screen",
+                        _bookStore,
+                        _navigationStore);
+                startScreenNavigationService.Navigate();
+            }
+            else
+            {
+                INavigate bookDetailsNavigationService =
+                    ServiceFactory.CreateNavigationService(
+                        "book details",
+                        _bookStore,
+                        _navigationStore);
+                INavigate layoutNavigationService =
+                    ServiceFactory.CreateNavigationService(
+                        "layout",
+                        _bookStore,
+                        _navigationStore);
+                layoutNavigationService.Navigate();
+                bookDetailsNavigationService.Navigate();
+            }
 
-            INavigate startScreenNavigationService =
-                ServiceFactory.CreateNavigationService(
-                    "start screen",
-                    _bookStore,
-                    _navigationStore);
-            startScreenNavigationService.Navigate();
-
-            MainViewModel mainViewModel = new(_navigationStore);
+                MainViewModel mainViewModel = new(_bookStore, _navigationStore);
             MainWindow = new MainView()
             {
                 DataContext = mainViewModel
@@ -62,6 +81,25 @@ namespace Cronus
             base.OnStartup(e);
         }
 
+
+
+        private BookStore InitializeBookStore()
+        {
+            string? lastOpenBookFilePath =
+                SettingsService.GetLastOpenBookFilePath();
+
+            // If the settings value return null or the file cannot be
+            // found, return a new book store.
+            if (lastOpenBookFilePath == null || !File.Exists(lastOpenBookFilePath))
+            {
+                return StoreFactory.CreateBookStore();
+            }
+
+
+            // Attempt to load the book store in the same state it
+            // was in when the app last exited.
+            return StoreFactory.LoadBookStoreFromFile(lastOpenBookFilePath);
+        }
 
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)

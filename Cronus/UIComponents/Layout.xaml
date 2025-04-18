@@ -70,7 +70,7 @@
                 
                 <!-- #Info Bar -->
                 <Border Grid.Column="1" Grid.Row="1">
-                    <Label Content="Placeholder" FontSize="9"/>
+                    <Label Content="{Binding InfoText}" FontSize="9"/>
                 </Border>
             </Grid>
             

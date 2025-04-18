@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Effects;
 using Cronus.Models;
+using Cronus.Stores;
 using Cronus.UIComponents.Dialogs;
 
 namespace Cronus.Services
@@ -102,6 +103,30 @@ namespace Cronus.Services
             dlg.ShowDialog();
 
             // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
+        /// Displays the <see cref="SaveChangesDialog"/> dialog
+        /// window.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <returns>The Save Changes dialog window</returns>
+        public static SaveChangesDialog PromptUserWithSaveChangesDialog(
+            BookStore bookStore)
+        {
+            SaveChangesDialog dlg = new(bookStore.CurrentBook);
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+
+            // Dim the window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            //Restore the main window.
             RestoreWindowVisuals(mainWindow);
 
             return dlg;

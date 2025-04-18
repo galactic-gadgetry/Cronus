@@ -7,11 +7,51 @@ using System.Threading.Tasks;
 using Cronus.Models;
 using Cronus.Models.DTOs;
 using Cronus.Stores;
+using Cronus.UIComponents.Dialogs;
 
 namespace Cronus.Services
 {
     public static class BookService
     {
+
+        public static bool CloseCurrentBook(BookStore bookStore)
+        {
+            // If the book has unsaved changes, prompt the user
+            // to save the book before closing.
+            Book book = bookStore.CurrentBook;
+            if (!book.IsBookVoid && book.HasUnsavedChanges)
+            {
+                // The dialog service's PromptUserWithSaveChangeDialog
+                // method returns the SaveChanges dialog window. The
+                // SaveBook property of the dialog is true if the user
+                // wishes to save the book before closing, false if
+                // they wish to discard changes.
+                SaveChangesDialog dlg =
+                    DialogService.PromptUserWithSaveChangesDialog(bookStore);
+
+                // If the dialog result is false, the user has
+                // cancelled the operation.
+                // If the dialog result is true, the user has requested
+                // to save the book before closing.
+                if (dlg.DialogResult == false)
+                {
+                    return false;
+                }
+                else if (dlg.DialogResult == true)
+                {
+                    if (dlg.SaveBook)
+                    {
+                        BookService.SaveBookToJson(book);
+                    }
+                }
+            }
+            
+            // Set the book store's current book to a void-state book.
+            SetBookStoreCurrentBookToVoidState(bookStore);
+
+            return true;
+        }
+
         /// <summary>
         /// Creates a new initialized <see cref="BookHeader"/>
         /// instance.

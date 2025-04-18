@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cronus.Views"
         xmlns:ui="clr-namespace:Cronus.UIComponents"
+        xmlns:util="clr-namespace:Cronus.Utilities"
         xmlns:vm="clr-namespace:Cronus.ViewModels"
         mc:Ignorable="d"
         Style="{StaticResource DefaultWindowStyle}"
         MinHeight="510" MinWidth="950"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        util:WindowCloser.EnableWindowClosing="True">
     
     <Grid>
         <Border>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cronus.Services;
 using Cronus.Stores;
 
 namespace Cronus.Utilities
@@ -19,6 +20,15 @@ namespace Cronus.Utilities
         public static NavigationStore CreateNavigationStore()
         {
             return new NavigationStore();
+        }
+
+
+        public static BookStore LoadBookStoreFromFile(string filePath)
+        {
+            BookStore bookStore = CreateBookStore();
+            BookService.LoadBookToBookStoreFromJson(bookStore, filePath);
+
+            return bookStore;
         }
     }
 }

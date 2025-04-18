@@ -22,9 +22,17 @@ namespace Cronus.Services
         {
             ArgumentNullException.ThrowIfNullOrEmpty(filePath);
             string jsonString = LoadJsonStringFromFile(filePath);
-            return JsonConvert.DeserializeObject<Book>(jsonString) ??
+            Book book = JsonConvert.DeserializeObject<Book>(jsonString) ??
                 throw new FileLoadException("Unable to load book " +
                 "from JSON file");
+
+            // Deserializing the Book object sets the properties
+            // and thus the book's HasUnsavedChanges property.
+            // Since this book is newly loaded, we manually set
+            // the HasUnsavedChanges property to false to
+            // indicate that the book hasn't been changed.
+            book.HasUnsavedChanges = false;
+            return book;
         }
 
         /// <summary>

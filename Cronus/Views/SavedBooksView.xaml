@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Cronus.Views.SavedBooksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cronus.Views"
+             xmlns:card="clr-namespace:Cronus.UIComponents.Cards"
+             mc:Ignorable="d">
+    
+    <Grid>
+        <Border Style="{StaticResource ViewBorderStyle}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- #View Title -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        Content="Saved Books"
+                        Style="{StaticResource ViewTitleLabelStyle}"/>
+
+                    <Button
+                        Grid.Column="1"
+                        Content="Back"
+                        Command="{Binding BackButtonClickedCommand}"
+                        Background="Transparent"
+                        Margin="0,0,10,0"/>
+                </Grid>
+                
+                <!-- #Content -->
+                <Border Grid.Row="1">
+                    <ListView
+                        x:Name="SavedBooksListView"
+                        ItemsSource="{Binding SavedBooks}"
+                        Style="{StaticResource DefaultListViewStyle}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <card:SavedBookCard
+                                    NameText="{Binding Name}"
+                                    CreatedDateStringText="{Binding CreatedDateString}"
+                                    DeleteButtonClickedCommand="{Binding DataContext.SavedBookCardDeleteButtonClickedCommand, ElementName=SavedBooksListView}"
+                                    DeleteButtonClickedCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"
+                                    LoadButtonClickedCommand="{Binding DataContext.SavedBookCardLoadButtonClickedCommand, ElementName=SavedBooksListView}"
+                                    LoadButtonClickedCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
+            </Grid>
+            
+        </Border>
+    </Grid>
+    
+</UserControl>

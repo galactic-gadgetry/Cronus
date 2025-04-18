@@ -47,6 +47,7 @@
     <Color x:Key="AlertControlFillColorPrimary110">#BC2F32</Color>
     <Color x:Key="AlertControlFillColorPrimary120">#8F2022</Color>
     <Color x:Key="AlertControlFillColorPrimaryDisabled">#DA373E</Color>
+    <Color x:Key="AlertControlColorSecondary100">#F0B132</Color>
 
     <Color x:Key="TextControlFillColorPrimary90">#BCBEC2</Color>
     <Color x:Key="TextControlFillColorPrimary100">#383A40</Color>
@@ -57,6 +58,8 @@
     <Color x:Key="TextFillColorPrimaryDisabled">#66686C</Color>
 
     <Color x:Key="TextFillColorSecondary100">#FFFFFF</Color>
+    <Color x:Key="TextFillColorSecondary110">#FDFEFE</Color>
+
     <Color x:Key="TextFillColorSecondary120">#E0E1E3</Color>
     <Color x:Key="TextFillColorSecondaryDisabled">#A3A4A7</Color>
 
@@ -70,9 +73,11 @@
 
     <SolidColorBrush x:Key="LayerAccentFillColorBrush1" Color="{StaticResource SolidControlFillColorSecondary100}"/>
 
+    <SolidColorBrush x:Key="LayerWarningFillColorBrush1" Color="{StaticResource AlertControlColorSecondary100}"/>
+
     <SolidColorBrush x:Key="TextFillColorBrush1" Color="{StaticResource TextFillColorPrimary80}"/>
 
-    <SolidColorBrush x:Key="TextAccentFillColorBrush1" Color="{StaticResource TextFillColorPrimary90}"/>
+    <SolidColorBrush x:Key="TextAccentFillColorBrush1" Color="{StaticResource TextFillColorSecondary110}"/>
 
     <SolidColorBrush x:Key="TextControlTextColorBrush1" Color="{StaticResource TextFillColorSecondary120}"/>
 

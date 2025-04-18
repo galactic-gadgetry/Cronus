@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="Cronus.UIComponents.Cards.SavedBookCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cronus.UIComponents.Cards"
+             mc:Ignorable="d"
+             MinWidth="650">
+    
+    <Grid x:Name="CardGrid">
+        <Border
+            Background="{StaticResource ControlBackgroundFillColorBrush1}"
+            Padding="25"
+            CornerRadius="4">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel
+                        Grid.Column="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                        <Label
+                            Content="{Binding NameText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                            Foreground="{StaticResource TextAccentFillColorBrush1}"
+                            FontSize="17"/>
+                    </StackPanel>
+
+                    <Button
+                        Grid.Column="1"
+                        Content="Delete"
+                        Command="{Binding DeleteButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                        CommandParameter="{Binding DeleteButtonClickedCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                        <Button.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource DeleteButtonStyle}">
+                                <Setter Property="Margin" Value="0,0,15,0"/>
+                                <Style.Triggers>
+                                    <!-- #Mouse over behavior -->
+                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=CardGrid}" Value="False">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button
+                        Grid.Column="2"
+                        Content="Load Book"
+                        Command="{Binding LoadButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                        CommandParameter="{Binding LoadButtonClickedCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                        <Button.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
+                                <Style.Triggers>
+                                    <!-- #Mouse over behaviors -->
+                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=CardGrid}" Value="False">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+
+                <Label
+                    Grid.Row="1"
+                    Content="STATISTICS"
+                    Margin="0,15,0,10"/>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Image Source="{StaticResource CalendarGreen}"/>
+                    <Label
+                        Content="{Binding CreatedDateStringText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                        Foreground="{StaticResource TextFillColorBrush1}"
+                        Padding="5,0"
+                        VerticalContentAlignment="Bottom"
+                        FontWeight="Normal"/>
+                </StackPanel>
+            </Grid>
+            
+        </Border>
+    </Grid>
+    
+</UserControl>

@@ -9,7 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Icons\Calendar\calendar_accent_green.png" />
+    <None Remove="Resources\Images\Icons\X\x_text_control_color_primary90.png" />
+    <None Remove="Resources\Images\Icons\X\x_white.png" />
     <None Remove="Resources\Images\Logos\fast-time.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,11 +24,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Resource Include="Resources\Images\Icons\Calendar\calendar_accent_green.png" />
+    <Resource Include="Resources\Images\Icons\X\x_text_control_color_primary90.png" />
+    <Resource Include="Resources\Images\Icons\X\x_white.png" />
+    <Resource Include="Resources\Images\Logos\fast-time.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Images\Logos\fast-time.png" />
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

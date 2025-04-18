@@ -1,0 +1,92 @@
+﻿<Window x:Class="Cronus.UIComponents.Dialogs.CreateNewLogBookDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cronus.UIComponents.Dialogs"
+        mc:Ignorable="d"
+        Title="New Log Book"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        SizeToContent="WidthAndHeight"
+        FocusManager.FocusedElement="{Binding ElementName=NameTextBox}">
+    
+    <Grid>
+        <Border>
+
+            <Border Style="{StaticResource DialogOutterBorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Style="{StaticResource DialogContentBorderStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Content="New log book"
+                                Foreground="{StaticResource TextAccentFillColorBrush1}"
+                                HorizontalAlignment="Center"
+                                FontSize="18"/>
+
+                            <TextBlock
+                                Grid.Row="1"
+                                Text="Details for the new log book"
+                                Foreground="{StaticResource TextFillColorBrush1}"
+                                HorizontalAlignment="Center"
+                                Margin="0,5"/>
+
+                            <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+                                <Label
+                                    Content="LOG BOOK NAME"
+                                    Foreground="{StaticResource TextFillColorBrush1}"
+                                    FontSize="{StaticResource SmallLabelFontSize}"/>
+                                <TextBox
+                                    x:Name="NameTextBox"
+                                    Text="New Log Book"
+                                    Style="{StaticResource DialogInputFieldTextBoxStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Border
+                        Grid.Row="1"
+                        Style="{StaticResource DialogControlBorderStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button
+                                Grid.Column="0"
+                                Content="Back"
+                                Background="Transparent"
+                                HorizontalAlignment="Left"
+                                Click="BackButton_Click"/>
+                            <Button
+                                Grid.Column="1"
+                                Content="Create"
+                                Style="{StaticResource AccentButtonStyle}"
+                                Width="85"
+                                HorizontalAlignment="Right"
+                                Click="CreateButton_Click"
+                                IsDefault="True"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+            
+        </Border>
+    </Grid>
+    
+</Window>

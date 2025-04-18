@@ -12,6 +12,22 @@ namespace Cronus.Services
     public static class JsonService
     {
         /// <summary>
+        /// Creates a <see cref="Book"/> instance from a JSON file.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        /// <exception cref="FileLoadException">Thrown if the string
+        /// found in the JSON file cannot be deserialized</exception>
+        public static Book LoadBookFromJsonFile(string filePath)
+        {
+            ArgumentNullException.ThrowIfNullOrEmpty(filePath);
+            string jsonString = LoadJsonStringFromFile(filePath);
+            return JsonConvert.DeserializeObject<Book>(jsonString) ??
+                throw new FileLoadException("Unable to load book " +
+                "from JSON file");
+        }
+
+        /// <summary>
         /// Creates a <see cref="BookHeader"/> instance from a JSON
         /// file.
         /// </summary>

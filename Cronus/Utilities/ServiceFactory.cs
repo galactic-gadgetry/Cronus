@@ -28,7 +28,7 @@ namespace Cronus.Utilities
                 case "saved books":
                     return new LayoutNavigationService<SavedBooksViewModel>(
                         navigationStore,
-                        () => new SavedBooksViewModel(bookStore));
+                        () => new SavedBooksViewModel(bookStore, navigationStore));
                 case "settings nav bar":
                     return new NavBarNavigationService<SettingsNavigationBarViewModel>(
                         navigationStore,

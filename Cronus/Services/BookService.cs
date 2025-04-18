@@ -147,6 +147,22 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Loads a <see cref="Book"/> instance from a JSON file and
+        /// sets it as the book store's current book.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static BookStore LoadBookToBookStoreFromJson(
+            BookStore bookStore, string filePath)
+        {
+            Book book = JsonService.LoadBookFromJsonFile(filePath);
+            SetBookStoreCurrentBook(bookStore, book);
+
+            return bookStore;
+        }
+
+        /// <summary>
         /// Saves the book store's current book to JSON file.
         /// </summary>
         /// <param name="bookStore"></param>

@@ -81,6 +81,33 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Displays the <see cref="MessageWithBackButtonDialog"/>
+        /// dialog window.
+        /// </summary>
+        /// <param name="caption"></param>
+        /// <param name="msg"></param>
+        /// <returns>The Message with Back Button dialog window</returns>
+        public static MessageWithBackButtonDialog PromptUserWithMessageWithBackButtonDialog(
+            string caption, string msg)
+        {
+            MessageWithBackButtonDialog dlg = new();
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.TitleText = caption;
+            dlg.MessageText = msg;
+
+            // Dim the window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
         /// Returns the window visuals to normal.
         /// </summary>
         /// <param name="window"></param>

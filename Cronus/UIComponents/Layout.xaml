@@ -28,6 +28,9 @@
                     <Grid>
                         <ContentControl Content="{Binding CurrentNavigationBarViewModel}">
                             <ContentControl.Resources>
+                                <DataTemplate DataType="{x:Type vm:NavigationBarViewModel}">
+                                    <local:NavigationBar/>
+                                </DataTemplate>
                                 <DataTemplate DataType="{x:Type vm:SettingsNavigationBarViewModel}">
                                     <local:SettingsNavigationBar/>
                                 </DataTemplate>
@@ -51,6 +54,9 @@
                                 </DataTemplate>
                                 <DataTemplate DataType="{x:Type vm:EditBookDetailsViewModels}">
                                     <view:EditBookDetailsView/>
+                                </DataTemplate>
+                                <DataTemplate DataType="{x:Type vm:ProjectsViewModel}">
+                                    <view:ProjectsView/>
                                 </DataTemplate>
                                 <DataTemplate DataType="{x:Type vm:SavedBooksViewModel}">
                                     <view:SavedBooksView/>

@@ -18,12 +18,6 @@ namespace Cronus.ViewModels
         private readonly NavigationStore _navigationStore;
 
 
-        private readonly INavigate _settingsNavBarNavigationSerivce;
-
-
-        private readonly INavigate _sideContentNavigationService;
-
-
         // Backing Fields
         private string infoText = string.Empty;
 
@@ -62,17 +56,6 @@ namespace Cronus.ViewModels
                 OnCurrentNavigationBarViewModelChanged;
             _navigationStore.CurrentSideContentViewModelChanged +=
                 OnCurrentSideContentViewModelChanged;
-
-            _settingsNavBarNavigationSerivce =
-                ServiceFactory.CreateNavigationService(
-                    "settings nav bar",
-                    _bookStore,
-                    _navigationStore);
-            _sideContentNavigationService =
-                ServiceFactory.CreateNavigationService(
-                    "x button side bar",
-                    _bookStore,
-                    _navigationStore);
         }
 
 
@@ -85,14 +68,35 @@ namespace Cronus.ViewModels
 
         private void NavigateDefaultViewConstituents()
         {
-            throw new NotImplementedException();
+            INavigate navBarNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "nav bar",
+                    _bookStore,
+                    _navigationStore);
+            INavigate sideContentNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "null side content",
+                    _bookStore,
+                    _navigationStore);
+            navBarNavigationService.Navigate();
+            sideContentNavigationService.Navigate();
         }
 
 
         private void NavigateSettingsViewConstituents()
         {
-            _settingsNavBarNavigationSerivce.Navigate();
-            _sideContentNavigationService.Navigate();
+            INavigate settingsNavBarNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "settings nav bar",
+                    _bookStore,
+                    _navigationStore);
+            INavigate sideContentNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "x button side bar",
+                    _bookStore,
+                    _navigationStore);
+            settingsNavBarNavigationService.Navigate();
+            sideContentNavigationService.Navigate();
         }
 
 

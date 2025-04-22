@@ -37,7 +37,8 @@
                 
                 <!-- #Book Bar -->
                 <Border x:Name="BookBarBorder" Grid.Column="1" Grid.Row="1">
-                    
+                    <local:BookBar
+                        Height="50"/>
                 </Border>
                 
                 <!-- #Book Bar Popup -->

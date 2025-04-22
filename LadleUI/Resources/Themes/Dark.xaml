@@ -35,6 +35,7 @@
     <Color x:Key="SolidControlFillColorPrimary120">#404249</Color>
     <Color x:Key="SolidControlFillColorPrimary130">#2B2D31</Color>
     <Color x:Key="SolidControlFillColorPrimary140">#1E1E22</Color>
+    <Color x:Key="SolidControlFillColorPrimary150">#232428</Color>
     <Color x:Key="SolidControlFillColorPrimary170">#1A1B1E</Color>
     <Color x:Key="SolidControlFillColorPrimaryDisabled">#494A50</Color>
 
@@ -70,6 +71,7 @@
 
     <SolidColorBrush x:Key="LayerFillColorBrush1" Color="{StaticResource WindowBackgroundColorPrimary100}"/>
     <SolidColorBrush x:Key="LayerFillColorBrush2" Color="{StaticResource SolidControlFillColorPrimary130}"/>
+    <SolidColorBrush x:Key="LayerFillColorBrush4" Color="{StaticResource SolidControlFillColorPrimary150}"/>
 
     <SolidColorBrush x:Key="LayerAccentFillColorBrush1" Color="{StaticResource SolidControlFillColorSecondary100}"/>
 

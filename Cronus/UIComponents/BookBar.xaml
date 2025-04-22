@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="Cronus.UIComponents.BookBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cronus.UIComponents"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" d:DesignWidth="240">
+    <UserControl.Resources>
+        <sys:Double x:Key="ControlImageHeight">20</sys:Double>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Border Background="{StaticResource LayerFillColorBrush4}">
+
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource TransparentIconButtonStyle}"/>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.55*"/>
+                    <ColumnDefinition Width="0.45*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- #Current Book Button -->
+                <Button
+                    Grid.Column="0"
+                    Margin="8,8,0,8" Padding="0,2"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource BookGray}"/>
+
+                        <StackPanel VerticalAlignment="Center">
+                            <StackPanel.Resources>
+                                <Style TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+                                    <Setter Property="Margin" Value="3,0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="FontWeight" Value="Normal"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Label
+                                Content="Test Book"
+                                Foreground="{StaticResource TextAccentFillColorBrush1}"/>
+                            <Label
+                                Content="Active"
+                                FontSize="{StaticResource SmallLabelFontSize}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+                
+                <!-- #Control Buttons -->
+                <Grid Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource TransparentIconButtonStyle}">
+                                <Setter Property="Margin" Value="0,8"/>
+                                <Setter Property="Padding" Value="8,5"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button>
+                            <Image>
+                                <Image.Resources>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="{StaticResource SaveGreen}"/>
+                                        <Setter Property="Height" Value="{StaticResource ControlImageHeight}"/>
+                                        <Style.Triggers>
+                                            <!-- #Disabled behaviors -->
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}" Value="False">
+                                                <Setter Property="Source" Value="{StaticResource SaveDisabled}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Resources>
+                            </Image>
+                        </Button>
+                        
+                        <Button
+                            Margin="0,8,3,8">
+                            <Image
+                                x:Name="SettingsButtonImage"
+                                Source="{StaticResource SettingsGray}"
+                                Height="{StaticResource ControlImageHeight}">
+                            </Image>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            
+        </Border>
+    </Grid>
+    
+</UserControl>

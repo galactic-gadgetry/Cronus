@@ -30,6 +30,34 @@
     </Style>
 
 
+    <Style x:Key="NavigationBarButtonTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource NavigationBarButtonForeground}"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Style.Triggers>
+            <!-- Mouse over, enabled behaviors -->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsMouseOver}" Value="True"/>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="{DynamicResource NavigationBarButtonForegroundMouseOver}"/>
+            </MultiDataTrigger>
+            <!-- Pressed behaviors -->
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsPressed}" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource NavigationBarButtonForegroundPressed}"/>
+            </DataTrigger>
+            <!-- Disabled behaviors -->
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource NavigationBarButtonForegroundDisabled}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
     <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}"/>
 
 </ResourceDictionary>

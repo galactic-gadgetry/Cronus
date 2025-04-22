@@ -21,6 +21,10 @@ namespace Cronus.Utilities
                     return new LayoutNavigationService<BookDetailsViewModel>(
                         navigationStore,
                         () => new BookDetailsViewModel(bookStore, navigationStore));
+                case "edit book details":
+                    return new LayoutNavigationService<EditBookDetailsViewModels>(
+                        navigationStore,
+                        () => new EditBookDetailsViewModels(bookStore, navigationStore));
                 case "layout":
                     return new NavigationService<LayoutViewModel>(
                         navigationStore,

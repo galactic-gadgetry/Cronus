@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cronus.UIComponents"
-             mc:Ignorable="d" d:DesignHeight="450">
+             xmlns:btn="clr-namespace:Cronus.UIComponents.Buttons"
+             mc:Ignorable="d" d:DesignHeight="650">
     
     <Grid>
         <Border Background="{StaticResource LayerFillColorBrush2}">
@@ -13,6 +14,35 @@
                     <ColumnDefinition Width="70"/>
                     <ColumnDefinition Width="240"/>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- #Side Navigation Bar Buttons -->
+                <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Background="{StaticResource ControlBackgroundFillColorBrush1}"/>
+                
+                <!-- #Navigation Buttons -->
+                <Border Grid.Column="1" Grid.Row="0" Background="{StaticResource LayerFillColorBrush2}">
+                    <StackPanel Margin="7,55,7,0">
+                        <btn:NavigationBarButton
+                            ButtonText="Projects"
+                            ButtonImageSource="{StaticResource BriefcaseGray}"
+                            ButtonImageSourceMouseOver="{StaticResource BriefcaseLightGray}"
+                            ButtonImageSourcePressed="{StaticResource BriefcaseWhite}"
+                            ButtonImageSourceDisabled="{StaticResource BriefcaseDisabled}"
+                            ButtonImageSourceHighlighted="{StaticResource BriefcaseWhite}"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- #Book Bar -->
+                <Border x:Name="BookBarBorder" Grid.Column="1" Grid.Row="1">
+                    <local:BookBar
+                        Height="50"/>
+                </Border>
+                
+                <!-- #Book Bar Popup -->
+                
             </Grid>
         </Border>
     </Grid>

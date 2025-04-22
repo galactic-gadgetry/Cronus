@@ -2,9 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
+    <BitmapImage x:Key="BookGray" UriSource="/Cronus;component/Resources/Images/Icons/Book/book_text_color_primary80.png"/>
+
+    <BitmapImage x:Key="BriefcaseGray" UriSource="/Cronus;component/Resources/Images/Icons/Briefcase/briefcase_text_color_primary80.png"/>
+    <BitmapImage x:Key="BriefcaseLightGray" UriSource="/Cronus;component/Resources/Images/Icons/Briefcase/briefcase_text_color_secondary120.png"/>
+    <BitmapImage x:Key="BriefcaseWhite" UriSource="/Cronus;component/Resources/Images/Icons/Briefcase/briefcase_white.png"/>
+    <BitmapImage x:Key="BriefcaseDisabled" UriSource="/Cronus;component/Resources/Images/Icons/Briefcase/briefcase_disabled.png"/>
+
     <BitmapImage x:Key="CalendarGreen" UriSource="/Cronus;component/Resources/Images/Icons/Calendar/calendar_accent_green.png"/>
 
     <BitmapImage x:Key="LetterXGray" UriSource="/Cronus;component/Resources/Images/Icons/X/x_text_control_color_primary90.png"/>
     <BitmapImage x:Key="LetterXWhite" UriSource="/Cronus;component/Resources/Images/Icons/X/x_white.png"/>
+
+    <BitmapImage x:Key="SaveGray" UriSource="/Cronus;component/Resources/Images/Icons/Save/save_text_color_primary90.png"/>
+    <BitmapImage x:Key="SaveGreen" UriSource="/Cronus;component/Resources/Images/Icons/Save/save_accent_green.png"/>
+    <BitmapImage x:Key="SaveDisabled" UriSource="/Cronus;component/Resources/Images/Icons/Save/save_disabled.png"/>
+
+    <BitmapImage x:Key="SettingsGray" UriSource="/Cronus;component/Resources/Images/Icons/Settings/settings_text_color_primary90.png"/>
 
 </ResourceDictionary>

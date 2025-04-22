@@ -2,8 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Cronus.UIComponents"
+             xmlns:btn="clr-namespace:Cronus.UIComponents.Buttons"
              mc:Ignorable="d" d:DesignHeight="450"
              MinWidth="238">
     
@@ -22,11 +23,21 @@
                 <!-- #Navigation Buttons -->
                 <Border Grid.Column="1">
                     <ScrollViewer Style="{DynamicResource RoundedScrollBarScrollViewerStyle}">
-                        <StackPanel>
-
+                        <StackPanel Margin="0,55,10,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="btn:NavigationBarButton">
+                                    <Setter Property="ButtonPadding" Value="0,5,11,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            
                             <Label
-                                Content="USER SETTINGS"/>
-                            <Button Content="Placeholder"/>
+                                Content="USER SETTINGS"
+                                Margin="10,0"
+                                FontSize="{StaticResource SmallLabelFontSize}"/>
+                            <btn:NavigationBarButton
+                                ButtonText="Book Details"
+                                IsHighlighted="{Binding IsBookDetailsTabSelected}"
+                                ButtonClickedCommand="{Binding BookDetailsButtonClickedCommand}"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Border>

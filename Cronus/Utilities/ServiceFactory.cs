@@ -40,10 +40,14 @@ namespace Cronus.Utilities
                 case "previous default view":
                     return new PreviousDefaultLayoutContentNavigationService(
                         navigationStore);
+                case "project details":
+                    return new LayoutNavigationService<ProjectDetailsViewModel>(
+                        navigationStore,
+                        () => new ProjectDetailsViewModel());
                 case "projects":
                     return new LayoutNavigationService<ProjectsViewModel>(
                         navigationStore,
-                        () => new ProjectsViewModel(bookStore));
+                        () => new ProjectsViewModel(bookStore, navigationStore));
                 case "saved books":
                     return new LayoutNavigationService<SavedBooksViewModel>(
                         navigationStore,

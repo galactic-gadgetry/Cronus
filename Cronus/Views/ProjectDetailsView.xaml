@@ -1,0 +1,185 @@
+﻿<UserControl x:Class="Cronus.Views.ProjectDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cronus.Views"
+             mc:Ignorable="d">
+
+    <Grid>
+        <Border Style="{StaticResource ViewBorderStyle}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- #View Title -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        Content="Project Details"
+                        Style="{StaticResource ViewTitleLabelStyle}"/>
+
+                    <TextBlock Grid.Column="1" Margin="0,0,15,0">
+                        <Hyperlink>
+                            Back to all projects
+                        </Hyperlink>
+                    </TextBlock>
+                </Grid>
+                
+                <!-- #Details Content -->
+                <Border Grid.Row="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Background="{StaticResource AccentBorderBackground}" CornerRadius="8,8,0,0"/>
+
+                        <Border
+                            Grid.Row="1"
+                            Background="{StaticResource ControlBackgroundFillColorBrush1}"
+                            Padding="10"
+                            CornerRadius="0,0,8,8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label
+                                        Grid.Column="0"
+                                        Content="SpaceY"
+                                        Style="{StaticResource ViewTitleLabelStyle}"
+                                        FontSize="16" FontWeight="Bold"
+                                        Margin="20"/>
+                                    <Button
+                                        Grid.Column="1"
+                                        Content="Edit Project Details"
+                                        Style="{StaticResource AccentButtonStyle}"
+                                        VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <Border
+                                    Grid.Row="1"
+                                    Background="{StaticResource LayerFillColorBrush2}"
+                                    Margin="0,10,0,0" Padding="15"
+                                    CornerRadius="8">
+                                    <Grid>
+                                        <Grid.Resources>
+                                            <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                            </Style>
+
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Margin" Value="0,5"/>
+                                            </Style>
+                                        </Grid.Resources>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <StackPanel Grid.Column="0" Grid.Row="0">
+                                            <Label
+                                                Content="NAME"
+                                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                                            <Label
+                                                Content="SpaceY"
+                                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="0" Grid.Row="1">
+                                            <Label
+                                                Content="CREATED ON"
+                                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                                            <Label
+                                                Content="18 April 2025"
+                                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="0" Grid.Row="2">
+                                            <Label
+                                                Content="CODE"
+                                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                                            <Label
+                                                Content="SPCY"
+                                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="0" Grid.Row="3">
+                                            <Label
+                                                Content="WBS"
+                                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                                            <Label
+                                                Content="12345.67.89.10.11"
+                                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="0" Grid.Row="4">
+                                            <Label
+                                                Content="STATUS"
+                                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                                            <Label
+                                                Content="Active"
+                                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        
+                        <!-- #Removal -->
+                        <Border
+                            Grid.Row="2"
+                            BorderBrush="{StaticResource AccentBorderBrush}"
+                            BorderThickness="0,1,0,0"
+                            Margin="0,30,0,0" Padding="0,40,0,15">
+                            <StackPanel>
+                                <Label
+                                    Content="PROJECT REMOVAL"
+                                    Margin="0,0,0,15"/>
+                                <TextBlock Text="Deleting this project means you cannot recover it at any time after taking this action."/>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,15,0,40">
+                                    <Button
+                                        Content="Archive Project"
+                                        Style="{StaticResource DeleteButtonStyle}"
+                                        Margin="0,0,15,0"/>
+                                    <Button
+                                        Content="Delete Project"
+                                        Style="{StaticResource EmptyDeleteButtonStyle}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+            
+        </Border>
+    </Grid>
+    
+</UserControl>

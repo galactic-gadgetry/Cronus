@@ -11,6 +11,7 @@ using Cronus.Models.DTOs;
 using Cronus.Services;
 using Cronus.Stores;
 using Cronus.UIComponents.Dialogs;
+using Cronus.Utilities;
 
 namespace Cronus.ViewModels
 {
@@ -21,6 +22,16 @@ namespace Cronus.ViewModels
         /// <see cref="Book"/>.
         /// </summary>
         private readonly BookStore _bookStore;
+
+        /// <summary>
+        /// Used to determine the app's navigation state.
+        /// </summary>
+        private readonly NavigationStore _navigationStore;
+
+        /// <summary>
+        /// Used to navigate to the Project Details view.
+        /// </summary>
+        private readonly INavigate _projectDetailsNavigationService;
 
 
         /// <summary>
@@ -55,9 +66,10 @@ namespace Cronus.ViewModels
 
 
 
-        public ProjectsViewModel(BookStore bookStore)
+        public ProjectsViewModel(BookStore bookStore, NavigationStore navigationStore)
         {
             _bookStore = bookStore;
+            _navigationStore = navigationStore;
 
             CreateProjectButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnCreateProjectButtonClicked));
@@ -67,6 +79,12 @@ namespace Cronus.ViewModels
                 new Action<object?>(OnProjectCardEditButtonClicked));
             ProjectCardNameHyperlinkClickedCommand = new RelayCommand(
                 new Action<object?>(OnProjectCardNameHyperlinkClicked));
+
+            _projectDetailsNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "project details",
+                    _bookStore,
+                    _navigationStore);
         }
 
 
@@ -126,10 +144,25 @@ namespace Cronus.ViewModels
             throw new NotImplementedException();
         }
 
-
+        /// <summary>
+        /// Handles the Project Card's Name hyperlink click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void OnProjectCardNameHyperlinkClicked(object? obj)
         {
-            throw new NotImplementedException();
+            Project? selectedProject = obj as Project;
+            if (selectedProject == null)
+            {
+                throw new ArgumentOutOfRangeException("The caller must be " +
+                    "a Project object");
+            }
+
+            // Set the book store's currently focused project to the
+            // selected project.
+            BookService.SetBookStoreCurrentFocusedProject(_bookStore, selectedProject);
+
+            _projectDetailsNavigationService.Navigate();
         }
     }
 }

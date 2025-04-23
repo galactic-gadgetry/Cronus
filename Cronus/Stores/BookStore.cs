@@ -13,7 +13,10 @@ namespace Cronus.Stores
         private Book currentBook;
 
 
-
+        /// <summary>
+        /// The current <see cref="Book"/> instance focused by the
+        /// application.
+        /// </summary>
         public Book CurrentBook
         {
             get => currentBook;
@@ -24,8 +27,17 @@ namespace Cronus.Stores
             }
         }
 
+        /// <summary>
+        /// The current <see cref="Project"/> in the
+        /// <seealso cref="CurrentBook"/> focused by the application.
+        /// </summary>
+        public Project? CurrentFocusedProject { get; set; }
 
 
+        /// <summary>
+        /// Raised when the <seealso cref="CurrentBook"/> property
+        /// is set.
+        /// </summary>
         public Action? CurrentBookChanged;
 
 
@@ -43,7 +55,10 @@ namespace Cronus.Stores
         }
 
 
-
+        /// <summary>
+        /// Handles the setting of the <seealso cref="CurrentBook"/>
+        /// property.
+        /// </summary>
         private void OnCurrentBookChanged()
         {
             CurrentBookChanged?.Invoke();

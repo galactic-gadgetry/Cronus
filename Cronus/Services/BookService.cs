@@ -286,6 +286,22 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Sets the book store's
+        /// <see cref="BookStore.CurrentFocusedProject"/> property
+        /// to the project.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="project"></param>
+        public static void SetBookStoreCurrentFocusedProject(
+            BookStore bookStore, Project project)
+        {
+            ArgumentNullException.ThrowIfNull(bookStore, nameof(bookStore));
+            ArgumentNullException.ThrowIfNull(project, nameof(project));
+
+            bookStore.CurrentFocusedProject = project;
+        }
+
+        /// <summary>
         /// Validates the project's properties.
         /// </summary>
         /// <param name="book">Book from which the collection will be

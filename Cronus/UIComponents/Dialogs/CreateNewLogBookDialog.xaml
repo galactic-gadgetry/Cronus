@@ -32,28 +32,27 @@
                             <Label
                                 Grid.Row="0"
                                 Content="New log book"
-                                Foreground="{StaticResource TextAccentFillColorBrush1}"
-                                HorizontalAlignment="Center"
-                                FontSize="18"/>
+                                Style="{StaticResource DialogTitleLabelStyle}"/>
 
                             <!-- #Message -->
                             <TextBlock
                                 Grid.Row="1"
                                 Text="Details for the new log book"
-                                Foreground="{StaticResource TextFillColorBrush1}"
-                                HorizontalAlignment="Center"
-                                Margin="0,5"/>
+                                Style="{StaticResource DialogContentTextBlockStyle}"/>
 
                             <!-- #Inputs -->
                             <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
-                                <Label
-                                    Content="LOG BOOK NAME"
-                                    Foreground="{StaticResource TextFillColorBrush1}"
-                                    FontSize="{StaticResource SmallLabelFontSize}"/>
+                                <StackPanel.Resources>
+                                    <Style TargetType="Label" BasedOn="{StaticResource DialogInputFieldHeaderLabelStyle}"/>
+
+                                    <Style TargetType="StackPanel" BasedOn="{StaticResource DialogInputFieldStackPanelStyle}"/>
+
+                                    <Style TargetType="TextBox" BasedOn="{StaticResource DialogInputFieldTextBoxStyle}"/>
+                                </StackPanel.Resources>
+                                <Label Content="LOG BOOK NAME"/>
                                 <TextBox
                                     x:Name="NameTextBox"
-                                    Text="New Log Book"
-                                    Style="{StaticResource DialogInputFieldTextBoxStyle}"/>
+                                    Text="New Log Book"/>
                             </StackPanel>
                         </Grid>
                     </Border>

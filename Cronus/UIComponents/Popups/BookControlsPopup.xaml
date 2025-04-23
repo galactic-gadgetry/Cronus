@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Cronus.UIComponents.Popups.BookControlsPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cronus.UIComponents.Popups"
+             mc:Ignorable="d" 
+             MinWidth="340">
+    
+    <Grid>
+        <Border Background="{StaticResource TextControlBackgroundColorBrush1}" CornerRadius="8">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="{StaticResource AccentBorderBackground}" Margin="8,8,0,0">
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <Button
+                            Command="{Binding EditBookDetailsButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                            Style="{StaticResource IconButtonStyle}"
+                            Margin="0,10,10,0"
+                            ToolTip="Edit Book">
+                            <Image Source="{StaticResource EditWhite}"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1"
+                        Background="{StaticResource LayerFillColorBrush5}"
+                        Margin="15,40,15,20" Padding="10"
+                        CornerRadius="8">
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="BorderBrush" Value="{StaticResource AccentBorderBackground}"/>
+                                <Setter Property="BorderThickness" Value="0,0,0,0.5"/>
+                                <Setter Property="Margin" Value="0,10"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <StackPanel>
+                            <!-- #Book Name -->
+                            <Label
+                                Content="{Binding BookNameText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                Foreground="{StaticResource TextAccentFillColorBrush1}"
+                                FontSize="20" FontWeight="Normal"/>
+                        </StackPanel>
+
+                        <Border/>
+
+                        <!-- #Created on Date -->
+                        <StackPanel>
+                            <Label
+                                Content="CREATED ON"
+                                Foreground="{StaticResource TextAccentFillColorBrush1}"
+                                Margin="0,5"
+                                FontSize="{StaticResource SmallLabelFontSize}"/>
+                            <Label
+                                Content="{Binding CreatedOnText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                FontWeight="Normal"/>
+                        </StackPanel>
+                        
+                        <!-- #Book Status -->
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse
+                                    Fill="{StaticResource ActiveStatusIconColorBrush1}"
+                                    Height="15" Width="15"/>
+                                <Label
+                                    Content="{Binding BookStatusText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    Margin="10,0" Padding="0"
+                                    FontWeight="Normal"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- #Switch Books Control -->
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <Style TargetType="Button" BasedOn="{StaticResource NavigationBarButtonStyle}"/>
+
+                                <Style TargetType="Image" BasedOn="{StaticResource NavigationBarButtonImageStyle}"/>
+
+                                <Style TargetType="Label" BasedOn="{StaticResource NavigationBarButtonLabelStyle}"/>
+                            </StackPanel.Resources>
+                            <Button Command="{Binding CloseBookButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{StaticResource SettingsGray}"/>
+                                    <Label
+                Content="Close Log Book"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Command="{Binding SwitchBooksButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{StaticResource SettingsGray}"/>
+                                    <Label Content="Switch Log Books"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            
+        </Border>
+    </Grid>
+    
+</UserControl>

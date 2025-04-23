@@ -1,0 +1,147 @@
+﻿<Window x:Class="Cronus.UIComponents.Dialogs.ManageBooksDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cronus.UIComponents.Dialogs"
+        xmlns:card="clr-namespace:Cronus.UIComponents.Cards"
+        mc:Ignorable="d"
+        Title="Manage Books"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        SizeToContent="WidthAndHeight"
+        Width="400"
+        MinHeight="300">
+    
+    <Grid>
+        <Border
+            Background="{StaticResource WindowBackground}"
+            Padding="10,20"
+            CornerRadius="4">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- #Title Label -->
+                <Label
+                    Grid.Row="0"
+                    Content="Manage Books"
+                    Foreground="{StaticResource TextAccentFillColorBrush1}"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,10"
+                    FontSize="18" FontWeight="Normal"/>
+
+                <!-- #X Button -->
+                <Button
+                    Grid.Row="0"
+                    Click="XButton_Click">
+                    <Button.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource IconButtonStyle}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Style.Triggers>
+                                <!-- #Mouse over behaviors -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Resources>
+                    <Image>
+                        <Image.Resources>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="{StaticResource LetterXGray}"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Stretch" Value="None"/>
+                                <Style.Triggers>
+                                    <!-- #Mouse over behaviors -->
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsMouseOver}" Value="True">
+                                        <Setter Property="Source" Value="{StaticResource LetterXWhite}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Resources>
+                    </Image>
+                </Button>
+
+                <!-- #Message -->
+                <TextBlock
+                    Grid.Row="1"
+                    Text="Switch books, close the current book. Go Wild!"
+                    HorizontalAlignment="Center"/>
+
+                <!-- #Saved Book List -->
+                <Border Grid.Row="2">
+                    <ListView
+                        x:Name="SavedBooksListView"
+                        ItemsSource="{Binding DataContext.SavedBooks}"
+                        MaxHeight="130">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <card:SmallSavedBookCard
+                                    BookNameText="{Binding Name}"
+                                    BookStatusText="{Binding Status}"
+                                    MoreButtonClickedCommand="{Binding DataContext.SavedBookMoreButtonClickedCommand, ElementName=SavedBooksListView}"
+                                    MoreButtonClickedCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
+
+                <!-- #Create Book Button -->
+                <TextBlock
+                    Grid.Row="3"
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Hyperlink Click="CreateLogBookButton_Click">
+                        Create Log Book
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+            
+        </Border>
+
+        <!-- #Saved Book Card More Button Popup -->
+        <Popup
+            x:Name="MoreButtonPopup"
+            IsOpen="{Binding IsSavedBookCardMoreButtonPopupOpen}"
+            Placement="Mouse"
+            AllowsTransparency="True"
+            StaysOpen="False">  
+            <Border>
+                <Border.Effect>
+                    <DropShadowEffect
+                        Color="Black"
+                        Opacity="0.4"
+                        BlurRadius="10"
+                        ShadowDepth="0"/>
+                </Border.Effect>
+                <Grid>
+                    <Border
+                        Background="{StaticResource LayerFillColorBrush5}"
+                        Width="175"
+                        Padding="7"
+                        CornerRadius="4">
+                        <Button
+                            Content="{Binding SavedBookCardMoreButtonPopupButtonText}"
+                            Command="{Binding SavedBookCardMoreButtonPopupButtonClickedCommand}"
+                            Style="{StaticResource EmptyDeleteButtonStyle}"
+                            BorderBrush="Transparent" BorderThickness="0"
+                            HorizontalContentAlignment="Left"/>
+                    </Border>
+                </Grid>
+            </Border>
+        </Popup>
+        
+    </Grid>
+    
+</Window>

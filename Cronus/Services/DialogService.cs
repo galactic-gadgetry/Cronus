@@ -82,6 +82,30 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Displays the <see cref="ManageBooksDialog"/> window.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="navigationStore"></param>
+        /// <returns>The Manage Books dialog window</returns>
+        public static ManageBooksDialog PromptUserWithManageBooksDialog(
+            BookStore bookStore, NavigationStore navigationStore)
+        {
+            ManageBooksDialog dlg = new(bookStore, navigationStore);
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
         /// Displays the <see cref="MessageWithBackButtonDialog"/>
         /// dialog window.
         /// </summary>

@@ -18,6 +18,10 @@
         <Setter Property="FontWeight" Value="Normal"/>
     </Style>
 
+    <Style x:Key="OKStatusLabelStyle" TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+        <Setter Property="Foreground" Value="{StaticResource OKStatusColorBrush1}"/>
+    </Style>
+
     <Style x:Key="ViewTitleLabelStyle" TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
         <Setter Property="Foreground" Value="{StaticResource TextFillColorBrush1}"/>
         <Setter Property="FontSize" Value="18"/>

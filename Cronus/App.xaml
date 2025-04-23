@@ -10,6 +10,7 @@
 
                 <ResourceDictionary Source="Resources/Dictionaries/Borders.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionaries/Buttons.xaml"/>
+                <ResourceDictionary Source="Resources/Dictionaries/Converters.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionaries/Images.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionaries/ItemControls.xaml"/>
                 <ResourceDictionary Source="Resources/Dictionaries/Palette.xaml"/>

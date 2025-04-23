@@ -7,11 +7,8 @@
         xmlns:card="clr-namespace:Cronus.UIComponents.Cards"
         mc:Ignorable="d"
         Title="Manage Books"
+        Style="{StaticResource DialogWindowStyle}"
         WindowStartupLocation="CenterOwner"
-        WindowStyle="None"
-        AllowsTransparency="True"
-        Background="Transparent"
-        SizeToContent="WidthAndHeight"
         Width="400"
         MinHeight="300">
     

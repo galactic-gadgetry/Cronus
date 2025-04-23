@@ -6,11 +6,8 @@
         xmlns:local="clr-namespace:Cronus.UIComponents.Dialogs"
         mc:Ignorable="d"
         Title="Confirmation"
+        Style="{StaticResource DialogWindowStyle}"
         WindowStartupLocation="CenterOwner"
-        WindowStyle="None"
-        AllowsTransparency="True"
-        Background="Transparent"
-        SizeToContent="WidthAndHeight"
         FocusManager.FocusedElement="{Binding ElementName=ConfirmationTextBox}">
     
     <Grid>

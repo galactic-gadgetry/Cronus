@@ -4,5 +4,6 @@
 
 
     <conv:InverseBoolConverter x:Key="BoolInverter"/>
+    <conv:MultiplyConverter x:Key="MultiplyConverter"/>
 
 </ResourceDictionary>

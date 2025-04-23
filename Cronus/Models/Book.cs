@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.DirectoryServices.ActiveDirectory;
 using System.IO;
@@ -69,6 +70,9 @@ namespace Cronus.Models
                 HasUnsavedChanges = true;
             }
         }
+
+
+        public ObservableCollection<Project> Projects { get; set; } = new();
 
 
         public string SaveFilePath { get; init; } = string.Empty;

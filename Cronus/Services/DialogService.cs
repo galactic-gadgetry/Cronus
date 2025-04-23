@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -50,6 +51,29 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Displays the <see cref="CreateNewProjectDialog"/> dialog
+        /// window.
+        /// </summary>
+        /// <returns>The Create New Project dialog window</returns>
+        public static CreateNewProjectDialog PromptUserWithCreateNewProjectDialog()
+        {
+            CreateNewProjectDialog dlg = new();
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.NameText = "New project";
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
         /// Displays the <see cref="ConfirmationDialog"/> window.
         /// </summary>
         /// <param name="model">Model instance to be deleted</param>
@@ -79,6 +103,30 @@ namespace Cronus.Services
             RestoreWindowVisuals(mainWindow);
 
             return dlg;
+        }
+
+        /// <summary>
+        /// Displays the <see cref="ErrorMessageWithOKButtonDialog"/>
+        /// dialog window.
+        /// </summary>
+        /// <param name="caption"></param>
+        /// <param name="message"></param>
+        public static void PromptUserWithErrorMessageWithOKButtonDialog(
+            string caption, string message)
+        {
+            ErrorMessageWithOKButtonDialog dlg = new();
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.TitleText = caption;
+            dlg.MessageText = message;
+
+            // Dime the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
         }
 
         /// <summary>

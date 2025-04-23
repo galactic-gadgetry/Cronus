@@ -6,11 +6,8 @@
         xmlns:local="clr-namespace:Cronus.UIComponents.Dialogs"
         mc:Ignorable="d"
         Title="Message with Back Button"
-        WindowStartupLocation="CenterOwner"
-        WindowStyle="None"
-        AllowsTransparency="True"
-        Background="Transparent"
-        SizeToContent="WidthAndHeight">
+        Style="{StaticResource DialogWindowStyle}"
+        WindowStartupLocation="CenterOwner">
 
     <Grid>
         <Border

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cronus.Views"
+             xmlns:card="clr-namespace:Cronus.UIComponents.Cards"
              mc:Ignorable="d" 
              d:DesignHeight="450">
     
@@ -34,7 +35,8 @@
                         Grid.Column="1"
                         Content="Create Project"
                         Style="{StaticResource AccentButtonStyle}"
-                        Margin="0,0,15,0"/>
+                        Margin="0,0,15,0"
+                        Command="{Binding CreateProjectButtonClickedCommand}"/>
                 </Grid>
                 
                 <!-- #View Contents -->
@@ -50,9 +52,23 @@
                         
                         <!-- #Projects List -->
                         <ListView
-                            x:Name="ProjectsListView">
-                            <ListViewItem>Project 1</ListViewItem>
-                            <ListViewItem>Project 2</ListViewItem>
+                            x:Name="ProjectsListView"
+                            ItemsSource="{Binding Projects}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <card:ProjectListCard
+                                        NameText="{Binding Name}"
+                                        CodeText="{Binding Code}"
+                                        WbsText="{Binding Wbs}"
+                                        StatusText="{Binding StatusText}"
+                                        DeleteButtonClickedCommand="{Binding DataContext.ProjectCardDeleteButtonClickedCommand, ElementName=ProjectsListView}"
+                                        DeleteButtonClickedCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"
+                                        EditButtonClickedCommand="{Binding DataContext.ProjectCardEditButtonClickedCommand, ElementName=ProjectsListView}"
+                                        EditButtonClickedCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"
+                                        NameHyperlinkClickedCommand="{Binding DataContext.ProjectCardNameHyperlinkClickedCommand, ElementName=ProjectsListView}"
+                                        NameHyperlinkClickedCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
                     </Grid>
                 </Border>

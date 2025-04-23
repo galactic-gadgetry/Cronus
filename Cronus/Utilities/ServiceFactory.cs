@@ -43,7 +43,7 @@ namespace Cronus.Utilities
                 case "projects":
                     return new LayoutNavigationService<ProjectsViewModel>(
                         navigationStore,
-                        () => new ProjectsViewModel());
+                        () => new ProjectsViewModel(bookStore));
                 case "saved books":
                     return new LayoutNavigationService<SavedBooksViewModel>(
                         navigationStore,

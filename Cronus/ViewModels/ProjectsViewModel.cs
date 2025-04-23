@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -118,6 +119,19 @@ namespace Cronus.ViewModels
         }
 
         /// <summary>
+        /// Handles the delete project request.
+        /// </summary>
+        /// <param name="project">Project instance to be
+        /// deleted</param>
+        private void DeleteProjectRequested(Project project)
+        {
+            BookService.DeleteProjectFromCurrentBook(_bookStore, project);
+
+            //  Update the info bar.
+            OnInfoUpdated($"Project '{project.Name}' deleted");
+        }
+
+        /// <summary>
         /// Handles the Create Project button clicked event.
         /// </summary>
         /// <param name="obj"></param>
@@ -132,10 +146,25 @@ namespace Cronus.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// Handles the Project Card's Delete button click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void OnProjectCardDeleteButtonClicked(object? obj)
         {
-            throw new NotImplementedException();
+            Project? selectedProject = obj as Project;
+            if (selectedProject == null)
+            {
+                throw new ArgumentOutOfRangeException("The caller must be " +
+                    "a Project object");
+            }
+
+            if (DialogService.PromptUserWithDeleteConfirmationDialog(
+                selectedProject).DialogResult == true)
+            {
+                DeleteProjectRequested(selectedProject);
+            }
         }
 
 

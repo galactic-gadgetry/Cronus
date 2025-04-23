@@ -192,6 +192,43 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Deletes the <see cref="Project"/> isntance from the
+        /// book's <see cref="Book.Projects"/> collection.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="project"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public static void DeleteProjectFromBook(Book book,
+            Project project)
+        {
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+            ArgumentNullException.ThrowIfNull(project, nameof(project));
+
+            ObservableCollection<Project> projects = book.Projects;
+            if (!projects.Remove(project))
+            {
+                throw new InvalidOperationException("Removal of the " +
+                    "Project instance from the collection failed");
+            }
+        }
+
+        /// <summary>
+        /// Deletes the <see cref="Project"/> instance from the
+        /// book store's current book's
+        /// <see cref="Book.Projects"/> collection.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="project"></param>
+        public static void DeleteProjectFromCurrentBook(
+            BookStore bookStore, Project project)
+        {
+            ArgumentNullException.ThrowIfNull(bookStore, nameof(bookStore));
+            ArgumentNullException.ThrowIfNull(project, nameof(project));
+
+            DeleteProjectFromBook(bookStore.CurrentBook, project);
+        }
+
+        /// <summary>
         /// Retrieves the saved book headers on file.
         /// </summary>
         /// <returns></returns>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.DirectoryServices.ActiveDirectory;
 using System.IO;
@@ -99,6 +100,9 @@ namespace Cronus.Models
             SaveFilePath = Path.Combine(
                 FileService.SaveFileDirectory,
                 ID.ToString() + ".json");
+            Status = BookStatus.Active;
+
+            Projects.CollectionChanged += OnProjectsChanged;
         }
 
 
@@ -106,6 +110,12 @@ namespace Cronus.Models
         public string GetModelTypeString()
         {
             return "Log Book";
+        }
+
+
+        private void OnProjectsChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            HasUnsavedChanges = true;
         }
 
 

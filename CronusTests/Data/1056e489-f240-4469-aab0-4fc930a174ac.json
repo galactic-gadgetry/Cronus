@@ -6,6 +6,18 @@
   "ID": "1056e489-f240-4469-aab0-4fc930a174ac",
   "IsBookVoid": false,
   "Name": "Test Book",
+  "Projects": [
+    {
+      "Code": "HYDR",
+      "CreatedDateTime": "2025-04-23T15:52:53.5730461-04:00",
+      "CreatedDateString": "23 April 2025",
+      "ID": "9adb3c5e-e3bc-4603-8639-141536123081",
+      "Name": "Coulometer",
+      "Status": 0,
+      "StatusText": "Active",
+      "Wbs": "12345.67.89.10.11"
+    }
+  ],
   "SaveFilePath": "C:\\Users\\nbspangl\\Documents\\coding\\WPF\\Cronus\\CronusTests\\Data\\1056e489-f240-4469-aab0-4fc930a174ac.json",
   "Status": 0,
   "StatusText": "Active"

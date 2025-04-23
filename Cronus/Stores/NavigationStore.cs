@@ -71,6 +71,15 @@ namespace Cronus.Stores
             }
         }
 
+        /// <summary>
+        /// Used to determine the previous
+        /// <see cref="LayoutViewModel.CurrentContnentViewModel"/>.
+        /// </summary>
+        public DefaultViewModelBase? PreviousDefaultLayoutContentViewModel { get; set; }
+
+
+        public ViewModelBase? PreviousLayoutContentViewModel { get; set; }
+
 
         /// <summary>
         /// Raised when the

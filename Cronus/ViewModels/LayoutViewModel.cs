@@ -62,7 +62,12 @@ namespace Cronus.ViewModels
 
         private void NavigateDefaultView()
         {
-            throw new NotImplementedException();
+            INavigate projectsNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "projects",
+                    _bookStore,
+                    _navigationStore);
+            projectsNavigationService.Navigate();
         }
 
 

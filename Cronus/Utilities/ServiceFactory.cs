@@ -37,6 +37,9 @@ namespace Cronus.Utilities
                     return new SideContentNavigationService<XButtonSideBarViewModel>(
                         navigationStore,
                         () => null);
+                case "previous default view":
+                    return new PreviousDefaultLayoutContentNavigationService(
+                        navigationStore);
                 case "projects":
                     return new LayoutNavigationService<ProjectsViewModel>(
                         navigationStore,

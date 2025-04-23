@@ -14,21 +14,30 @@ namespace Cronus.ViewModels
 {
     public class XButtonSideBarViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Used to navigate to the previous default view.
+        /// </summary>
+        private readonly INavigate _previousDefaultViewNavigationService;
 
-        private readonly INavigate _projectsNavigationService;
 
-
-
+        /// <summary>
+        /// Executed when the X button is clicked.
+        /// </summary>
         public ICommand XButtonClickedCommand { get; }
 
 
-
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <seealso cref="XButtonSideBarViewModel"/> class.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="navigationStore"></param>
         public XButtonSideBarViewModel(BookStore bookStore,
             NavigationStore navigationStore)
         {
-            _projectsNavigationService =
+            _previousDefaultViewNavigationService =
                 ServiceFactory.CreateNavigationService(
-                    "projects",
+                    "previous default view",
                     bookStore,
                     navigationStore);
 
@@ -37,10 +46,13 @@ namespace Cronus.ViewModels
         }
 
 
-
+        /// <summary>
+        /// Handles the X button click event.
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnXButtonClicked(object? obj)
         {
-            _projectsNavigationService.Navigate();
+            _previousDefaultViewNavigationService.Navigate();
         }
     }
 }

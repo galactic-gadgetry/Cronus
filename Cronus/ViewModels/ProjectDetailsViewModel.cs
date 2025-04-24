@@ -20,6 +20,9 @@ namespace Cronus.ViewModels
         /// </summary>
         private readonly BookStore _bookStore;
 
+
+        private readonly INavigate _editProjectDetailsNavigationService;
+
         /// <summary>
         /// Used to determine the app's navigation state.
         /// </summary>
@@ -75,6 +78,11 @@ namespace Cronus.ViewModels
             EditProjectButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnEditProjectButtonClicked));
 
+            _editProjectDetailsNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "edit project details",
+                    _bookStore,
+                    _navigationStore);
             _projectsNavigationService =
                 ServiceFactory.CreateNavigationService(
                     "projects",
@@ -136,10 +144,15 @@ namespace Cronus.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// Handles the Edit Project button click event.
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnEditProjectButtonClicked(object? obj)
         {
-            throw new NotImplementedException();
+            // There should already be a focused project, so
+            // navigate to the Edit Project Details view.
+            _editProjectDetailsNavigationService.Navigate();
         }
     }
 }

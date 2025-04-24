@@ -25,6 +25,15 @@ namespace Cronus.Stores
             get => currentLayoutContentViewModel;
             set
             {
+                // Track the view that is being navigated away from
+                // for return functions.
+                if (CurrentLayoutContentViewModel is DefaultViewModelBase)
+                {
+                    PreviousDefaultLayoutContentViewModel =
+                        (DefaultViewModelBase)CurrentLayoutContentViewModel;
+                }
+                PreviousLayoutContentViewModel = CurrentLayoutContentViewModel;
+
                 currentLayoutContentViewModel = value;
                 OnCurrentLayoutContentViewModelChanged();
             }

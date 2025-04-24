@@ -24,6 +24,9 @@ namespace Cronus.ViewModels
         /// </summary>
         private readonly BookStore _bookStore;
 
+
+        private readonly INavigate _editProjectDetailsNavigationService;
+
         /// <summary>
         /// Used to determine the app's navigation state.
         /// </summary>
@@ -66,7 +69,12 @@ namespace Cronus.ViewModels
         public ICommand ProjectCardNameHyperlinkClickedCommand { get; }
 
 
-
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <seealso cref="ProjectsViewModel"/> class.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="navigationStore"></param>
         public ProjectsViewModel(BookStore bookStore, NavigationStore navigationStore)
         {
             _bookStore = bookStore;
@@ -81,6 +89,11 @@ namespace Cronus.ViewModels
             ProjectCardNameHyperlinkClickedCommand = new RelayCommand(
                 new Action<object?>(OnProjectCardNameHyperlinkClicked));
 
+            _editProjectDetailsNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "edit project details",
+                    _bookStore,
+                    _navigationStore);
             _projectDetailsNavigationService =
                 ServiceFactory.CreateNavigationService(
                     "project details",
@@ -167,10 +180,25 @@ namespace Cronus.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// Handles the Project Card Edit button click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void OnProjectCardEditButtonClicked(object? obj)
         {
-            throw new NotImplementedException();
+            Project? selectedProject = obj as Project;
+            if (selectedProject == null)
+            {
+                throw new ArgumentOutOfRangeException("The caller must be " +
+                    "a Project object");
+            }
+
+            // Set the selected project  as the current book's
+            // focused project and navigate to the Edit Project
+            // Details view.
+            BookService.SetBookStoreCurrentFocusedProject(_bookStore, selectedProject);
+            _editProjectDetailsNavigationService.Navigate();
         }
 
         /// <summary>

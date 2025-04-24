@@ -339,6 +339,34 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Sets the book's <see cref="Book.HasUnsavedChanges"/>
+        /// property to the value.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="value"></param>
+        public static void SetBookHasUnsavedChanges(Book book, bool value)
+        {
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+
+            book.HasUnsavedChanges = value;
+        }
+
+        /// <summary>
+        /// Sets the book store's current book's
+        /// <see cref="Book.HasUnsavedChanges"/> property to the
+        /// value.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="value"></param>
+        public static void SetCurrentBookHasUnsavedChanges(
+            BookStore bookStore, bool value)
+        {
+            ArgumentNullException.ThrowIfNull(bookStore, nameof(bookStore));
+
+            SetBookHasUnsavedChanges(bookStore.CurrentBook, value);
+        }
+
+        /// <summary>
         /// Validates the project's properties.
         /// </summary>
         /// <param name="book">Book from which the collection will be

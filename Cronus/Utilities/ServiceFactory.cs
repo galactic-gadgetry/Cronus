@@ -25,6 +25,10 @@ namespace Cronus.Utilities
                     return new LayoutNavigationService<EditBookDetailsViewModels>(
                         navigationStore,
                         () => new EditBookDetailsViewModels(bookStore, navigationStore));
+                case "edit project details":
+                    return new LayoutNavigationService<EditProjectDetailsViewModel>(
+                        navigationStore,
+                        () => new EditProjectDetailsViewModel(bookStore, navigationStore));
                 case "layout":
                     return new NavigationService<LayoutViewModel>(
                         navigationStore,
@@ -37,6 +41,8 @@ namespace Cronus.Utilities
                     return new SideContentNavigationService<XButtonSideBarViewModel>(
                         navigationStore,
                         () => null);
+                case "previous":
+                    return new PreviousLayoutContentNavigationService(navigationStore);
                 case "previous default view":
                     return new PreviousDefaultLayoutContentNavigationService(
                         navigationStore);

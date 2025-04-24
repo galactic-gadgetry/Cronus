@@ -61,7 +61,6 @@
 
     <Color x:Key="TextFillColorSecondary100">#FFFFFF</Color>
     <Color x:Key="TextFillColorSecondary110">#FDFEFE</Color>
-
     <Color x:Key="TextFillColorSecondary120">#E0E1E3</Color>
     <Color x:Key="TextFillColorSecondaryDisabled">#A3A4A7</Color>
 

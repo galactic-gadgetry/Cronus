@@ -12,6 +12,10 @@
     <BitmapImage x:Key="BriefcaseDisabled" UriSource="/Cronus;component/Resources/Images/Icons/Briefcase/briefcase_disabled.png"/>
 
     <BitmapImage x:Key="CalendarGreen" UriSource="/Cronus;component/Resources/Images/Icons/Calendar/calendar_accent_green.png"/>
+    <BitmapImage x:Key="CalendarGray" UriSource="/Cronus;component/Resources/Images/Icons/Calendar/calendar_text_color_primary80.png"/>
+    <BitmapImage x:Key="CalendarLightGray" UriSource="/Cronus;component/Resources/Images/Icons/Calendar/calendar_text_color_secondary120.png"/>
+    <BitmapImage x:Key="CalendarWhite" UriSource="/Cronus;component/Resources/Images/Icons/Calendar/calendar_white.png"/>
+    <BitmapImage x:Key="CalendarDisabled" UriSource="/Cronus;component/Resources/Images/Icons/Calendar/calendar_disabled.png"/>
 
     <BitmapImage x:Key="EditGrey" UriSource="/Cronus;component/Resources/Images/Icons/Edit/edit_text_color_primary80.png"/>
     <BitmapImage x:Key="EditWhite" UriSource="/Cronus;component/Resources/Images/Icons/Edit/edit_white.png"/>

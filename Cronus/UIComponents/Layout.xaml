@@ -52,6 +52,9 @@
                                 <DataTemplate DataType="{x:Type vm:BookDetailsViewModel}">
                                     <view:BookDetailsView/>
                                 </DataTemplate>
+                                <DataTemplate DataType="{x:Type vm:DailyTimesheetViewModel}">
+                                    <view:DailyTimesheetView/>
+                                </DataTemplate>
                                 <DataTemplate DataType="{x:Type vm:EditBookDetailsViewModels}">
                                     <view:EditBookDetailsView/>
                                 </DataTemplate>

@@ -29,6 +29,11 @@ namespace Cronus.ViewModels
         private readonly BookStore _bookStore;
 
         /// <summary>
+        /// Used to navigate to the Daily Timesheet view.
+        /// </summary>
+        private readonly INavigate _dailyTimesheetNavigationService;
+
+        /// <summary>
         /// Used to navigate to the Edit Book Details view.
         /// </summary>
         private readonly INavigate _editBookDetailsNavigationService;
@@ -51,6 +56,7 @@ namespace Cronus.ViewModels
 
         // Backing Fields
         private bool isBookBarPopupOpen = false;
+        private bool isDailyTimesheetTabSelected = false;
         private bool isProjectsTabSelected = false;
 
 
@@ -82,6 +88,20 @@ namespace Cronus.ViewModels
             {
                 isBookBarPopupOpen = value;
                 OnPropertyChanged(nameof(IsBookBarPopupOpen));
+            }
+        }
+
+        /// <summary>
+        /// True if the Daily Timesheet tab is selected, false
+        /// otherwise.
+        /// </summary>
+        public bool IsDailyTimesheetTabSelected
+        {
+            get => isDailyTimesheetTabSelected;
+            set
+            {
+                isDailyTimesheetTabSelected = value;
+                OnPropertyChanged(nameof(IsDailyTimesheetTabSelected));
             }
         }
 
@@ -133,6 +153,11 @@ namespace Cronus.ViewModels
         public ICommand BookControlsPopupSwitchBooksButtonClickedCommand { get; }
 
         /// <summary>
+        /// Executed when the Daily Timesheet button is clicked.
+        /// </summary>
+        public ICommand DailyTimesheetButtonClickedCommand { get; }
+
+        /// <summary>
         /// Executed when the Projects button is clicked.
         /// </summary>
         public ICommand ProjectsButtonClickedCommand { get; }
@@ -157,13 +182,19 @@ namespace Cronus.ViewModels
                 new Action<object?>(OnBookControlsPopupEditBookButtonClicked));
             BookControlsPopupSwitchBooksButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnBookControlsPopupSwitchBooksButtonClicked));
-
+            DailyTimesheetButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnDailyTimesheetButtonClicked));
             ProjectsButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnProjectsButtonClicked));
 
             _bookDetailsNavigationService =
                 ServiceFactory.CreateNavigationService(
                     "book details",
+                    _bookStore,
+                    _navigationStore);
+            _dailyTimesheetNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "daily timesheet",
                     _bookStore,
                     _navigationStore);
             _editBookDetailsNavigationService =
@@ -288,6 +319,15 @@ namespace Cronus.ViewModels
         }
 
         /// <summary>
+        /// Handles the Daily Timesheet button click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnDailyTimesheetButtonClicked(object? obj)
+        {
+            _dailyTimesheetNavigationService.Navigate();
+        }
+
+        /// <summary>
         /// Handles the Projects button click event.
         /// </summary>
         /// <param name="obj"></param>
@@ -348,6 +388,9 @@ namespace Cronus.ViewModels
             {
                 case ProjectsViewModel:
                     IsProjectsTabSelected = true;
+                    break;
+                case DailyTimesheetViewModel:
+                    IsDailyTimesheetTabSelected = true;
                     break;
                 default:
                     return;

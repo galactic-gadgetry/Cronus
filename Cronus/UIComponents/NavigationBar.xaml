@@ -27,6 +27,15 @@
                 <Border Grid.Column="1" Grid.Row="0" Background="{StaticResource LayerFillColorBrush2}">
                     <StackPanel Margin="7,55,7,0">
                         <btn:NavigationBarButton
+                            ButtonText="Timesheet"
+                            ButtonClickedCommand="{Binding DailyTimesheetButtonClickedCommand}"
+                            ButtonImageSource="{StaticResource CalendarGray}"
+                            ButtonImageSourceMouseOver="{StaticResource CalendarLightGray}"
+                            ButtonImageSourcePressed="{StaticResource CalendarWhite}"
+                            ButtonImageSourceDisabled="{StaticResource CalendarDisabled}"
+                            ButtonImageSourceHighlighted="{StaticResource CalendarWhite}"
+                            IsHighlighted="{Binding IsDailyTimesheetTabSelected}"/>
+                        <btn:NavigationBarButton
                             ButtonText="Projects"
                             ButtonImageSource="{StaticResource BriefcaseGray}"
                             ButtonImageSourceMouseOver="{StaticResource BriefcaseLightGray}"

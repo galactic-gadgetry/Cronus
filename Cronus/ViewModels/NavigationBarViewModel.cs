@@ -242,7 +242,7 @@ namespace Cronus.ViewModels
         /// <exception cref="NotImplementedException"></exception>
         private void OnBookBarSaveBookButtonClicked(object? obj)
         {
-            throw new NotImplementedException();
+            SaveBookRequested();
         }
 
         /// <summary>
@@ -331,6 +331,12 @@ namespace Cronus.ViewModels
                     OpenManageBooksDialog();
                 }
             }
+        }
+
+        
+        public void SaveBookRequested()
+        {
+            BookService.SaveCurrentBookToJson(_bookStore);
         }
 
 

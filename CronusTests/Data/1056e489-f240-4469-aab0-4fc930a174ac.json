@@ -16,16 +16,6 @@
       "Status": 0,
       "StatusText": "Active",
       "Wbs": "12345.67.89.10.11"
-    },
-    {
-      "Code": "DEL",
-      "CreatedDateTime": "2025-04-24T10:54:55.6916685-04:00",
-      "CreatedDateString": "24 April 2025",
-      "ID": "79857ad6-d4ec-4a07-84f2-d3b52cd3afb9",
-      "Name": "Delete Me",
-      "Status": 0,
-      "StatusText": "Active",
-      "Wbs": "33333"
     }
   ],
   "SaveFilePath": "C:\\Users\\nbspangl\\Documents\\coding\\WPF\\Cronus\\CronusTests\\Data\\1056e489-f240-4469-aab0-4fc930a174ac.json",

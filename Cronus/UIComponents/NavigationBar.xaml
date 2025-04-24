@@ -47,7 +47,7 @@
                         BookNameButtonClickedCommand="{Binding BookBarBookNameButtonClickedCommand}"
                         SaveBookButtonClickedCommand="{Binding BookBarSaveBookButtonClickedCommand}"
                         SettingsButtonClickedCommand="{Binding BookBarSettingsButtonClickedCommand}"
-                        IsSaveBookButtonEnabled="True"
+                        IsSaveBookButtonEnabled="{Binding CurrentBook.HasUnsavedChanges}"
                         BookNameButtonIsHitTestVisible="{Binding ElementName=BookBarPopup, Path=IsOpen, Converter={StaticResource BoolInverter}}"/>
                 </Border>
                 

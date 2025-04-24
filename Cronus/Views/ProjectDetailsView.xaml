@@ -29,7 +29,7 @@
                         Style="{StaticResource ViewTitleLabelStyle}"/>
 
                     <TextBlock Grid.Column="1" Margin="0,0,15,0">
-                        <Hyperlink>
+                        <Hyperlink Command="{Binding BackToAllProjectsHyperlinkClickedCommand}">
                             Back to all projects
                         </Hyperlink>
                     </TextBlock>
@@ -73,7 +73,8 @@
                                         Grid.Column="1"
                                         Content="Edit Project Details"
                                         Style="{StaticResource AccentButtonStyle}"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center"
+                                        Command="{Binding EditProjectButtonClickedCommand}"/>
                                 </Grid>
 
                                 <Border
@@ -168,10 +169,12 @@
                                     <Button
                                         Content="Archive Project"
                                         Style="{StaticResource DeleteButtonStyle}"
-                                        Margin="0,0,15,0"/>
+                                        Margin="0,0,15,0"
+                                        Command="{Binding ArchiveProjectButtonClickedCommand}"/>
                                     <Button
                                         Content="Delete Project"
-                                        Style="{StaticResource EmptyDeleteButtonStyle}"/>
+                                        Style="{StaticResource EmptyDeleteButtonStyle}"
+                                        Command="{Binding DeleteProjectButtonClickedCommand}"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>

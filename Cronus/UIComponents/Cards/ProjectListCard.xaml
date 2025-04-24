@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="Cronus.UIComponents.Cards.ProjectListCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cronus.UIComponents.Cards"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="705">
+    <Grid>
+        <Border
+            Background="{StaticResource ControlBackgroundFillColorBrush1}"
+            Padding="25"
+            CornerRadius="4">
+
+            <Grid>
+                <Expander Template="{StaticResource AnimatedExpanderTemplate}">
+                    <Expander.Header>
+                        <Grid>
+                            <Grid.Resources>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Margin" Value="5,0"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.35*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.2*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- #Name -->
+                            <StackPanel Grid.Column="0">
+                                <Label
+                                    Content="NAME"
+                                    Style="{StaticResource HeaderLabelStyle}"/>
+                                <TextBlock>
+                                    <Hyperlink
+                                        Command="{Binding NameHyperlinkClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                        CommandParameter="{Binding NameHyperlinkClickedCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                        <TextBlock Text="{Binding NameText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            
+                            <!-- #Name Code -->
+                            <StackPanel Grid.Column="1">
+                                <Label
+                                    Content="CODE"
+                                    Style="{StaticResource HeaderLabelStyle}"/>
+                                <Label Content="{Binding CodeText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+                            </StackPanel>
+                            
+                            <!-- #WBS Code -->
+                            <StackPanel Grid.Column="2">
+                                <Label
+                                    Content="WBS"
+                                    Style="{StaticResource HeaderLabelStyle}"/>
+                                <Label Content="{Binding WbsText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+                            </StackPanel>
+                            
+                            <!-- #Status -->
+                            <StackPanel Grid.Column="3">
+                                <Label
+                                    Content="STATUS"
+                                    Style="{StaticResource HeaderLabelStyle}"/>
+                                <Label Content="{Binding StatusText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+                            </StackPanel>
+                            
+                            <!-- #Actions -->
+                            <StackPanel
+                                Grid.Column="4"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button" BasedOn="{StaticResource TransparentIconButtonStyle}"/>
+
+                                    <Style TargetType="Image">
+                                        <Setter Property="Stretch" Value="None"/>
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <Button
+                                    Command="{Binding EditButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    CommandParameter="{Binding EditButtonClickedCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                    <Image Source="{StaticResource EditGrey}"/>
+                                </Button>
+
+                                <Button
+                                    Command="{Binding DeleteButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    CommandParameter="{Binding DeleteButtonClickedCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                    <Image Source="{StaticResource TrashGray}"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Expander.Header>
+
+                    <Grid Height="175">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0"/>
+                        <Border Grid.Column="1"/>
+                        <Border Grid.Column="2"/>
+                        <Border Grid.Column="3"/>
+                        <Border Grid.Column="4"/>
+                    </Grid>
+                </Expander>
+            </Grid>
+
+        </Border>
+    </Grid>
+    
+</UserControl>

@@ -5,11 +5,20 @@
     <!-- #Colors -->
     <Color x:Key="BannerColorPrimary100">#61554C</Color>
     <Color x:Key="BannerColorPrimary130">#221E1A</Color>
-    
-    
+
+    <Color x:Key="OKStatusColorPrimary100">#3BA55C</Color>
+
+
+    <!-- #Brushes -->
+    <SolidColorBrush x:Key="ActiveStatusIconColorBrush1" Color="{StaticResource OKStatusColorPrimary100}"/>
+
+    <SolidColorBrush x:Key="OKStatusColorBrush1" Color="{StaticResource OKStatusColorPrimary100}"/>
+
+
     <!-- #Border -->
     <SolidColorBrush x:Key="AccentBorderBackground" Color="{StaticResource BannerColorPrimary100}"/>
     <SolidColorBrush x:Key="AccentBorderBrush" Color="{StaticResource BannerColorPrimary100}"/>
+    
 
     <!-- #Button -->
     <SolidColorBrush x:Key="IconButtonBackground" Color="{StaticResource TextControlColorPrimary90}"/>

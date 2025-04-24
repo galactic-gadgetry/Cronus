@@ -36,6 +36,7 @@
     <Color x:Key="SolidControlFillColorPrimary130">#2B2D31</Color>
     <Color x:Key="SolidControlFillColorPrimary140">#1E1E22</Color>
     <Color x:Key="SolidControlFillColorPrimary150">#232428</Color>
+    <Color x:Key="SolidControlFillColorPrimary160">#111214</Color>
     <Color x:Key="SolidControlFillColorPrimary170">#1A1B1E</Color>
     <Color x:Key="SolidControlFillColorPrimaryDisabled">#494A50</Color>
 
@@ -64,6 +65,8 @@
     <Color x:Key="TextFillColorSecondary120">#E0E1E3</Color>
     <Color x:Key="TextFillColorSecondaryDisabled">#A3A4A7</Color>
 
+    <Color x:Key="SurfaceStrokeColorFlyout">#33000000</Color>
+
     <!-- #Brushes -->
     <SolidColorBrush x:Key="ControlBackgroundFillColorBrush1" Color="{StaticResource SolidControlFillColorPrimary140}"/>
     <SolidColorBrush x:Key="ControlBackgroundFillColorBrush2" Color="{StaticResource SolidControlFillColorPrimary100}"/>
@@ -72,6 +75,7 @@
     <SolidColorBrush x:Key="LayerFillColorBrush1" Color="{StaticResource WindowBackgroundColorPrimary100}"/>
     <SolidColorBrush x:Key="LayerFillColorBrush2" Color="{StaticResource SolidControlFillColorPrimary130}"/>
     <SolidColorBrush x:Key="LayerFillColorBrush4" Color="{StaticResource SolidControlFillColorPrimary150}"/>
+    <SolidColorBrush x:Key="LayerFillColorBrush5" Color="{StaticResource SolidControlFillColorPrimary160}"/>
 
     <SolidColorBrush x:Key="LayerAccentFillColorBrush1" Color="{StaticResource SolidControlFillColorSecondary100}"/>
 
@@ -80,6 +84,8 @@
     <SolidColorBrush x:Key="TextFillColorBrush1" Color="{StaticResource TextFillColorPrimary80}"/>
 
     <SolidColorBrush x:Key="TextAccentFillColorBrush1" Color="{StaticResource TextFillColorSecondary110}"/>
+
+    <SolidColorBrush x:Key="TextControlBackgroundColorBrush1" Color="{StaticResource TextControlFillColorPrimary100}"/>
 
     <SolidColorBrush x:Key="TextControlTextColorBrush1" Color="{StaticResource TextFillColorSecondary120}"/>
 
@@ -164,6 +170,12 @@
     <SolidColorBrush x:Key="TextBoxForegroundDisabled" Color="{StaticResource TextFillColorPrimaryDisabled}"/>
     <SolidColorBrush x:Key="TextBoxSelectionBrush" Color="{StaticResource SolidControlFillColorPrimary90}"/>
     <SolidColorBrush x:Key="TextBoxSelectionTextBrush" Color="{StaticResource TextFillColorSecondary100}"/>
+    
+    
+    <!-- #ToolTip -->
+    <SolidColorBrush x:Key="ToolTipBackground" Color="{StaticResource SolidControlFillColorPrimary160}"/>
+    <SolidColorBrush x:Key="ToolTipForeground" Color="{StaticResource TextFillColorSecondary100}"/>
+    <SolidColorBrush x:Key="ToolTipBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}"/>
 
 
     <!-- #Window -->
@@ -225,6 +237,6 @@
 
     <Color x:Key="TextOnAccentColorPrimary100">#000000</Color>
 
-    <Color x:Key="SurfaceStrokeColorFlyout">#33000000</Color>
+    <!-- Color x:Key="SurfaceStrokeColorFlyout">#33000000</Color> -->
 
 </ResourceDictionary>

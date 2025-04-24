@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -50,6 +51,29 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Displays the <see cref="CreateNewProjectDialog"/> dialog
+        /// window.
+        /// </summary>
+        /// <returns>The Create New Project dialog window</returns>
+        public static CreateNewProjectDialog PromptUserWithCreateNewProjectDialog()
+        {
+            CreateNewProjectDialog dlg = new();
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.NameText = "New project";
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
         /// Displays the <see cref="ConfirmationDialog"/> window.
         /// </summary>
         /// <param name="model">Model instance to be deleted</param>
@@ -69,6 +93,54 @@ namespace Cronus.Services
             dlg.ConfirmationControlLabelText = "TYPE 'DELETE' TO " +
                 "CONFIRM";
             dlg.DialogAcceptButtonText = $"Delete {model.GetModelTypeString()}";
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
+        /// Displays the <see cref="ErrorMessageWithOKButtonDialog"/>
+        /// dialog window.
+        /// </summary>
+        /// <param name="caption"></param>
+        /// <param name="message"></param>
+        public static void PromptUserWithErrorMessageWithOKButtonDialog(
+            string caption, string message)
+        {
+            ErrorMessageWithOKButtonDialog dlg = new();
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.TitleText = caption;
+            dlg.MessageText = message;
+
+            // Dime the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+        }
+
+        /// <summary>
+        /// Displays the <see cref="ManageBooksDialog"/> window.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="navigationStore"></param>
+        /// <returns>The Manage Books dialog window</returns>
+        public static ManageBooksDialog PromptUserWithManageBooksDialog(
+            BookStore bookStore, NavigationStore navigationStore)
+        {
+            ManageBooksDialog dlg = new(bookStore, navigationStore);
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
 
             // Dim the main window.
             DimWindowVisuals(mainWindow);

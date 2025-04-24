@@ -1,0 +1,72 @@
+﻿<Window x:Class="Cronus.UIComponents.Dialogs.ErrorMessageWithOKButtonDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cronus.UIComponents.Dialogs"
+        mc:Ignorable="d"
+        Title="Error Message with OK Button"
+        Style="{StaticResource DialogWindowStyle}"
+        WindowStartupLocation="CenterOwner">
+    
+    <Grid>
+        <Border>
+
+            <Border
+                Style="{StaticResource DialogOutterBorderStyle}"
+                Height="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- #Content -->
+                    <Border Grid.Row="0" Style="{StaticResource DialogContentBorderStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <!-- #Title -->
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <Image Source="{StaticResource AlertTriangleRed}"/>
+
+                                <Label
+                                    x:Name="TitleLabel"
+                                    Foreground="{StaticResource TextAccentFillColorBrush1}"
+                                    VerticalAlignment="Center"
+                                    Margin="10,0" Padding="0"
+                                    FontSize="18"/>
+                            </StackPanel>
+                            
+                            <!-- #Message -->
+                            <Border
+                                Grid.Row="1"
+                                Style="{StaticResource WarningTextBlockBorderStyle}"
+                                VerticalAlignment="Top">
+                                <TextBlock
+                                    x:Name="MessageTextBlock"
+                                    Style="{StaticResource WarningTextBlockStyle}"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    
+                    <!-- #Controls -->
+                    <Border
+                        Grid.Row="1"
+                        Style="{StaticResource DialogControlBorderStyle}">
+                        <Button
+                            Content="OK"
+                            Background="Transparent"
+                            HorizontalAlignment="Center"
+                            Click="OKButton_Click"/>
+                    </Border>
+                </Grid>
+            </Border>
+            
+        </Border>
+    </Grid>
+    
+</Window>

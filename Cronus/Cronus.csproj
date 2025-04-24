@@ -9,17 +9,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Icons\Alert-Triangle\alert-triangle_control_alert_color_primary100.png" />
     <None Remove="Resources\Images\Icons\Book\book_text_color_primary80.png" />
     <None Remove="Resources\Images\Icons\Briefcase\briefcase_disabled.png" />
     <None Remove="Resources\Images\Icons\Briefcase\briefcase_text_color_primary80.png" />
     <None Remove="Resources\Images\Icons\Briefcase\briefcase_text_color_secondary120.png" />
     <None Remove="Resources\Images\Icons\Briefcase\briefcase_white.png" />
     <None Remove="Resources\Images\Icons\Calendar\calendar_accent_green.png" />
+    <None Remove="Resources\Images\Icons\Edit\edit_text_color_primary80.png" />
+    <None Remove="Resources\Images\Icons\Edit\edit_white.png" />
+    <None Remove="Resources\Images\Icons\More-Horizontal\more-horizontal_text_control_color_primary90.png" />
+    <None Remove="Resources\Images\Icons\More-Horizontal\more-horizontal_white.png" />
     <None Remove="Resources\Images\Icons\Save\save_accent_green.png" />
     <None Remove="Resources\Images\Icons\Save\save_disabled%281%29.png" />
     <None Remove="Resources\Images\Icons\Save\save_disabled.png" />
     <None Remove="Resources\Images\Icons\Save\save_text_color_primary90.png" />
     <None Remove="Resources\Images\Icons\Settings\settings_text_color_primary90.png" />
+    <None Remove="Resources\Images\Icons\Trash\trash_text_color_primary80.png" />
     <None Remove="Resources\Images\Icons\X\x_text_control_color_primary90.png" />
     <None Remove="Resources\Images\Icons\X\x_white.png" />
     <None Remove="Resources\Images\Logos\fast-time.png" />
@@ -34,16 +40,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\Icons\Alert-Triangle\alert-triangle_control_alert_color_primary100.png" />
     <Resource Include="Resources\Images\Icons\Book\book_text_color_primary80.png" />
     <Resource Include="Resources\Images\Icons\Briefcase\briefcase_disabled.png" />
     <Resource Include="Resources\Images\Icons\Briefcase\briefcase_text_color_primary80.png" />
     <Resource Include="Resources\Images\Icons\Briefcase\briefcase_text_color_secondary120.png" />
     <Resource Include="Resources\Images\Icons\Briefcase\briefcase_white.png" />
     <Resource Include="Resources\Images\Icons\Calendar\calendar_accent_green.png" />
+    <Resource Include="Resources\Images\Icons\Edit\edit_text_color_primary80.png" />
+    <Resource Include="Resources\Images\Icons\Edit\edit_white.png" />
+    <Resource Include="Resources\Images\Icons\More-Horizontal\more-horizontal_text_control_color_primary90.png" />
+    <Resource Include="Resources\Images\Icons\More-Horizontal\more-horizontal_white.png" />
     <Resource Include="Resources\Images\Icons\Save\save_accent_green.png" />
     <Resource Include="Resources\Images\Icons\Save\save_disabled.png" />
     <Resource Include="Resources\Images\Icons\Save\save_text_color_primary90.png" />
     <Resource Include="Resources\Images\Icons\Settings\settings_text_color_primary90.png" />
+    <Resource Include="Resources\Images\Icons\Trash\trash_text_color_primary80.png" />
     <Resource Include="Resources\Images\Icons\X\x_text_control_color_primary90.png" />
     <Resource Include="Resources\Images\Icons\X\x_white.png" />
     <Resource Include="Resources\Images\Logos\fast-time.png" />

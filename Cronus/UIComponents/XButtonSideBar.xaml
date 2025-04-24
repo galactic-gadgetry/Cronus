@@ -11,7 +11,8 @@
 
             <Grid Width="315" Margin="0,55,0,0">
                 <!-- #X Button -->
-                <Button>
+                <Button
+                    Command="{Binding XButtonClickedCommand}">
                     <Button.Resources>
                         <Style TargetType="Button" BasedOn="{StaticResource IconButtonStyle}">
                             <Setter Property="Height" Value="35"/>

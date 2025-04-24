@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="Cronus.UIComponents.Cards.SmallSavedBookCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cronus.UIComponents.Cards"
+             mc:Ignorable="d">
+    
+    <Grid>
+        <Border
+            Background="{StaticResource LayerFillColorBrush2}"
+            Width="350"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Padding="10"
+            CornerRadius="4">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- #Title -->
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{StaticResource BookGray}"/>
+                    <StackPanel Margin="10,0">
+                        <Label
+                            Content="{Binding BookNameText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                            Style="{StaticResource AccentLabelStyle}"
+                            FontWeight="Bold"/>
+                        <Label
+                            Content="{Binding BookStatusText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                            Style="{StaticResource OKStatusLabelStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                <!-- #More Button -->
+                <Button
+                    x:Name="MoreButton"
+                    Grid.Column="1"
+                    Command="{Binding MoreButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                    CommandParameter="{Binding MoreButtonClickedCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                    <Button.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource IconButtonStyle}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Style.Triggers>
+                                <!-- #Mouse over behaviors -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Resources>
+                    <Image>
+                        <Image.Resources>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="{StaticResource MoreHorizontalGray}"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Style.Triggers>
+                                    <!-- #Mouse over behaviors -->
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsMouseOver}" Value="True">
+                                        <Setter Property="Source" Value="{StaticResource MoreHorizontalWhite}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Resources>
+                    </Image>
+                </Button>
+            </Grid>
+            
+        </Border>
+    </Grid>
+    
+</UserControl>

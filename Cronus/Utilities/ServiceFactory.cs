@@ -25,10 +25,35 @@ namespace Cronus.Utilities
                     return new LayoutNavigationService<EditBookDetailsViewModels>(
                         navigationStore,
                         () => new EditBookDetailsViewModels(bookStore, navigationStore));
+                case "edit project details":
+                    return new LayoutNavigationService<EditProjectDetailsViewModel>(
+                        navigationStore,
+                        () => new EditProjectDetailsViewModel(bookStore, navigationStore));
                 case "layout":
                     return new NavigationService<LayoutViewModel>(
                         navigationStore,
                         () => new LayoutViewModel(bookStore, navigationStore));
+                case "nav bar":
+                    return new NavBarNavigationService<NavigationBarViewModel>(
+                        navigationStore,
+                        () => new NavigationBarViewModel(bookStore, navigationStore));
+                case "null side content":
+                    return new SideContentNavigationService<XButtonSideBarViewModel>(
+                        navigationStore,
+                        () => null);
+                case "previous":
+                    return new PreviousLayoutContentNavigationService(navigationStore);
+                case "previous default view":
+                    return new PreviousDefaultLayoutContentNavigationService(
+                        navigationStore);
+                case "project details":
+                    return new LayoutNavigationService<ProjectDetailsViewModel>(
+                        navigationStore,
+                        () => new ProjectDetailsViewModel(bookStore, navigationStore));
+                case "projects":
+                    return new LayoutNavigationService<ProjectsViewModel>(
+                        navigationStore,
+                        () => new ProjectsViewModel(bookStore, navigationStore));
                 case "saved books":
                     return new LayoutNavigationService<SavedBooksViewModel>(
                         navigationStore,
@@ -44,7 +69,7 @@ namespace Cronus.Utilities
                 case "x button side bar":
                     return new SideContentNavigationService<XButtonSideBarViewModel>(
                         navigationStore,
-                        () => new XButtonSideBarViewModel());
+                        () => new XButtonSideBarViewModel(bookStore, navigationStore));
                 default:
                     throw new NotImplementedException();
                     }

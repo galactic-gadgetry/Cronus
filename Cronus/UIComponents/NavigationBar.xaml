@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cronus.UIComponents"
              xmlns:btn="clr-namespace:Cronus.UIComponents.Buttons"
+             xmlns:pop="clr-namespace:Cronus.UIComponents.Popups"
              mc:Ignorable="d" d:DesignHeight="650">
     
     <Grid>
@@ -31,18 +32,51 @@
                             ButtonImageSourceMouseOver="{StaticResource BriefcaseLightGray}"
                             ButtonImageSourcePressed="{StaticResource BriefcaseWhite}"
                             ButtonImageSourceDisabled="{StaticResource BriefcaseDisabled}"
-                            ButtonImageSourceHighlighted="{StaticResource BriefcaseWhite}"/>
+                            ButtonImageSourceHighlighted="{StaticResource BriefcaseWhite}"
+                            ButtonClickedCommand="{Binding ProjectsButtonClickedCommand}"
+                            IsHighlighted="{Binding IsProjectsTabSelected}"/>
                     </StackPanel>
                 </Border>
                 
                 <!-- #Book Bar -->
                 <Border x:Name="BookBarBorder" Grid.Column="1" Grid.Row="1">
                     <local:BookBar
-                        Height="50"/>
+                        Height="50"
+                        BookNameText="{Binding CurrentBookName}"
+                        BookStatusText="{Binding CurrentBookStatus}"
+                        BookNameButtonClickedCommand="{Binding BookBarBookNameButtonClickedCommand}"
+                        SaveBookButtonClickedCommand="{Binding BookBarSaveBookButtonClickedCommand}"
+                        SettingsButtonClickedCommand="{Binding BookBarSettingsButtonClickedCommand}"
+                        IsSaveBookButtonEnabled="{Binding CurrentBook.HasUnsavedChanges}"
+                        BookNameButtonIsHitTestVisible="{Binding ElementName=BookBarPopup, Path=IsOpen, Converter={StaticResource BoolInverter}}"/>
                 </Border>
                 
                 <!-- #Book Bar Popup -->
-                
+                <Popup
+                    x:Name="BookBarPopup"
+                    IsOpen="{Binding IsBookBarPopupOpen}"
+                    PlacementTarget="{Binding ElementName=BookBarBorder}"
+                    Placement="Top"
+                    HorizontalOffset="-20" VerticalOffset="-5"
+                    StaysOpen="False"
+                    AllowsTransparency="True">
+                    <Border>
+                        <Border.Effect>
+                            <DropShadowEffect
+                                Color="Black"
+                                Opacity="0.4"
+                                BlurRadius="10"
+                                ShadowDepth="0"/>
+                        </Border.Effect>
+                        <pop:BookControlsPopup
+                            BookNameText="{Binding CurrentBookName}"
+                            CreatedOnText="{Binding CurrentBook.CreatedDateString}"
+                            BookStatusText="{Binding CurrentBookStatus}"
+                            CloseBookButtonClickedCommand="{Binding BookControlsPopupCloseBookButtonClickedCommand}"
+                            EditBookDetailsButtonClickedCommand="{Binding BookControlsPopupEditBookButtonClickedCommand}"
+                            SwitchBooksButtonClickedCommand="{Binding BookControlsPopupSwitchBooksButtonClickedCommand}"/>
+                    </Border>
+                </Popup>
             </Grid>
         </Border>
     </Grid>

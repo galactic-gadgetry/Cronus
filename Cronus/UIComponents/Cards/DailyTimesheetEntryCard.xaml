@@ -1,0 +1,211 @@
+﻿<UserControl x:Class="Cronus.UIComponents.Cards.DailyTimesheetEntryCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cronus.UIComponents.Cards"
+             mc:Ignorable="d"
+             d:DesignWidth="705">
+
+    <Grid>
+        <Border x:Name="TestBorder">
+            <Border.Style>
+                <Style>
+                    <Setter Property="Border.Background" Value="{StaticResource ControlBackgroundFillColorBrush1}"/>
+                    <Setter Property="Border.Padding" Value="25"/>
+                    <Setter Property="Border.CornerRadius" Value="4"/>
+                    <Style.Triggers>
+                        <Trigger Property="Border.IsMouseOver" Value="True">
+                            <Setter Property="Border.Background" Value="Green"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Margin" Value="5,0"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+                
+                
+                            <Grid Grid.Column="0">
+                                <Grid.Resources>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Height" Value="12"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                    </Style>
+
+                                    <Style TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+                                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                                        <Setter Property="Margin" Value="5,0,0,0"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="FontWeight" Value="Normal"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Source="{StaticResource BookGray}"/>
+                                    <Label Content="{Binding TitleText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+                                    </StackPanel>
+
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Source="{StaticResource BriefcaseGray}"/>
+                                    <Label Content="{Binding ProjectNameText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+                                </StackPanel>
+                            </Grid>
+
+                
+                            <StackPanel
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button" BasedOn="{StaticResource TransparentIconButtonStyle}"/>
+
+                                    <Style TargetType="Image">
+                                        <Setter Property="Stretch" Value="None"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Button
+                                    Command="{Binding EditButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    CommandParameter="{Binding EditButtonClickedCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                    <Image Source="{StaticResource EditGray}"/>
+                                </Button>
+                                <Button
+                                    Command="{Binding DeleteButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    CommandParameter="{Binding DeleteButtonClickedCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                    <Image Source="{StaticResource TrashGray}"/>
+                                </Button>
+                            </StackPanel>
+
+                
+                            <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Label Content="{Binding DurationText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"/>
+                                <Label
+                                    Content="{Binding TimeText, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    FontWeight="Normal"/>
+                            </StackPanel>
+                        </Grid>
+            
+        </Border>
+        
+        
+        <!--
+        <Border
+            Background="{StaticResource ControlBackgroundFillColorBrush1}"
+            Padding="25"
+            CornerRadius="4">
+
+            <Grid>
+                <Expander x:Name="ContentExpander" Template="{StaticResource AnimatedExpanderTemplate}">
+                    <Expander.Header>
+                        <Grid>
+                            <Grid.Resources>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Margin" Value="5,0"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition Width="0.3*"/>
+                            </Grid.ColumnDefinitions>
+-->
+                            <!-- #Info -->
+        <!--
+                            <Grid Grid.Column="0">
+                                <Grid.Resources>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Height" Value="12"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                    </Style>
+
+                                    <Style TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+                                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                                        <Setter Property="Margin" Value="5,0,0,0"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="FontWeight" Value="Normal"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Source="{StaticResource BookGray}"/>
+                                    <Label Content="Title"/>
+                                    </StackPanel>
+
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Source="{StaticResource BriefcaseGray}"/>
+                                    <Label Content="Project"/>
+                                </StackPanel>
+                            </Grid>
+-->
+                            <!-- #Actions -->
+        <!--
+                            <StackPanel
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button" BasedOn="{StaticResource TransparentIconButtonStyle}"/>
+
+                                    <Style TargetType="Image">
+                                        <Setter Property="Stretch" Value="None"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Button>
+                                    <Image Source="{StaticResource EditGray}"/>
+                                </Button>
+                                <Button>
+                                    <Image Source="{StaticResource TrashGray}"/>
+                                </Button>
+                            </StackPanel>
+-->
+                            <!-- #Time -->
+        <!--
+                            <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Label Content="04:00"/>
+                                <Label
+                                    Content="1:00 AM - 5:00 AM"
+                                    FontWeight="Normal"/>
+                            </StackPanel>
+                        </Grid>
+                    </Expander.Header>
+
+                    <Grid MaxHeight="175" x:Name="DescriptionGrid" Background="Yellow">
+                        <TextBlock 
+                            MaxWidth="{Binding ActualWidth, ElementName=DescriptionGrid}"
+                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed urna id eros auctor convallis nec in dolor. Nam eu arcu mattis, lobortis urna nec, sollicitudin enim. In lobortis tortor non eros elementum viverra. Nullam tellus ex, bibendum ac nulla quis, lacinia mattis mauris. Nullam sit amet purus quis sem ultrices venenatis. Donec a sollicitudin justo, id interdum lectus. Sed ultricies dictum ex, vitae condimentum erat vestibulum semper. Nullam porta ipsum quis scelerisque auctor. Morbi sollicitudin faucibus cursus."/>
+                    </Grid>
+                </Expander>
+            </Grid>
+            
+        </Border>
+        -->
+    </Grid>
+    
+</UserControl>

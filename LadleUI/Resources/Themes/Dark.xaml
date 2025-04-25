@@ -146,6 +146,14 @@
     <SolidColorBrush x:Key="NavigationBarButtonBorderBrushMouseOver" Color="{StaticResource TextFillColorSecondary100}"/>
     <SolidColorBrush x:Key="NavigationBarButtonBorderBrushPressed" Color="{StaticResource TextFillColorSecondary100}"/>
     <SolidColorBrush x:Key="NavigationBarButtonBorderBrushDisabled" Color="{StaticResource TextFillColorSecondaryDisabled}"/>
+    
+    
+    <!-- #ComboBox -->
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxForeground" Color="{StaticResource TextFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="{StaticResource SolidControlFillColorPrimary130}"/>
+    <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush" Color="{StaticResource SolidControlFillColorPrimary130}"/>
 
 
     <!-- #Hyperlink -->

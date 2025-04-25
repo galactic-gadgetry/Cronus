@@ -83,7 +83,7 @@
                                 <Button
                                     Command="{Binding EditButtonClickedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                                     CommandParameter="{Binding EditButtonClickedCommandParameter, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
-                                    <Image Source="{StaticResource EditGrey}"/>
+                                    <Image Source="{StaticResource EditGray}"/>
                                 </Button>
 
                                 <Button

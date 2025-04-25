@@ -4,11 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cronus.Views"
+             xmlns:card="clr-namespace:Cronus.UIComponents.Cards"
              mc:Ignorable="d" 
              d:DesignHeight="450">
     
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="450"/>
+        </Grid.ColumnDefinitions>
+        
         <Border
+            Grid.Column="0"
             Style="{StaticResource ViewBorderStyle}"
             HorizontalAlignment="Stretch">
 
@@ -17,7 +24,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!-- #View Title -->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -44,21 +51,44 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        
+
                         <!-- TODO: Add filter row -->
                         <Border Grid.Row="0"/>
-                        
+
                         <!-- #Entry List -->
                         <Border Grid.Row="1">
                             <ListView
-                                x:Name="EntryListView">
-                                
+                                x:Name="EntriesListView"
+                                ItemsSource="{Binding TimeEntries}"
+                                SelectedItem="{Binding SelectedItem}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <card:DailyTimesheetEntryCard
+                                            TitleText="{Binding Title}"
+                                            ProjectNameText="{Binding AssignedProject.Name}"
+                                            DurationText="{Binding Duration}"
+                                            TimeText="{Binding TimeString}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
                             </ListView>
+                            <!--
+                            <ListBox>
+                                <card:DailyTimesheetEntryCard/>
+                                <card:DailyTimesheetEntryCard/>
+                            </ListBox>
+                            -->
                         </Border>
                     </Grid>
                 </Border>
             </Grid>
             
+        </Border>
+        
+        <!-- #Side Content -->
+        <Border
+            Grid.Column="1"
+            Background="{StaticResource LayerFillColorBrush2}">
+            <ToggleButton Content="Test Button" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
     </Grid>
     

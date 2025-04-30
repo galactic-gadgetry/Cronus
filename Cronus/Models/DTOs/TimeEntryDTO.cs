@@ -13,6 +13,12 @@ namespace Cronus.Models.DTOs
         public Project? AssignedProject { get; set; } = null;
 
 
+        public DateOnly Date { get; set; }
+
+
+        public string Description { get; set; } = string.Empty;
+
+
         public DateTime EndTime { get; set; }
 
 

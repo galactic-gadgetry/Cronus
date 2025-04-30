@@ -49,7 +49,10 @@ namespace Cronus.UIComponents.Dialogs
         /// </summary>
         public ObservableCollection<Project> Projects { get; }
 
-
+        /// <summary>
+        /// The selected <see cref="Project"/> for the Projecct
+        /// combo box.
+        /// </summary>
         public Project SelectedProject { get; set; }
 
         /// <summary>

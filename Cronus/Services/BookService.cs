@@ -48,6 +48,32 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Adds the time entry to the current book's
+        /// <see cref="Book.TimeEntries"/> collection.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="timeEntry"></param>
+        /// <returns>True if successful, false otherwise</returns>
+        public static (bool, string?) AddTimeEntryToCurrentBook(
+            BookStore bookStore, TimeEntry timeEntry)
+        {
+            ArgumentNullException.ThrowIfNull(bookStore, nameof(bookStore));
+            ArgumentNullException.ThrowIfNull(timeEntry, nameof(timeEntry));
+
+            // Validate that the time entry properties and return
+            // false if invalid.
+            Book book = bookStore.CurrentBook;
+            (bool result, string? detail) = ValidateTimeEntry(book, timeEntry);
+            if (result == false)
+            {
+                return (false, detail);
+            }
+
+            book.TimeEntries.Add(timeEntry);
+            return (true, detail);
+        }
+
+        /// <summary>
         /// Sets the book store's
         /// <see cref="BookStore.CurrentBook"/> property to null.
         /// </summary>
@@ -386,6 +412,35 @@ namespace Cronus.Services
                 if (result == true)
                 {
                     return (false, detail);
+                }
+            }
+
+            return (true, null);
+        }
+
+        /// <summary>
+        /// Validates the time entry's properties.
+        /// </summary>
+        /// <param name="book">Book from which the collection will
+        /// be compared</param>
+        /// <param name="timeEntry"></param>
+        /// <returns>True if the time entry is valid, false
+        /// otherwise</returns>
+        public static (bool, string?) ValidateTimeEntry(Book book, TimeEntry timeEntry)
+        {
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+            ArgumentNullException.ThrowIfNull(timeEntry, nameof(timeEntry));
+
+            // If the time entry's timeframe overlaps an existing
+            // time entry's timeframe, return false.
+            IEnumerable<TimeEntry> currentEntries =
+                book.TimeEntries.Where<TimeEntry>(t => t.Date == timeEntry.Date);
+            foreach (TimeEntry t in currentEntries)
+            {
+                (bool result, string? title) = t.ContainsTimeframeConflict(timeEntry);
+                if (result == true)
+                {
+                    return (false, title);
                 }
             }
 

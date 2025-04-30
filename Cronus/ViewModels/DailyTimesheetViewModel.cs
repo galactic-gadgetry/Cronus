@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,21 +31,26 @@ namespace Cronus.ViewModels
         private DateTime selectedDate;
         private TimeEntry? selectedTimeEntry;
 
-
+        /// <summary>
+        /// Returns the book store's current <see cref="Book"/>.
+        /// </summary>
         public Book CurrentBook => _bookStore.CurrentBook;
 
 
-
+        /// <summary>
+        /// The currently selected date of the view.
+        /// </summary>
         public DateTime SelectedDate
         {
             get => selectedDate;
             set
             {
                 selectedDate = value;
+                OnSelectedDateChanged();
             }
         }
 
-
+        
         public TimeEntry? SelectedTimeEntry
         {
             get => selectedTimeEntry;
@@ -52,31 +58,23 @@ namespace Cronus.ViewModels
             {
                 selectedTimeEntry = value;
                 // selectedItem.TestBorder.Background = Brushes.Yellow;
-                OnPropertyChanged(nameof(SelectedTimeEntry));
+                OnPropertyChanged(nameof(TimeEntries));
             }
         }
 
-
-        public ObservableCollection<TimeEntry> TimeEntries { get; set; } = new()
-        {
-            new TimeEntry
-            {
-                Title = "Test Entry",
-                AssignedProject = new() { Name = "Test Project" },
-                StartTime = new(2025, 4, 25, 1, 0, 0),
-                EndTime = new(2025, 4, 25, 5, 0, 0),
-            },
-            new TimeEntry
-            {
-                Title = "Work",
-                AssignedProject = new() { Name = "SpaceY" },
-                StartTime = new(2025, 4, 25, 5, 0, 0),
-                EndTime = new(2025, 4, 25, 6, 0, 0),
-            },
-        };
+        /// <summary>
+        /// Returns the <see cref="TimeEntry"/> instances of the
+        /// current book's <see cref="Book.TimeEntries"/> collection
+        /// that occur on the <seealso cref="SelectedDate"/>.
+        /// </summary>
+        public ObservableCollection<TimeEntry> TimeEntries =>
+            new(CurrentBook.TimeEntries
+            .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate)));
 
 
-
+        /// <summary>
+        /// Executed when the Create Entry button is clicked.
+        /// </summary>
         public ICommand CreateEntryButtonClickedCommand { get; }
 
 
@@ -89,10 +87,17 @@ namespace Cronus.ViewModels
 
             CreateEntryButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnCreateEntryButtonClicked));
+
+            CurrentBook.TimeEntries.CollectionChanged += OnTimeEntriesChanged;
         }
 
 
-
+        /// <summary>
+        /// Creates a new <see cref="TimeEntry"/> instance and adds
+        /// it to the current book's <see cref="Book.TimeEntries"/>
+        /// collection.
+        /// </summary>
+        /// <param name="dlg"></param>
         private void CreateNewTimeEntryRequested(
             CreateNewTimeEntryDialog dlg)
         {
@@ -126,23 +131,32 @@ namespace Cronus.ViewModels
             TimeEntryDTO dto = new()
             {
                 AssignedProject = dlg.SelectedProject,
+                Date = DateOnly.FromDateTime(SelectedDate),
+                Description = dlg.DescriptionText,
                 EndTime = endDateTime,
                 StartTime = startDateTime,
-                Title = dlg.Title,
+                Title = dlg.TitleText,
             };
 
             // If the time entry could not be created or added,
             // display an error message.
-            throw new NotImplementedException();
-            //(bool result, string? detail) =
-            //    TimeEntryService.CreateNewTimeEntryInCurrentBook(_bookStore, dto);
-            //if (result == false)
-            //{
-            //    throw new NotImplementedException();
-            //}
+            (bool result, string? detail) =
+                TimeEntryService.CreateNewTimeEntryInCurrentBook(_bookStore, dto);
+            if (result == false)
+            {
+                string caption = "Unable to Create New Entry";
+                string message = "The selected timeframe overlaps " +
+                    "the timeframe of another entry (entry " +
+                    $"'{detail}').";
+                DialogService.PromptUserWithErrorMessageWithOKButtonDialog(
+                    caption, message);
+            }
         }
 
-
+        /// <summary>
+        /// Handles the Create Entry button click event.
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnCreateEntryButtonClicked(object? obj)
         {
             CreateNewTimeEntryDialog dlg =
@@ -152,6 +166,26 @@ namespace Cronus.ViewModels
             {
                 CreateNewTimeEntryRequested(dlg);
             }
+        }
+
+        /// <summary>
+        /// Handles the <seealso cref="SelectedDate"/> property being
+        /// set.
+        /// </summary>
+        private void OnSelectedDateChanged()
+        {
+            OnPropertyChanged(nameof(TimeEntries));
+        }
+
+        /// <summary>
+        /// Handles the <see cref="Book.TimeEntries"/> collection
+        /// changed event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnTimeEntriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(TimeEntries));
         }
     }
 }

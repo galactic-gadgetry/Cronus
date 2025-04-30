@@ -74,7 +74,12 @@ namespace Cronus.Services
             return dlg;
         }
 
-
+        /// <summary>
+        /// Displays the <see cref="CreateNewTimeEntryDialog"/>
+        /// dialog window.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns>The dialog window</returns>
         public static CreateNewTimeEntryDialog PromptUserWithCreateNewTimeEntryDialog(
             Book book)
         {

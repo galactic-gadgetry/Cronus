@@ -13,7 +13,13 @@ namespace Cronus.Models
         public Project? AssignedProject { get; set; } = null;
 
 
+        public DateOnly Date { get; set; }
+
+
         public DateTime EndTime { get; set; }
+
+
+        public string Description { get; set; } = string.Empty;
 
 
         public Duration Duration => EndTime - StartTime;
@@ -26,5 +32,26 @@ namespace Cronus.Models
 
 
         public string Title { get; set; } = string.Empty;
+
+
+
+        public (bool, string) ContainsTimeframeConflict(TimeEntry timeEntry)
+        {
+            // Check that the time entry dates match.
+            if (timeEntry.Date != Date)
+            {
+                throw new ArgumentOutOfRangeException(Date.ToString(), "Time " +
+                    "entry dates do not match");
+            }
+
+            if (timeEntry.StartTime < EndTime && StartTime < timeEntry.EndTime)
+            {
+                return (true, Title);
+            }
+            else
+            {
+                return (false, Title);
+            }
+        }
     }
 }

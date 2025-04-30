@@ -78,42 +78,54 @@ namespace Cronus.UIComponents.Cards
                 new PropertyMetadata(string.Empty));
 
 
-
+        /// <summary>
+        /// Parameter passed when the Delete button is clicked.
+        /// </summary>
         public object DeleteButtonClickedCommandParameter
         {
             get => (object)GetValue(DeleteButtonClickedCommandParameterProperty);
             set => SetValue(DeleteButtonClickedCommandParameterProperty, value);
         }
 
-
+        /// <summary>
+        /// Text for the Duration label.
+        /// </summary>
         public string DurationText
         {
             get => (string)GetValue(DurationTextProperty);
             set => SetValue(DurationTextProperty, value);
         }
 
-
+        /// <summary>
+        /// Parameter passed when the Edit button is clicked.
+        /// </summary>
         public object EditButtonClickedCommandParameter
         {
             get => (object)GetValue(EditButtonClickedCommandParameterProperty);
             set => SetValue(EditButtonClickedCommandParameterProperty, value);
         }
 
-
+        /// <summary>
+        /// Text for the Name label.
+        /// </summary>
         public string ProjectNameText
         {
             get => (string)(GetValue(ProjectNameTextProperty));
             set => SetValue(ProjectNameTextProperty, value);
         }
 
-
+        /// <summary>
+        /// Text for the Time label.
+        /// </summary>
         public string TimeText
         {
             get => ((string)(GetValue(TimeTextProperty)));
             set => SetValue(TimeTextProperty, value);
         }
 
-
+        /// <summary>
+        /// Text for the Title label.
+        /// </summary>
         public string TitleText
         {
             get => (String)(GetValue(TitleTextProperty));
@@ -121,14 +133,18 @@ namespace Cronus.UIComponents.Cards
         }
 
 
-
+        /// <summary>
+        /// Executed when the Edit button is clicked.
+        /// </summary>
         public ICommand EditButtonClickedCommand
         {
             get => (ICommand)GetValue(EditButtonClickedCommandProperty);
             set => SetValue(EditButtonClickedCommandProperty, value);
         }
 
-
+        /// <summary>
+        /// Executed when the Delete button is clicked.
+        /// </summary>
         public ICommand DeleteButtonClickedCommand
         {
             get => (ICommand)(GetValue(DeleteButtonClickedCommandProperty));

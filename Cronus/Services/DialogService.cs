@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
@@ -61,6 +62,26 @@ namespace Cronus.Services
             Window mainWindow = Application.Current.MainWindow;
             dlg.Owner = mainWindow;
             dlg.NameText = "New project";
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+
+        public static CreateNewTimeEntryDialog PromptUserWithCreateNewTimeEntryDialog(
+            Book book)
+        {
+            CreateNewTimeEntryDialog dlg = new(book.Projects);
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.TitleText = "New entry";
 
             // Dim the main window.
             DimWindowVisuals(mainWindow);

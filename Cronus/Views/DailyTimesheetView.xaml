@@ -11,7 +11,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="450"/>
+            <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
         
         <Border
@@ -41,7 +41,8 @@
                         Grid.Column="1"
                         Content="Create Entry"
                         Style="{StaticResource AccentButtonStyle}"
-                        Margin="0,0,15,0"/>
+                        Margin="0,0,15,0"
+                        Command="{Binding CreateEntryButtonClickedCommand}"/>
                 </Grid>
                 
                 <!-- #View Contents -->
@@ -53,7 +54,12 @@
                         </Grid.RowDefinitions>
 
                         <!-- TODO: Add filter row -->
-                        <Border Grid.Row="0"/>
+                        <Border Grid.Row="0" Margin="0,0,0,25">
+                            <DatePicker
+                                HorizontalAlignment="Left"
+                                MinWidth="250"
+                                SelectedDate="{Binding SelectedDate}"/>
+                        </Border>
 
                         <!-- #Entry List -->
                         <Border Grid.Row="1">
@@ -71,12 +77,6 @@
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
-                            <!--
-                            <ListBox>
-                                <card:DailyTimesheetEntryCard/>
-                                <card:DailyTimesheetEntryCard/>
-                            </ListBox>
-                            -->
                         </Border>
                     </Grid>
                 </Border>
@@ -88,7 +88,7 @@
         <Border
             Grid.Column="1"
             Background="{StaticResource LayerFillColorBrush2}">
-            <ToggleButton Content="Test Button" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            
         </Border>
     </Grid>
     

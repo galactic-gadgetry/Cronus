@@ -51,45 +51,70 @@
                                 </StackPanel.Resources>
                                 <StackPanel>
                                     <Label Content="ENTRY TITLE"/>
-                                    <TextBox Text="Test Title"/>
+                                    <TextBox x:Name="TitleTextBox"/>
                                 </StackPanel>
                                 <StackPanel>
                                     <Label Content="PROJECT"/>
-                                    <ComboBox SelectedIndex="0">
-                                        SpaceY
-                                    </ComboBox>
+                                    <ComboBox
+                                        x:Name="ProjectComboBox"
+                                        ItemsSource="{Binding Projects}"
+                                        DisplayMemberPath="Name"
+                                        SelectedItem="{Binding SelectedProject}"/>
                                 </StackPanel>
                                 <StackPanel>
                                     <Label Content="TIME"/>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <ComboBox SelectedIndex="0">
-                                            <ComboBoxItem>01</ComboBoxItem>
-                                            <ComboBoxItem>02</ComboBoxItem>
-                                        </ComboBox>
+                                        <StackPanel.Resources>
+                                            <Style TargetType="ComboBox" BasedOn="{StaticResource DefaultComboBoxStyle}">
+                                                <Setter Property="Margin" Value="5,0"/>
+                                            </Style>
+                                            
+                                            <Style TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+                                                <Setter Property="Margin" Value="5,0"/>
+                                                <Setter Property="Padding" Value="0"/>
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                <Setter Property="FontSize" Value="20"/>
+                                                <Setter Property="FontWeight" Value="Normal"/>
+                                            </Style>
+                                        </StackPanel.Resources>
+                                        <ComboBox
+                                            x:Name="StartHourComboBox"
+                                            ItemsSource="{Binding Hours}"
+                                            SelectedIndex="0"/>
                                         <Label Content=":"/>
-                                        <ComboBox SelectedIndex="0">
-                                            00
-                                        </ComboBox>
-                                        <ComboBox SelectedIndex="0">
-                                            AM
-                                        </ComboBox>
+                                        <ComboBox
+                                            x:Name="StartMinuteComboBox"
+                                            ItemsSource="{Binding Minutes}"
+                                            SelectedIndex="0"/>
+                                        <ComboBox
+                                            x:Name="StartMeridiemComboBox"
+                                            ItemsSource="{Binding Meridiems}"
+                                            SelectedIndex="0"/>
                                         <Label Content="-"/>
-                                        <ComboBox SelectedIndex="0">
-                                            <ComboBoxItem>05</ComboBoxItem>
-                                            <ComboBoxItem>06</ComboBoxItem>
-                                        </ComboBox>
+                                        <ComboBox
+                                            x:Name="EndHourComboBox"
+                                            ItemsSource="{Binding Hours}"
+                                            SelectedIndex="0"/>
                                         <Label Content=":"/>
-                                        <ComboBox SelectedIndex="0">
-                                            00
-                                        </ComboBox>
-                                        <ComboBox SelectedIndex="0">
-                                            AM
-                                        </ComboBox>
+                                        <ComboBox
+                                            x:Name="EndMinuteComboBox"
+                                            ItemsSource="{Binding Minutes}"
+                                            SelectedIndex="0"/>
+                                        <ComboBox
+                                            x:Name="EndMeridiemComboBox"
+                                            ItemsSource="{Binding Meridiems}"
+                                            SelectedIndex="0"/>
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel>
                                     <Label Content="DESCRIPTION"/>
-                                    <TextBox/>
+                                    <TextBox
+                                        x:Name="DescriptionTextBox"
+                                        Height="100"
+                                        HorizontalAlignment="Stretch"
+                                        MaxLength="1024"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
@@ -110,14 +135,18 @@
                                 Grid.Column="0"
                                 Content="Back"
                                 Background="Transparent"
-                                HorizontalAlignment="Left"/>
+                                HorizontalAlignment="Left"
+                                Click="BackButton_Click"/>
 
                             <Button
                                 Grid.Column="1"
                                 Content="Create"
                                 Style="{StaticResource AccentButtonStyle}"
                                 Width="85"
-                                HorizontalAlignment="Right"/>
+                                HorizontalAlignment="Right"
+                                Click="CreateButton_Click"
+                                IsDefault="True"
+                                IsEnabled="{Binding AreInputsValid}"/>
                         </Grid>
                     </Border>
                 </Grid>

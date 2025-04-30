@@ -24,7 +24,7 @@ namespace Cronus.Utilities
                 case "daily timesheet":
                     return new LayoutNavigationService<DailyTimesheetViewModel>(
                         navigationStore,
-                        () => new DailyTimesheetViewModel());
+                        () => new DailyTimesheetViewModel(bookStore));
                 case "edit book details":
                     return new LayoutNavigationService<EditBookDetailsViewModels>(
                         navigationStore,

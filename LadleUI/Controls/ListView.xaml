@@ -12,7 +12,7 @@
                     <ContentPresenter/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="Red"/>
+                            <Setter Property="Background" Value="Yellow"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

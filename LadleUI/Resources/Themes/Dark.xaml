@@ -64,6 +64,8 @@
     <Color x:Key="TextFillColorSecondary120">#E0E1E3</Color>
     <Color x:Key="TextFillColorSecondaryDisabled">#A3A4A7</Color>
 
+    <Color x:Key="TextOnAccentColorPrimary100">#000000</Color>
+
     <Color x:Key="SurfaceStrokeColorFlyout">#33000000</Color>
 
     <!-- #Brushes -->
@@ -148,12 +150,41 @@
     <SolidColorBrush x:Key="NavigationBarButtonBorderBrushDisabled" Color="{StaticResource TextFillColorSecondaryDisabled}"/>
     
     
+    <!-- #Calendar -->
+    <SolidColorBrush x:Key="CalendarBackground" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="CalendarBackgroundSelected" Color="{StaticResource SolidControlFillColorPrimary80}"/>
+    <SolidColorBrush x:Key="CalendarForeground" Color="{StaticResource TextFillColorPrimary90}"/>
+    <SolidColorBrush x:Key="CalendarBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}"/>
+    <SolidColorBrush x:Key="CalendarBorderBrushSelected" Color="{StaticResource SolidControlFillColorPrimary80}"/>
+    <SolidColorBrush x:Key="CalendarTodayBackground" Color="{StaticResource SolidControlFillColorPrimary80}"/>
+    <SolidColorBrush x:Key="CalendarTodayForeground" Color="{StaticResource TextOnAccentColorPrimary100}"/>
+    <SolidColorBrush x:Key="CalendarItemBackgroundMouseOver" Color="{StaticResource SolidControlFillColorPrimary90}"/>
+    <SolidColorBrush x:Key="CalendarButtonForeground" Color="{StaticResource TextFillColorPrimary80}"/>
+
+
     <!-- #ComboBox -->
     <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource SolidControlFillColorPrimary100}"/>
     <SolidColorBrush x:Key="ComboBoxForeground" Color="{StaticResource TextFillColorPrimary100}"/>
     <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="{StaticResource SolidControlFillColorPrimary100}"/>
     <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="{StaticResource SolidControlFillColorPrimary130}"/>
     <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush" Color="{StaticResource SolidControlFillColorPrimary130}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBackground" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBackgroundEditable" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBackgroundMouseOver" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBackgroundPressed" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBackgroundDisabled" Color="{StaticResource SolidControlFillColorPrimaryDisabled}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBorderBrush" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBorderBrushEditable" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBorderBrushMouseOver" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBorderBrushPressed" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBorderBrushDisabled" Color="{StaticResource SolidControlFillColorPrimaryDisabled}"/>
+    <SolidColorBrush x:Key="ComboBoxEditableTextBoxForeground" Color="{StaticResource TextFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{StaticResource SolidControlFillColorPrimary140}"/>
+    
+    
+    <!-- #DatePicker -->
+    <SolidColorBrush x:Key="DatePickerBackground" Color="{StaticResource SolidControlFillColorPrimary100}"/>
+    <SolidColorBrush x:Key="DatePickerForeground" Color="{StaticResource TextFillColorPrimary90}"/>
 
 
     <!-- #Hyperlink -->
@@ -242,7 +273,7 @@
     <Color x:Key="TextColorSecondary120">#E0E1E3</Color>
     <Color x:Key="TextColorSecondaryDisabled">#A3A4A7</Color>
 
-    <Color x:Key="TextOnAccentColorPrimary100">#000000</Color>
+    <!-- <Color x:Key="TextOnAccentColorPrimary100">#000000</Color> -->
 
     <!-- Color x:Key="SurfaceStrokeColorFlyout">#33000000</Color> -->
 

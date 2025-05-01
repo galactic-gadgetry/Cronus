@@ -79,6 +79,9 @@
                 <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="2">
                     <ContentControl Content="{Binding CurrentSideContentViewModel}">
                         <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type vm:TimeEntryDetailsSideBarViewModel}">
+                                <local:TimeEntryDetailsSideBar/>
+                            </DataTemplate>
                             <DataTemplate DataType="{x:Type vm:XButtonSideBarViewModel}">
                                 <local:XButtonSideBar/>
                             </DataTemplate>

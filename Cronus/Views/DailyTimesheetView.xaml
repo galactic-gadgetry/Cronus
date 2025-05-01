@@ -7,13 +7,13 @@
              xmlns:card="clr-namespace:Cronus.UIComponents.Cards"
              mc:Ignorable="d" 
              d:DesignHeight="450">
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        
+
         <Border
             Grid.Column="0"
             Style="{StaticResource ViewBorderStyle}"
@@ -44,7 +44,7 @@
                         Margin="0,0,15,0"
                         Command="{Binding CreateEntryButtonClickedCommand}"/>
                 </Grid>
-                
+
                 <!-- #View Contents -->
                 <Border Grid.Row="1" Margin="0,10,0,0">
                     <Grid>
@@ -66,14 +66,15 @@
                             <ListView
                                 x:Name="EntriesListView"
                                 ItemsSource="{Binding TimeEntries}"
-                                SelectedItem="{Binding SelectedItem}">
+                                SelectedItem="{Binding SelectedTimeEntry}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <card:DailyTimesheetEntryCard
                                             TitleText="{Binding Title}"
                                             ProjectNameText="{Binding AssignedProject.Name}"
                                             DurationText="{Binding Duration}"
-                                            TimeText="{Binding TimeString}"/>
+                                            TimeText="{Binding TimeString}"
+                                            Tag="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
@@ -81,13 +82,111 @@
                     </Grid>
                 </Border>
             </Grid>
-            
+
         </Border>
-        
+
         <!-- #Side Content -->
         <Border
             Grid.Column="1"
-            Background="{StaticResource LayerFillColorBrush2}">
+            Width="315"
+            Margin="0,30,0,0">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=EntriesListView}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <StackPanel>
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    Margin="15,15,0,0">
+                    <Hyperlink Command="{Binding SideContentCloseButtonClickedCommand}">
+                        Close
+                    </Hyperlink>
+                </TextBlock>
+                
+                <Border
+                    Background="{StaticResource LayerFillColorBrush2}"
+                    Margin="10,25,10,0" Padding="15"
+                    CornerRadius="8">
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Margin" Value="0,5"/>
+                            </Style>
+                        </StackPanel.Resources>
+                            
+                        <StackPanel>
+                            <Label
+                                Content="TITLE"
+                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                            <Label
+                                Content="{Binding SelectedTimeEntry.Title}"
+                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                        </StackPanel>
+
+                                    <StackPanel>
+                            <Label
+                                Content="PROJECT"
+                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                            <Label
+                                Content="{Binding SelectedTimeEntry.AssignedProject.Name}"
+                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <Label
+                                Content="DATE"
+                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                            <Label
+                                Content="{Binding SelectedTimeEntry.Date}"
+                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <Label
+                                Content="DURATION"
+                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                            <Label
+                                Content="{Binding SelectedTimeEntry.Duration}"
+                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <Label
+                                Content="TIME"
+                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                            <Label
+                                Content="{Binding SelectedTimeEntry.TimeString}"
+                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <Label
+                                Content="DESCRIPTION"
+                                Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
+                            <TextBlock
+                                Text="{Binding SelectedTimeEntry.Description}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Margin="0,10,0,0">
+                    <Button
+                        Content="Edit Details"
+                        Style="{StaticResource AccentButtonStyle}"
+                        HorizontalAlignment="Left"
+                        Margin="25,0,0,0"/>
+                </Border>
+            </StackPanel>
         </Border>
     </Grid>
     

@@ -22,7 +22,7 @@ namespace Cronus.Models
         public string Description { get; set; } = string.Empty;
 
 
-        public Duration Duration => EndTime - StartTime;
+        public TimeSpan Duration => EndTime - StartTime;
 
 
         public DateTime StartTime { get; set; }

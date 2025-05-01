@@ -40,7 +40,7 @@
                             Padding="8,10"
                             CornerRadius="4">
                             <TextBlock
-                                Text="{Binding CurrentBook.Name, StringFormat='Want to save changes to \&apos;{0}\&apos;?'}"
+                                
                                 Foreground="{StaticResource TextAccentFillColorBrush1}"
                                 HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                         </Border>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +16,7 @@ using Cronus.Services;
 using Cronus.Stores;
 using Cronus.UIComponents.Cards;
 using Cronus.UIComponents.Dialogs;
+using Cronus.Utilities;
 
 namespace Cronus.ViewModels
 {
@@ -25,6 +27,9 @@ namespace Cronus.ViewModels
         /// <see cref="Book"/>.
         /// </summary>
         private readonly BookStore _bookStore;
+
+
+        private readonly NavigationStore _navigationStore;
 
 
         // Backing Fields
@@ -57,8 +62,8 @@ namespace Cronus.ViewModels
             set
             {
                 selectedTimeEntry = value;
-                // selectedItem.TestBorder.Background = Brushes.Yellow;
-                OnPropertyChanged(nameof(TimeEntries));
+                OnSelectedTimeEntryChanged();
+                OnPropertyChanged(nameof(SelectedTimeEntry));
             }
         }
 
@@ -77,16 +82,25 @@ namespace Cronus.ViewModels
         /// </summary>
         public ICommand CreateEntryButtonClickedCommand { get; }
 
+        /// <summary>
+        /// Executed when the side content's Close button is clicked.
+        /// </summary>
+        public ICommand SideContentCloseButtonClickedCommand { get; }
 
 
-        public DailyTimesheetViewModel(BookStore bookStore)
+
+        public DailyTimesheetViewModel(BookStore bookStore,
+            NavigationStore navigationStore)
         {
             _bookStore = bookStore;
+            _navigationStore = navigationStore;
             selectedDate = DateTime.Today;
             SelectedTimeEntry = null;
 
             CreateEntryButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnCreateEntryButtonClicked));
+            SideContentCloseButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnSideContentCloseButtonClicked));
 
             CurrentBook.TimeEntries.CollectionChanged += OnTimeEntriesChanged;
         }
@@ -169,12 +183,27 @@ namespace Cronus.ViewModels
         }
 
         /// <summary>
+        /// Handles the side content's Close button click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnSideContentCloseButtonClicked(object? obj)
+        {
+            SelectedTimeEntry = null;
+        }
+
+        /// <summary>
         /// Handles the <seealso cref="SelectedDate"/> property being
         /// set.
         /// </summary>
         private void OnSelectedDateChanged()
         {
             OnPropertyChanged(nameof(TimeEntries));
+        }
+
+
+        private void OnSelectedTimeEntryChanged()
+        {
+            return;
         }
 
         /// <summary>

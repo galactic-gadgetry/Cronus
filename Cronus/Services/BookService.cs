@@ -223,7 +223,8 @@ namespace Cronus.Services
         /// </summary>
         /// <param name="book"></param>
         /// <param name="project"></param>
-        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="InvalidOperationException">Thrown if the
+        /// Project removal operation failed</exception>
         public static void DeleteProjectFromBook(Book book,
             Project project)
         {
@@ -252,6 +253,42 @@ namespace Cronus.Services
             ArgumentNullException.ThrowIfNull(project, nameof(project));
 
             DeleteProjectFromBook(bookStore.CurrentBook, project);
+        }
+
+        /// <summary>
+        /// Deletes the <see cref="TimeEntry"/> instance from the
+        /// book's <see cref="Book.TimeEntries"/> collection.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="timeEntry"></param>
+        /// <exception cref="InvalidOperationException">Thrown if
+        /// the TimeEntry removal operation failed</exception>
+        public static void DeleteTimeEntryFromBook(Book book, TimeEntry timeEntry)
+        {
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+            ArgumentNullException.ThrowIfNull(timeEntry, nameof(timeEntry));
+
+            if (!book.TimeEntries.Remove(timeEntry))
+            {
+                throw new InvalidOperationException("Removal of the " +
+                    "TimeEntry instance from the collection failed");
+            }
+        }
+
+        /// <summary>
+        /// Deletes the <see cref="TimeEntry"/> instance from the
+        /// book store's current book's
+        /// <see cref="Book.TimeEntries"/> colleciton.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="timeEntry"></param>
+        public static void DeleteTimeEntryFromCurrentBook(
+            BookStore bookStore, TimeEntry timeEntry)
+        {
+            ArgumentNullException.ThrowIfNull(bookStore, nameof(bookStore));
+            ArgumentNullException.ThrowIfNull(timeEntry, nameof(timeEntry));
+
+            DeleteTimeEntryFromBook(bookStore.CurrentBook, timeEntry);
         }
 
         /// <summary>

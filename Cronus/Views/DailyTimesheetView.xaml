@@ -154,7 +154,11 @@
                                             ProjectNameText="{Binding AssignedProject.Name}"
                                             DurationText="{Binding Duration}"
                                             TimeText="{Binding TimeString}"
-                                            Tag="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, UpdateSourceTrigger=PropertyChanged}"/>
+                                            Tag="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem}, UpdateSourceTrigger=PropertyChanged}"
+                                            EditButtonClickedCommand="{Binding DataContext.TimeEntryCardEditButtonClickedCommand, ElementName=EntriesListView}"
+                                            EditButtonClickedCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"
+                                            DeleteButtonClickedCommand="{Binding DataContext.TimeEntryCardDeleteButtonClickedCommand, ElementName=EntriesListView}"
+                                            DeleteButtonClickedCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"/>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>

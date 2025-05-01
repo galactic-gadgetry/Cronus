@@ -1,11 +1,11 @@
-﻿<Window x:Class="Cronus.UIComponents.Dialogs.SaveChangesDialog"
+﻿<Window x:Class="Cronus.UIComponents.Dialogs.SimpleConfirmationDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cronus.UIComponents.Dialogs"
         mc:Ignorable="d"
-        Title="Save Changes"
+        Title="Simple Confirmation"
         Style="{StaticResource DialogWindowStyle}"
         WindowStartupLocation="CenterOwner">
     
@@ -17,32 +17,27 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
+                
+                <!-- #Content -->
                 <Border Grid.Row="0" Style="{StaticResource DialogContentBorderStyle}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        
-                        <!-- #Title Label -->
+
                         <Label
                             Grid.Row="0"
-                            Content="Save Changes"
+                            x:Name="TitleLabel"
                             Foreground="{StaticResource TextAccentFillColorBrush1}"
-                            Margin="0,0,0,10"
                             FontSize="18"/>
-                        
-                        <!-- #Message -->
+
                         <Border
                             Grid.Row="1"
-                            Background="{StaticResource LayerWarningFillColorBrush1}"
-                            Padding="8,10"
-                            CornerRadius="4">
+                            Style="{StaticResource WarningTextBlockBorderStyle}">
                             <TextBlock
-                                Text="{Binding CurrentBook.Name, StringFormat='Want to save changes to \&apos;{0}\&apos;?'}"
-                                Foreground="{StaticResource TextAccentFillColorBrush1}"
-                                HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                                x:Name="ConfirmationMessageTextBlock"
+                                Style="{StaticResource WarningTextBlockStyle}"/>
                         </Border>
                     </Grid>
                 </Border>
@@ -61,13 +56,9 @@
                             </Hyperlink>
                         </TextBlock>
                         <Button
-                            Content="Don't Save"
-                            Margin="0,0,15,0"
-                            Click="DontSaveButton_Click"/>
-                        <Button
-                            Content="Save"
+                            x:Name="DialogAcceptButton"
                             Style="{StaticResource AccentButtonStyle}"
-                            Click="SaveButton_Click"
+                            Click="AcceptButton_Click"
                             IsDefault="True"/>
                     </StackPanel>
                 </Border>

@@ -88,6 +88,25 @@
       "StartTime": "2025-04-29T08:00:00",
       "TimeString": "08:00 AM - 09:00 AM",
       "Title": "Admin"
+    },
+    {
+      "AssignedProject": {
+        "Code": "HYDR",
+        "CreatedDateTime": "2025-04-23T15:52:53.5730461-04:00",
+        "CreatedDateString": "23 April 2025",
+        "ID": "9adb3c5e-e3bc-4603-8639-141536123081",
+        "Name": "Coulometer",
+        "Status": 0,
+        "StatusText": "Active",
+        "Wbs": "12345.67.89.10.11"
+      },
+      "Date": "2025-05-01",
+      "EndTime": "2025-05-01T09:00:00-04:00",
+      "Description": "This is an adminstrative task.",
+      "Duration": "01:00:00",
+      "StartTime": "2025-05-01T08:00:00-04:00",
+      "TimeString": "08:00 AM - 09:00 AM",
+      "Title": "Admin"
     }
   ]
 }

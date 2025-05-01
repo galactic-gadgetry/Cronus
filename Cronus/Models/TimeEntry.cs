@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace Cronus.Models
 {
-    public class TimeEntry
+    public class TimeEntry : IConfirmDeletion
     {
 
         public Project? AssignedProject { get; set; } = null;
@@ -52,6 +52,13 @@ namespace Cronus.Models
             {
                 return (false, Title);
             }
+        }
+
+
+
+        public string GetModelTypeString()
+        {
+            return "Time Entry";
         }
     }
 }

@@ -17,6 +17,7 @@
     <Style x:Key="DialogOutterBorderStyle" TargetType="Border">
         <Setter Property="MinHeight" Value="250"/>
         <Setter Property="MinWidth" Value="400"/>
+        <Setter Property="MaxWidth" Value="500"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="CornerRadius" Value="4"/>

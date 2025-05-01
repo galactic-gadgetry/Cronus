@@ -103,6 +103,12 @@ namespace Cronus.ViewModels
         /// </summary>
         public ICommand SideContentCloseButtonClickedCommand { get; }
 
+
+        public ICommand TimeEntryCardDeleteButtonClickedCommand { get; }
+
+
+        public ICommand TimeEntryCardEditButtonClickedCommand { get; }
+
         /// <summary>
         /// Executed when the Today button is clicked.
         /// </summary>
@@ -120,14 +126,18 @@ namespace Cronus.ViewModels
 
             CreateEntryButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnCreateEntryButtonClicked));
-            TodayButtonClickedCommand = new RelayCommand(
-                new Action<object?>(OnTodayButtonClicked));
             NextDayButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnNextDayButtonClicked));
             PreviousDayButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnPreviousDayButtonClicked));
             SideContentCloseButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnSideContentCloseButtonClicked));
+            TimeEntryCardDeleteButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnTimeEntryCardDeleteButtonClicked));
+            TimeEntryCardEditButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnTimeEntryCardEditButtonClicked));
+            TodayButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnTodayButtonClicked));
 
             CurrentBook.TimeEntries.CollectionChanged += OnTimeEntriesChanged;
         }
@@ -194,6 +204,15 @@ namespace Cronus.ViewModels
             }
         }
 
+
+        private void DeleteTimeEntryRequested(TimeEntry timeEntry)
+        {
+            BookService.DeleteTimeEntryFromCurrentBook(_bookStore, timeEntry);
+
+            // Update the info bar.
+            OnInfoUpdated($"Time entry '{timeEntry.Title}' deleted");
+        }
+
         /// <summary>
         /// Handles the Create Entry button click event.
         /// </summary>
@@ -249,6 +268,29 @@ namespace Cronus.ViewModels
         private void OnSelectedTimeEntryChanged()
         {
             return;
+        }
+
+
+        private void OnTimeEntryCardDeleteButtonClicked(object? obj)
+        {
+            TimeEntry? selectedTimeEntry = obj as TimeEntry;
+            if (selectedTimeEntry == null)
+            {
+                throw new ArgumentOutOfRangeException("The caller " +
+                    "must be a TimeEntry object");
+            }
+
+            if (DialogService.PromptUserWithSimpleDeleteConfirmationDialog(
+                selectedTimeEntry) == true)
+            {
+                DeleteTimeEntryRequested(selectedTimeEntry);
+            }
+        }
+
+
+        private void OnTimeEntryCardEditButtonClicked(object? obj)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

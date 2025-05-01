@@ -231,6 +231,38 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Displays the <see cref="SimpleConfirmationDialog"/> dialog
+        /// window.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>True if the user confirms the deletion request,
+        /// false otherwise</returns>
+        public static bool? PromptUserWithSimpleDeleteConfirmationDialog(
+            IConfirmDeletion model)
+        {
+            ArgumentNullException.ThrowIfNull(model, nameof(model));
+
+            SimpleConfirmationDialog dlg = new();
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.TitleText = $"Delete {model.GetModelTypeString()}";
+            dlg.ConfirmationMessageText = "Are you sure that you " +
+                $"want to delete this {model.GetModelTypeString().ToLower()}? " +
+                "This action cannot be undone.";
+            dlg.DialogAcceptButtonText = $"Delete {model.GetModelTypeString()}";
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg.DialogResult;
+        }
+
+        /// <summary>
         /// Returns the window visuals to normal.
         /// </summary>
         /// <param name="window"></param>

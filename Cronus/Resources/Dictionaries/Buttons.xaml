@@ -37,6 +37,10 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
             </Trigger>
+            <!-- #Pressed behaviors -->
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonBackgroundPressed}"/>
+            </Trigger>
             <!-- #Disabled behaviors -->
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="Transparent"/>

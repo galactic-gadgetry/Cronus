@@ -28,7 +28,9 @@ namespace Cronus.ViewModels
         /// </summary>
         private readonly BookStore _bookStore;
 
-
+        /// <summary>
+        /// Used to determine the app's navigation state.
+        /// </summary>
         private readonly NavigationStore _navigationStore;
 
 
@@ -52,10 +54,14 @@ namespace Cronus.ViewModels
             {
                 selectedDate = value;
                 OnSelectedDateChanged();
+                OnPropertyChanged(nameof(SelectedDate));
             }
         }
 
-        
+        /// <summary>
+        /// The currently selected <see cref="TimeEntry"/> in the
+        /// Time Entries list.
+        /// </summary>
         public TimeEntry? SelectedTimeEntry
         {
             get => selectedTimeEntry;
@@ -83,9 +89,24 @@ namespace Cronus.ViewModels
         public ICommand CreateEntryButtonClickedCommand { get; }
 
         /// <summary>
+        /// Executed when the Next Day button is clicked.
+        /// </summary>
+        public ICommand NextDayButtonClickedCommand { get; }
+
+        /// <summary>
+        /// Executed when the Previous Day button is clicked.
+        /// </summary>
+        public ICommand PreviousDayButtonClickedCommand { get; }
+
+        /// <summary>
         /// Executed when the side content's Close button is clicked.
         /// </summary>
         public ICommand SideContentCloseButtonClickedCommand { get; }
+
+        /// <summary>
+        /// Executed when the Today button is clicked.
+        /// </summary>
+        public ICommand TodayButtonClickedCommand { get; }
 
 
 
@@ -99,6 +120,12 @@ namespace Cronus.ViewModels
 
             CreateEntryButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnCreateEntryButtonClicked));
+            TodayButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnTodayButtonClicked));
+            NextDayButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnNextDayButtonClicked));
+            PreviousDayButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnPreviousDayButtonClicked));
             SideContentCloseButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnSideContentCloseButtonClicked));
 
@@ -183,6 +210,24 @@ namespace Cronus.ViewModels
         }
 
         /// <summary>
+        /// Handles the Next Day button click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnNextDayButtonClicked(object? obj)
+        {
+            SelectedDate = SelectedDate.AddDays(1);
+        }
+
+        /// <summary>
+        /// Handles the Previous Day button click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnPreviousDayButtonClicked(object? obj)
+        {
+            SelectedDate = SelectedDate.AddDays(-1);
+        }
+
+        /// <summary>
         /// Handles the side content's Close button click event.
         /// </summary>
         /// <param name="obj"></param>
@@ -215,6 +260,15 @@ namespace Cronus.ViewModels
         private void OnTimeEntriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(TimeEntries));
+        }
+
+        /// <summary>
+        /// Handles the Today button click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnTodayButtonClicked(object? obj)
+        {
+            SelectedDate = DateTime.Today;
         }
     }
 }

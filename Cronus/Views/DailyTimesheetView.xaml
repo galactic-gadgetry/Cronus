@@ -55,10 +55,90 @@
 
                         <!-- TODO: Add filter row -->
                         <Border Grid.Row="0" Margin="0,0,0,25">
-                            <DatePicker
-                                HorizontalAlignment="Left"
-                                MinWidth="250"
-                                SelectedDate="{Binding SelectedDate}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button" BasedOn="{StaticResource TransparentIconButtonStyle}"/>
+                                </StackPanel.Resources>
+                                <Button
+                                    Command="{Binding TodayButtonClickedCommand}"
+                                    ToolTip="Today">
+                                    <Image>
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Source" Value="{StaticResource HomeGray}"/>
+                                                <Style.Triggers>
+                                                    <!-- #Mouse over behaviors -->
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsMouseOver}" Value="True">
+                                                        <Setter Property="Source" Value="{StaticResource HomeLightGray}"/>
+                                                    </DataTrigger>
+                                                    <!-- #Pressed behaviors -->
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsPressed}" Value="True">
+                                                        <Setter Property="Source" Value="{StaticResource HomeWhite}"/>
+                                                    </DataTrigger>
+                                                    <!-- #Disabled behaviors -->
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}" Value="False">
+                                                        <Setter Property="Source" Value="{StaticResource HomeDisabled}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Button>
+                                <Button
+                                    Command="{Binding PreviousDayButtonClickedCommand}"
+                                    ToolTip="Previous Day">
+                                    <Image>
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Source" Value="{StaticResource ChevronLeftGray}"/>
+                                                <Style.Triggers>
+                                                    <!-- #Mouse over behaviors -->
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsMouseOver}" Value="True">
+                                                        <Setter Property="Source" Value="{StaticResource ChevronLeftLightGray}"/>
+                                                    </DataTrigger>
+                                                    <!-- #Pressed behaviors -->
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsPressed}" Value="True">
+                                                        <Setter Property="Source" Value="{StaticResource ChevronLeftWhite}"/>
+                                                    </DataTrigger>
+                                                    <!-- #Disabled behaviors -->
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}" Value="False">
+                                                        <Setter Property="Source" Value="{StaticResource ChevronLeftDisabled}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Button>
+                                <Button
+                                    Command="{Binding NextDayButtonClickedCommand}"
+                                    ToolTip="Next Day">
+                                    <Image>
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Source" Value="{StaticResource ChevronRightGray}"/>
+                                                <Style.Triggers>
+                                                    <!-- #Mouse over behaviors -->
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsMouseOver}" Value="True">
+                                                        <Setter Property="Source" Value="{StaticResource ChevronRightLightGray}"/>
+                                                    </DataTrigger>
+                                                    <!-- #Pressed behaviors -->
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsPressed}" Value="True">
+                                                        <Setter Property="Source" Value="{StaticResource ChevronRightWhite}"/>
+                                                    </DataTrigger>
+                                                    <!-- #Disabled behaviors -->
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}" Value="False">
+                                                        <Setter Property="Source" Value="{StaticResource ChevronRightDisabled}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Button>
+                                <DatePicker
+                                    HorizontalAlignment="Left"
+                                    MinWidth="250"
+                                    SelectedDate="{Binding SelectedDate}"/>
+                            </StackPanel>
                         </Border>
 
                         <!-- #Entry List -->
@@ -85,7 +165,7 @@
 
         </Border>
 
-        <!-- #Side Content -->
+        <!-- #Details Content -->
         <Border
             Grid.Column="1"
             Width="315"

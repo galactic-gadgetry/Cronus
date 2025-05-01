@@ -268,7 +268,8 @@
                         Content="Edit Details"
                         Style="{StaticResource AccentButtonStyle}"
                         HorizontalAlignment="Left"
-                        Margin="25,0,0,0"/>
+                        Margin="25,0,0,0"
+                        Command="{Binding SideContentEditDetailsButtonClickedCommand}"/>
                 </Border>
             </StackPanel>
         </Border>

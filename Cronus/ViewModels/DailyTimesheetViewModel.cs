@@ -68,7 +68,6 @@ namespace Cronus.ViewModels
             set
             {
                 selectedTimeEntry = value;
-                OnSelectedTimeEntryChanged();
                 OnPropertyChanged(nameof(SelectedTimeEntry));
             }
         }
@@ -103,10 +102,22 @@ namespace Cronus.ViewModels
         /// </summary>
         public ICommand SideContentCloseButtonClickedCommand { get; }
 
+        /// <summary>
+        /// Executed when the side content's Edit Details button
+        /// is clicked.
+        /// </summary>
+        public ICommand SideContentEditDetailsButtonClickedCommand { get; }
 
+        /// <summary>
+        /// Executed when the Time Entry Card's Delete button is
+        /// clicked.
+        /// </summary>
         public ICommand TimeEntryCardDeleteButtonClickedCommand { get; }
 
-
+        /// <summary>
+        /// Executed when the Time Entry Card's Edit button is
+        /// clicked.
+        /// </summary>
         public ICommand TimeEntryCardEditButtonClickedCommand { get; }
 
         /// <summary>
@@ -115,7 +126,12 @@ namespace Cronus.ViewModels
         public ICommand TodayButtonClickedCommand { get; }
 
 
-
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <seealso cref="DailyTimesheetViewModel"/> class.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="navigationStore"></param>
         public DailyTimesheetViewModel(BookStore bookStore,
             NavigationStore navigationStore)
         {
@@ -132,6 +148,8 @@ namespace Cronus.ViewModels
                 new Action<object?>(OnPreviousDayButtonClicked));
             SideContentCloseButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnSideContentCloseButtonClicked));
+            SideContentEditDetailsButtonClickedCommand = new RelayCommand(
+                new Action<object?>(OnSideContentEditDetailsButtonClicked));
             TimeEntryCardDeleteButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnTimeEntryCardDeleteButtonClicked));
             TimeEntryCardEditButtonClickedCommand = new RelayCommand(
@@ -152,31 +170,8 @@ namespace Cronus.ViewModels
         private void CreateNewTimeEntryRequested(
             CreateNewTimeEntryDialog dlg)
         {
-            // Get the time inputs.
-            int startHour = int.Parse(dlg.StartHourComboBox.Text);
-            int startMinute = int.Parse(dlg.StartMinuteComboBox.Text);
-            string startMeridiem = dlg.StartMeridiemComboBox.Text;
-            int endHour = int.Parse(dlg.EndHourComboBox.Text);
-            int endMinute = int.Parse(dlg.EndMinuteComboBox.Text);
-            string endMeridiem = dlg.EndMeridiemComboBox.Text;
-
-            // If either of the times is post meridiem, add 12 to
-            // the integer.
-            if (startMeridiem.ToLower() == "pm")
-            {
-                startHour += 12;
-            }
-            if (endMeridiem.ToLower() == "pm")
-            {
-                endHour += 12;
-            }
-
-            // Set the start and end date times.
-            DateTime date = SelectedDate.Date;
-            TimeSpan startTimeSpan = new(startHour, startMinute, 0);
-            TimeSpan endTimeSpan = new(endHour, endMinute, 0);
-            DateTime startDateTime = date + startTimeSpan;
-            DateTime endDateTime = date + endTimeSpan;
+            // Get start and end times.
+            (DateTime startDateTime, DateTime endDateTime) = ParseDialogTimes(dlg);
 
             // Create a new TimeEntry from the dialog inputs.
             TimeEntryDTO dto = new()
@@ -204,13 +199,59 @@ namespace Cronus.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// Handles the delete time entry request.
+        /// </summary>
+        /// <param name="timeEntry">TimeEntry instance to be
+        /// deleted</param>
         private void DeleteTimeEntryRequested(TimeEntry timeEntry)
         {
             BookService.DeleteTimeEntryFromCurrentBook(_bookStore, timeEntry);
 
             // Update the info bar.
             OnInfoUpdated($"Time entry '{timeEntry.Title}' deleted");
+        }
+
+        /// <summary>
+        /// Handles the edit time entry details request.
+        /// </summary>
+        /// <param name="dlg"></param>
+        /// <param name="timeEntry"></param>
+        private void EditTimeEntryRequested(EditTimeEntryDialog dlg,
+            TimeEntry timeEntry)
+        {
+            // Get start and end times.
+            (DateTime startDateTime, DateTime endDateTime) = ParseDialogTimes(dlg);
+            
+            TimeEntryDTO dto = new()
+            {
+                AssignedProject = (Project)dlg.ProjectComboBox.SelectedItem,
+                Date = DateOnly.FromDateTime(startDateTime),
+                Description = dlg.DescriptionText,
+                EndTime= endDateTime,
+                StartTime = startDateTime,
+                Title = dlg.TitleText,
+            };
+
+            (bool result, string? detail) =
+                TimeEntryService.EditTimeEntryDetails(_bookStore, timeEntry, dto);
+            if (result)
+            {
+                // Save the book and called the OnPropertyChanged
+                // method on the TimeEntries collection.
+                BookService.SaveCurrentBookToJson(_bookStore);
+                OnPropertyChanged(nameof(SelectedTimeEntry));
+                OnPropertyChanged(nameof(TimeEntries));
+            }
+            else
+            {
+                string caption = "Unable to Edit Time Entry";
+                string message = "The selected timeframe overlaps " +
+                    "the timeframe of another entry (entry " +
+                    $"'{detail}').";
+                DialogService.PromptUserWithErrorMessageWithOKButtonDialog(
+                    caption, message);
+            }
         }
 
         /// <summary>
@@ -256,6 +297,28 @@ namespace Cronus.ViewModels
         }
 
         /// <summary>
+        /// Handles the side content's Edit Details button click
+        /// event.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NullReferenceException"></exception>
+        private void OnSideContentEditDetailsButtonClicked(object? obj)
+        {
+            if (SelectedTimeEntry == null)
+            {
+                throw new NullReferenceException("SelectedTimeEntry " +
+                    "must not be null");
+            }
+
+            EditTimeEntryDialog dlg = DialogService.PromptUserWithEditTimeEntryDialog(
+                CurrentBook, SelectedTimeEntry);
+            if (dlg.DialogResult == true)
+            {
+                EditTimeEntryRequested(dlg, SelectedTimeEntry);
+            }
+        }
+
+        /// <summary>
         /// Handles the <seealso cref="SelectedDate"/> property being
         /// set.
         /// </summary>
@@ -264,13 +327,12 @@ namespace Cronus.ViewModels
             OnPropertyChanged(nameof(TimeEntries));
         }
 
-
-        private void OnSelectedTimeEntryChanged()
-        {
-            return;
-        }
-
-
+        /// <summary>
+        /// Handles the Time Entry Card's Delete button click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if
+        /// the caller is null</exception>
         private void OnTimeEntryCardDeleteButtonClicked(object? obj)
         {
             TimeEntry? selectedTimeEntry = obj as TimeEntry;
@@ -287,10 +349,27 @@ namespace Cronus.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// Handles the Time Entry Card's Edit button click event.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if
+        /// the caller is null</exception>
         private void OnTimeEntryCardEditButtonClicked(object? obj)
         {
-            throw new NotImplementedException();
+            TimeEntry? selectedTimeEntry = obj as TimeEntry;
+            if (selectedTimeEntry == null)
+            {
+                throw new ArgumentOutOfRangeException("The caller " +
+                    "must be a TimeEntry object");
+            }
+
+            EditTimeEntryDialog dlg = DialogService.PromptUserWithEditTimeEntryDialog(
+                CurrentBook, selectedTimeEntry);
+            if (dlg.DialogResult == true)
+            {
+                EditTimeEntryRequested(dlg, selectedTimeEntry);
+            }
         }
 
         /// <summary>
@@ -311,6 +390,78 @@ namespace Cronus.ViewModels
         private void OnTodayButtonClicked(object? obj)
         {
             SelectedDate = DateTime.Today;
+        }
+
+        /// <summary>
+        /// Parses the dialog's time inputs.
+        /// </summary>
+        /// <param name="dlg"></param>
+        /// <returns>Start and end DateTime instances</returns>
+        private (DateTime, DateTime) ParseDialogTimes(CreateNewTimeEntryDialog dlg)
+        {
+            // Get the time inputs.
+            int startHour = int.Parse(dlg.StartHourComboBox.Text);
+            int startMinute = int.Parse(dlg.StartMinuteComboBox.Text);
+            string startMeridiem = dlg.StartMeridiemComboBox.Text;
+            int endHour = int.Parse(dlg.EndHourComboBox.Text);
+            int endMinute = int.Parse(dlg.EndMinuteComboBox.Text);
+            string endMeridiem = dlg.EndMeridiemComboBox.Text;
+
+            // If either of the times is post meridiem, add 12 to
+            // the integer.
+            if (startMeridiem.ToLower() == "pm")
+            {
+                startHour += 12;
+            }
+            if (endMeridiem.ToLower() == "pm")
+            {
+                endHour += 12;
+            }
+
+            // Set the start and end date times.
+            DateTime date = SelectedDate.Date;
+            TimeSpan startTimeSpan = new(startHour, startMinute, 0);
+            TimeSpan endTimeSpan = new(endHour, endMinute, 0);
+            DateTime startDateTime = date + startTimeSpan;
+            DateTime endDateTime = date + endTimeSpan;
+
+            return (startDateTime, endDateTime);
+        }
+
+        /// <summary>
+        /// Parses the dialog's time inputs.
+        /// </summary>
+        /// <param name="dlg"></param>
+        /// <returns>Start and end DateTime instances</returns>
+        private (DateTime, DateTime) ParseDialogTimes(EditTimeEntryDialog dlg)
+        {
+            // Get the time inputs.
+            int startHour = int.Parse(dlg.StartHourComboBox.Text);
+            int startMinute = int.Parse(dlg.StartMinuteComboBox.Text);
+            string startMeridiem = dlg.StartMeridiemComboBox.Text;
+            int endHour = int.Parse(dlg.EndHourComboBox.Text);
+            int endMinute = int.Parse(dlg.EndMinuteComboBox.Text);
+            string endMeridiem = dlg.EndMeridiemComboBox.Text;
+
+            // If either of the times is post meridiem, add 12 to
+            // the integer.
+            if (startMeridiem.ToLower() == "pm")
+            {
+                startHour += 12;
+            }
+            if (endMeridiem.ToLower() == "pm")
+            {
+                endHour += 12;
+            }
+
+            // Set the start and end date times.
+            DateTime date = SelectedDate.Date;
+            TimeSpan startTimeSpan = new(startHour, startMinute, 0);
+            TimeSpan endTimeSpan = new(endHour, endMinute, 0);
+            DateTime startDateTime = date + startTimeSpan;
+            DateTime endDateTime = date + endTimeSpan;
+
+            return (startDateTime, endDateTime);
         }
     }
 }

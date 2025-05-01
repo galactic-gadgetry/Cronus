@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
-using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,9 +18,9 @@ using Cronus.Models;
 namespace Cronus.UIComponents.Dialogs
 {
     /// <summary>
-    /// Interaction logic for CreateNewTimeEntryDialog.xaml
+    /// Interaction logic for EditTimeEntryDialog.xaml
     /// </summary>
-    public partial class CreateNewTimeEntryDialog : Window
+    public partial class EditTimeEntryDialog : Window
     {
         /// <summary>
         /// Text for the Description text box.
@@ -53,12 +53,6 @@ namespace Cronus.UIComponents.Dialogs
         public ObservableCollection<Project> Projects { get; }
 
         /// <summary>
-        /// The selected <see cref="Project"/> for the Projecct
-        /// combo box.
-        /// </summary>
-        public Project SelectedProject { get; set; }
-
-        /// <summary>
         /// Text for the Title text box.
         /// </summary>
         public string TitleText
@@ -70,17 +64,20 @@ namespace Cronus.UIComponents.Dialogs
 
         /// <summary>
         /// Initializes a new instance of the
-        /// <seealso cref="CreateNewTimeEntryDialog"/> class.
+        /// <seealso cref="EditTimeEntryDialog"/> class.
         /// </summary>
         /// <param name="projects"></param>
-        public CreateNewTimeEntryDialog(ObservableCollection<Project> projects)
+        /// <param name="timeEntry"></param>
+        public EditTimeEntryDialog(ObservableCollection<Project> projects,
+            TimeEntry timeEntry)
         {
             Projects = projects;
-            SelectedProject = Projects[0];
 
             DataContext = this;
 
             InitializeComponent();
+
+            SetInputs(timeEntry);
         }
 
 
@@ -95,13 +92,47 @@ namespace Cronus.UIComponents.Dialogs
         }
 
         /// <summary>
-        /// Handles the Create button click event.
+        /// Handles the Save button click event.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(Object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        /// <summary>
+        /// Sets the input fields of the dialog window.
+        /// </summary>
+        /// <param name="timeEntry"></param>
+        private void SetInputs(TimeEntry timeEntry)
+        {
+            // Parse time into strings.
+            string startHour = timeEntry.StartTime.Hour.ToString();
+            string startMinute = timeEntry.StartTime.Minute.ToString();
+            string startMeridiem = timeEntry.StartTime.ToString("tt", CultureInfo.InvariantCulture);
+            string endHour = timeEntry.EndTime.Hour.ToString();
+            string endMinute = timeEntry.EndTime.Minute.ToString();
+            string endMeridiem = timeEntry.EndTime.ToString("tt", CultureInfo.InvariantCulture);
+
+            // Set time combo boxes.
+            StartHourComboBox.SelectedItem = startHour;
+            StartMinuteComboBox.SelectedItem = startMinute;
+            StartMeridiemComboBox.SelectedItem = startMeridiem;
+            EndHourComboBox.SelectedItem = endHour;
+            EndMinuteComboBox.SelectedItem = endMinute;
+            EndMeridiemComboBox.SelectedItem = endMeridiem;
+
+            DescriptionText = timeEntry.Description;
+            if (timeEntry.AssignedProject != null)
+            {
+                ProjectComboBox.SelectedItem = Projects.Single(p => p.ID == timeEntry.AssignedProject.ID);
+            }
+            else
+            {
+                ProjectComboBox.SelectedItem = Projects[0];
+            }
+                TitleText = timeEntry.Title;
         }
     }
 }

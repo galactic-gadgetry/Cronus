@@ -107,6 +107,25 @@
       "StartTime": "2025-05-01T08:00:00-04:00",
       "TimeString": "08:00 AM - 09:00 AM",
       "Title": "Admin"
+    },
+    {
+      "AssignedProject": {
+        "Code": "CAPMAG",
+        "CreatedDateTime": "2025-04-28T13:41:06.9842059-04:00",
+        "CreatedDateString": "28 April 2025",
+        "ID": "22d31a39-2068-463a-92d7-fe6a5f78844a",
+        "Name": "CAPMAG",
+        "Status": 0,
+        "StatusText": "Active",
+        "Wbs": "22222"
+      },
+      "Date": "2025-05-01",
+      "EndTime": "2025-05-01T10:00:00-04:00",
+      "Description": "This is a test description.",
+      "Duration": "01:00:00",
+      "StartTime": "2025-05-01T09:00:00-04:00",
+      "TimeString": "09:00 AM - 10:00 AM",
+      "Title": "Test Entry"
     }
   ]
 }

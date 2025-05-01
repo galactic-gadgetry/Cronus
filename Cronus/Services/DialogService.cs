@@ -132,6 +132,33 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Displays the <see cref="EditTimeEntryDialog"/> window.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="timeEntry"></param>
+        /// <returns>The Edit Time Entry Dialog window</returns>
+        public static EditTimeEntryDialog PromptUserWithEditTimeEntryDialog(
+            Book book, TimeEntry timeEntry)
+        {
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+            ArgumentNullException.ThrowIfNull(timeEntry, nameof(timeEntry));
+
+            EditTimeEntryDialog dlg = new(book.Projects, timeEntry);
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
         /// Displays the <see cref="ErrorMessageWithOKButtonDialog"/>
         /// dialog window.
         /// </summary>

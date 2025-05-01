@@ -56,6 +56,7 @@ namespace Cronus.ViewModels
                 OnCurrentNavigationBarViewModelChanged;
             _navigationStore.CurrentSideContentViewModelChanged +=
                 OnCurrentSideContentViewModelChanged;
+            _navigationStore.InfoUpdated += OnInfoUpdated;
         }
 
 

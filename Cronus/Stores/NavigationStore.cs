@@ -171,7 +171,7 @@ namespace Cronus.Stores
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="info"></param>
-        private void OnInfoUpdated(object? sender, string info)
+        public void OnInfoUpdated(object? sender, string info)
         {
             InfoUpdated?.Invoke(this, info);
         }

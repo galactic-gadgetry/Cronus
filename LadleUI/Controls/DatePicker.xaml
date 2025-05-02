@@ -1,0 +1,147 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+
+    <Thickness x:Key="DatePickerThemeBorderThickness">0</Thickness>
+    <Thickness x:Key="DatePickerCalendarButtonMargin">5,0</Thickness>
+    <Thickness x:Key="DatePickerCalendarButtonPadding">0</Thickness>
+
+    <sys:Double x:Key="DatePickerCalendarButtonHeight">24</sys:Double>
+    <sys:Double x:Key="DatePickerCalendarButtonWidth">24</sys:Double>
+
+
+    <Style x:Key="DefaultDatePickerTextBoxStyle" TargetType="DatePickerTextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource DatePickerForeground}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource TextBoxForeground}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Margin="{TemplateBinding Margin}">
+                        <Grid>
+                            <Decorator
+                                x:Name="PART_ContentHost"
+                                Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="DefaultDatePickerStyle" TargetType="DatePicker">
+        <!-- #Default Ladle UI Calendar Style -->
+        <Setter Property="CalendarStyle" Value="{DynamicResource DefaultCalendarStyle}"/>
+        <Setter Property="Background" Value="{DynamicResource DatePickerBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource DatePickerForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource DatePickerThemeBorderThickness}"/>
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}"/>
+        <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
+        <Setter Property="Border.CornerRadius" Value="{DynamicResource TextControlCornerRadius}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePicker">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid
+                            Grid.Row="0"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                MinHeight="{TemplateBinding MinHeight}"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                Padding="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                CornerRadius="{TemplateBinding Border.CornerRadius}">
+                                <Grid
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <DatePickerTextBox
+                                            x:Name="PART_TextBox"
+                                            Margin="0"
+                                            Padding="{TemplateBinding Padding}"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            ContextMenu="{TemplateBinding ContextMenu}"
+                                            Focusable="{TemplateBinding Focusable}"
+                                            Foreground="{TemplateBinding Foreground}"/>
+                                    </Grid>
+                                    <Button
+                                        Grid.Column="1"
+                                        x:Name="PART_Button"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Height="{StaticResource DatePickerCalendarButtonHeight}"
+                                        Width="{StaticResource DatePickerCalendarButtonWidth}"
+                                        Margin="{StaticResource DatePickerCalendarButtonMargin}"
+                                        Padding="{StaticResource DatePickerCalendarButtonPadding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center">
+                                        <Image
+                                            Source="{DynamicResource CalendarGray}"
+                                            Margin="{StaticResource DatePickerCalendarButtonPadding}"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                            <Popup
+                                Grid.Row="1"
+                                x:Name="PART_Popup"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Top"
+                                AllowsTransparency="True"
+                                Placement="Mouse"
+                                PlacementTarget="{Binding ElementName=PART_TextBox}"
+                                StaysOpen="False"/>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- #Mouse over behaviors -->
+                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="DatePickerTextBox" BasedOn="{StaticResource DefaultDatePickerTextBoxStyle}"/>
+    <Style TargetType="DatePicker" BasedOn="{StaticResource DefaultDatePickerStyle}"/>
+
+</ResourceDictionary>

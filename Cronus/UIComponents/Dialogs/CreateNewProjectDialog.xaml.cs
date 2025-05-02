@@ -46,7 +46,10 @@ namespace Cronus.UIComponents.Dialogs
             set => WbsTextBox.Text = value;
         }
 
-
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <seealso cref="CreateNewProjectDialog"/>
+        /// </summary>
         public CreateNewProjectDialog()
         {
             InitializeComponent();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
@@ -74,6 +75,31 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Displays the <see cref="CreateNewTimeEntryDialog"/>
+        /// dialog window.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns>The dialog window</returns>
+        public static CreateNewTimeEntryDialog PromptUserWithCreateNewTimeEntryDialog(
+            Book book, DateTime startDateTime)
+        {
+            CreateNewTimeEntryDialog dlg = new(book.Projects, startDateTime);
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.TitleText = "New entry";
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
         /// Displays the <see cref="ConfirmationDialog"/> window.
         /// </summary>
         /// <param name="model">Model instance to be deleted</param>
@@ -106,6 +132,33 @@ namespace Cronus.Services
         }
 
         /// <summary>
+        /// Displays the <see cref="EditTimeEntryDialog"/> window.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="timeEntry"></param>
+        /// <returns>The Edit Time Entry Dialog window</returns>
+        public static EditTimeEntryDialog PromptUserWithEditTimeEntryDialog(
+            Book book, TimeEntry timeEntry)
+        {
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+            ArgumentNullException.ThrowIfNull(timeEntry, nameof(timeEntry));
+
+            EditTimeEntryDialog dlg = new(book.Projects, timeEntry);
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg;
+        }
+
+        /// <summary>
         /// Displays the <see cref="ErrorMessageWithOKButtonDialog"/>
         /// dialog window.
         /// </summary>
@@ -121,12 +174,12 @@ namespace Cronus.Services
             dlg.MessageText = message;
 
             // Dime the main window.
-            DimWindowVisuals(mainWindow);
+            //DimWindowVisuals(mainWindow);     THIS APPEARS TO NOT BE NEEDED FOR THE ERROR MESSAGE DIALOG.
 
             dlg.ShowDialog();
 
             // Restore the main window.
-            RestoreWindowVisuals(mainWindow);
+            //RestoreWindowVisuals(mainWindow);     THIS APPEARS TO NOT BE NEEDED FOR THE ERROR MESSAGE DIALOG.
         }
 
         /// <summary>
@@ -202,6 +255,38 @@ namespace Cronus.Services
             RestoreWindowVisuals(mainWindow);
 
             return dlg;
+        }
+
+        /// <summary>
+        /// Displays the <see cref="SimpleConfirmationDialog"/> dialog
+        /// window.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>True if the user confirms the deletion request,
+        /// false otherwise</returns>
+        public static bool? PromptUserWithSimpleDeleteConfirmationDialog(
+            IConfirmDeletion model)
+        {
+            ArgumentNullException.ThrowIfNull(model, nameof(model));
+
+            SimpleConfirmationDialog dlg = new();
+            Window mainWindow = Application.Current.MainWindow;
+            dlg.Owner = mainWindow;
+            dlg.TitleText = $"Delete {model.GetModelTypeString()}";
+            dlg.ConfirmationMessageText = "Are you sure that you " +
+                $"want to delete this {model.GetModelTypeString().ToLower()}? " +
+                "This action cannot be undone.";
+            dlg.DialogAcceptButtonText = $"Delete {model.GetModelTypeString()}";
+
+            // Dim the main window.
+            DimWindowVisuals(mainWindow);
+
+            dlg.ShowDialog();
+
+            // Restore the main window.
+            RestoreWindowVisuals(mainWindow);
+
+            return dlg.DialogResult;
         }
 
         /// <summary>

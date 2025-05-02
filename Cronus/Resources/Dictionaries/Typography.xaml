@@ -20,7 +20,7 @@
 
     <Style x:Key="DialogInputFieldHeaderLabelStyle" TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
         <Setter Property="Foreground" Value="{StaticResource TextFillColorBrush1}"/>
-        <Setter Property="FontSize" Value="{StaticResource SmallLabelFontSize}"/>
+        <Setter Property="FontSize" Value="{DynamicResource SmallLabelFontSize}"/>
         <Setter Property="FontWeight" Value="Normal"/>
     </Style>
 

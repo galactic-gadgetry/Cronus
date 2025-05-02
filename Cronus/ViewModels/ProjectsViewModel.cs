@@ -24,7 +24,9 @@ namespace Cronus.ViewModels
         /// </summary>
         private readonly BookStore _bookStore;
 
-
+        /// <summary>
+        /// Used to navigate to the Edit Project Details view.
+        /// </summary>
         private readonly INavigate _editProjectDetailsNavigationService;
 
         /// <summary>
@@ -128,6 +130,10 @@ namespace Cronus.ViewModels
                     $"project. Projects' {detail} must be unique.";
                 DialogService.PromptUserWithErrorMessageWithOKButtonDialog(
                     caption, message);
+            }
+            else
+            {
+                OnInfoUpdated($"New project '{dto.Name}' created");
             }
         }
 

@@ -1,0 +1,70 @@
+﻿<Window x:Class="Cronus.UIComponents.Dialogs.SimpleConfirmationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cronus.UIComponents.Dialogs"
+        mc:Ignorable="d"
+        Title="Simple Confirmation"
+        Style="{StaticResource DialogWindowStyle}"
+        WindowStartupLocation="CenterOwner">
+    
+    <Grid>
+        <Border Style="{StaticResource DialogOutterBorderStyle}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- #Content -->
+                <Border Grid.Row="0" Style="{StaticResource DialogContentBorderStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            x:Name="TitleLabel"
+                            Foreground="{StaticResource TextAccentFillColorBrush1}"
+                            FontSize="18"/>
+
+                        <Border
+                            Grid.Row="1"
+                            Style="{StaticResource WarningTextBlockBorderStyle}">
+                            <TextBlock
+                                x:Name="ConfirmationMessageTextBlock"
+                                Style="{StaticResource WarningTextBlockStyle}"/>
+                        </Border>
+                    </Grid>
+                </Border>
+                
+                <!-- #Controls -->
+                <Border
+                    Grid.Row="1"
+                    Style="{StaticResource DialogControlBorderStyle}"
+                    Background="{StaticResource LayerFillColorBrush2}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock
+                            Margin="0,5,15,0"
+                            VerticalAlignment="Center">
+                            <Hyperlink Click="CancelButton_Click">
+                                Cancel
+                            </Hyperlink>
+                        </TextBlock>
+                        <Button
+                            x:Name="DialogAcceptButton"
+                            Style="{StaticResource AccentButtonStyle}"
+                            Click="AcceptButton_Click"
+                            IsDefault="True"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            
+        </Border>
+    </Grid>
+    
+</Window>

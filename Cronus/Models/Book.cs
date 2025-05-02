@@ -85,6 +85,9 @@ namespace Cronus.Models
         public string StatusText => Status.ToString();
 
 
+        public ObservableCollection<TimeEntry> TimeEntries { get; set; } = new();
+
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -103,6 +106,7 @@ namespace Cronus.Models
             Status = BookStatus.Active;
 
             Projects.CollectionChanged += OnProjectsChanged;
+            TimeEntries.CollectionChanged += OnTimeEntriesChanged;
         }
 
 
@@ -123,6 +127,12 @@ namespace Cronus.Models
         {
             PropertyChanged?.Invoke(this,
                 new PropertyChangedEventArgs(propertyName));
+        }
+
+
+        private void OnTimeEntriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            HasUnsavedChanges = true;
         }
     }
 }

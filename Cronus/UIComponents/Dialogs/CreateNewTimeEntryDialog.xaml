@@ -81,31 +81,25 @@
                                         </StackPanel.Resources>
                                         <ComboBox
                                             x:Name="StartHourComboBox"
-                                            ItemsSource="{Binding Hours}"
-                                            SelectedIndex="0"/>
+                                            ItemsSource="{Binding Hours}"/>
                                         <Label Content=":"/>
                                         <ComboBox
                                             x:Name="StartMinuteComboBox"
-                                            ItemsSource="{Binding Minutes}"
-                                            SelectedIndex="0"/>
+                                            ItemsSource="{Binding Minutes}"/>
                                         <ComboBox
                                             x:Name="StartMeridiemComboBox"
-                                            ItemsSource="{Binding Meridiems}"
-                                            SelectedIndex="0"/>
+                                            ItemsSource="{Binding Meridiems}"/>
                                         <Label Content="-"/>
                                         <ComboBox
                                             x:Name="EndHourComboBox"
-                                            ItemsSource="{Binding Hours}"
-                                            SelectedIndex="0"/>
+                                            ItemsSource="{Binding Hours}"/>
                                         <Label Content=":"/>
                                         <ComboBox
                                             x:Name="EndMinuteComboBox"
-                                            ItemsSource="{Binding Minutes}"
-                                            SelectedIndex="0"/>
+                                            ItemsSource="{Binding Minutes}"/>
                                         <ComboBox
                                             x:Name="EndMeridiemComboBox"
-                                            ItemsSource="{Binding Meridiems}"
-                                            SelectedIndex="0"/>
+                                            ItemsSource="{Binding Meridiems}"/>
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel>
@@ -146,8 +140,7 @@
                                 Width="85"
                                 HorizontalAlignment="Right"
                                 Click="CreateButton_Click"
-                                IsDefault="True"
-                                IsEnabled="{Binding AreInputsValid}"/>
+                                IsDefault="True"/>
                         </Grid>
                     </Border>
                 </Grid>

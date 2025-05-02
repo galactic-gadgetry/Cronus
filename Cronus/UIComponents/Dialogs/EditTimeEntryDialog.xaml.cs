@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Cronus.Models;
+using Cronus.Services;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Cronus.UIComponents.Dialogs
 {
@@ -23,6 +25,17 @@ namespace Cronus.UIComponents.Dialogs
     public partial class EditTimeEntryDialog : Window
     {
         /// <summary>
+        /// Returns True if the dialog inputs are valid, false
+        /// otherwise.
+        /// </summary>
+        public bool AreInputsValid => StartDateTime <= EndDateTime;
+
+        /// <summary>
+        /// Date for the new time entry.
+        /// </summary>
+        public DateTime Date;
+
+        /// <summary>
         /// Text for the Description text box.
         /// </summary>
         public string DescriptionText
@@ -30,6 +43,11 @@ namespace Cronus.UIComponents.Dialogs
             get => DescriptionTextBox.Text;
             set => DescriptionTextBox.Text = value;
         }
+
+        /// <summary>
+        /// End date and time for the time entry.
+        /// </summary>
+        public DateTime EndDateTime { get; set; }
 
         /// <summary>
         /// Array of strings for the Hour combo boxes.
@@ -53,6 +71,11 @@ namespace Cronus.UIComponents.Dialogs
         public ObservableCollection<Project> Projects { get; }
 
         /// <summary>
+        /// Start date and time for the time entry.
+        /// </summary>
+        public DateTime StartDateTime { get; set; }
+
+        /// <summary>
         /// Text for the Title text box.
         /// </summary>
         public string TitleText
@@ -71,13 +94,14 @@ namespace Cronus.UIComponents.Dialogs
         public EditTimeEntryDialog(ObservableCollection<Project> projects,
             TimeEntry timeEntry)
         {
+            Date = timeEntry.Date.ToDateTime(TimeOnly.Parse("12:00 AM"));
             Projects = projects;
 
             DataContext = this;
 
             InitializeComponent();
 
-            SetInputs(timeEntry);
+            InitializeInputs(timeEntry);
         }
 
 
@@ -92,27 +116,17 @@ namespace Cronus.UIComponents.Dialogs
         }
 
         /// <summary>
-        /// Handles the Save button click event.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SaveButton_Click(Object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
-
-        /// <summary>
         /// Sets the input fields of the dialog window.
         /// </summary>
         /// <param name="timeEntry"></param>
-        private void SetInputs(TimeEntry timeEntry)
+        private void InitializeInputs(TimeEntry timeEntry)
         {
             // Parse time into strings.
-            string startHour = timeEntry.StartTime.Hour.ToString();
-            string startMinute = timeEntry.StartTime.Minute.ToString();
+            string startHour = timeEntry.StartTime.ToString("hh");
+            string startMinute = timeEntry.StartTime.ToString("mm");
             string startMeridiem = timeEntry.StartTime.ToString("tt", CultureInfo.InvariantCulture);
-            string endHour = timeEntry.EndTime.Hour.ToString();
-            string endMinute = timeEntry.EndTime.Minute.ToString();
+            string endHour = timeEntry.EndTime.ToString("hh");
+            string endMinute = timeEntry.EndTime.ToString("mm");
             string endMeridiem = timeEntry.EndTime.ToString("tt", CultureInfo.InvariantCulture);
 
             // Set time combo boxes.
@@ -132,7 +146,67 @@ namespace Cronus.UIComponents.Dialogs
             {
                 ProjectComboBox.SelectedItem = Projects[0];
             }
-                TitleText = timeEntry.Title;
+            TitleText = timeEntry.Title;
+        }
+
+        /// <summary>
+        /// Handles the Save button click event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetTimes();
+            if (!AreInputsValid)
+            {
+                string caption = "Invalid Timeframe";
+                string message = "The end time cannot be set before " +
+                    "the start time.";
+                DialogService.PromptUserWithErrorMessageWithOKButtonDialog
+                    (caption, message);
+
+                return;
+            }
+            DialogResult = true;
+        }
+
+        /// <summary>
+        /// Parses the time combo box inputs and converts them
+        /// to date and times for the start and end date and times.
+        /// </summary>
+        /// <exception cref="NullReferenceException">Thrown if the
+        /// meridiem combo boxes' SelectedItem is null</exception>
+        private void SetTimes()
+        {
+            int.TryParse(StartHourComboBox.SelectedItem.ToString(), out int startHour);
+            int.TryParse(StartMinuteComboBox.SelectedItem.ToString(), out int startMinute);
+            string? startMeridiem = StartMeridiemComboBox.SelectedItem.ToString();
+            int.TryParse(EndHourComboBox.SelectedItem.ToString(), out int endHour);
+            int.TryParse(EndMinuteComboBox.SelectedItem.ToString(), out int endMinute);
+            string? endMeridiem = EndMeridiemComboBox.SelectedItem.ToString();
+
+            if (startMeridiem == null)
+            {
+                throw new NullReferenceException(nameof(startMeridiem));
+            }
+            if (endMeridiem == null)
+            {
+                throw new NullReferenceException(nameof(endMeridiem));
+            }
+
+            if (startMeridiem.ToLower() == "pm")
+            {
+                startHour += 12;
+            }
+            if (endMeridiem.ToLower() == "pm")
+            {
+                endHour += 12;
+            }
+
+            TimeSpan startTimeSpan = new(startHour, startMinute, 0);
+            TimeSpan endTimeSpan = new(endHour, endMinute, 0);
+            StartDateTime = Date + startTimeSpan;
+            EndDateTime = Date + endTimeSpan;
         }
     }
 }

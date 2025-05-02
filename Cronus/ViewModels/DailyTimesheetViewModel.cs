@@ -37,6 +37,7 @@ namespace Cronus.ViewModels
         // Backing Fields
         private DateTime selectedDate;
         private TimeEntry? selectedTimeEntry;
+        private ObservableCollection<TimeEntry> timeEntries = new();
 
         /// <summary>
         /// Returns the book store's current <see cref="Book"/>.
@@ -73,13 +74,17 @@ namespace Cronus.ViewModels
         }
 
         /// <summary>
-        /// Returns the <see cref="TimeEntry"/> instances of the
-        /// current book's <see cref="Book.TimeEntries"/> collection
-        /// that occur on the <seealso cref="SelectedDate"/>.
+        /// Collection of time entries for the selected date.
         /// </summary>
-        public ObservableCollection<TimeEntry> TimeEntries =>
-            new(CurrentBook.TimeEntries
-            .Where(t => t.Date == DateOnly.FromDateTime(SelectedDate)));
+        public ObservableCollection<TimeEntry> TimeEntries
+        {
+            get => timeEntries;
+            set
+            {
+                timeEntries = value;
+                OnPropertyChanged(nameof(TimeEntries));
+            }
+        }
 
 
         /// <summary>
@@ -137,7 +142,7 @@ namespace Cronus.ViewModels
         {
             _bookStore = bookStore;
             _navigationStore = navigationStore;
-            selectedDate = DateTime.Today;
+            SelectedDate = DateTime.Today;
             SelectedTimeEntry = null;
 
             CreateEntryButtonClickedCommand = new RelayCommand(
@@ -260,8 +265,24 @@ namespace Cronus.ViewModels
         /// <param name="obj"></param>
         private void OnCreateEntryButtonClicked(object? obj)
         {
-            CreateNewTimeEntryDialog dlg =
-                DialogService.PromptUserWithCreateNewTimeEntryDialog(CurrentBook);
+            // Get the day's latest time entry's end time so that
+            // the Create New Time Entry dialog window's start
+            // time will be set to that time. If there are no time
+            // entries, set the start time to 8:00 AM.
+            DateTime dialogStartDateTime;
+            if (TimeEntries.Count == 0)
+            {
+                dialogStartDateTime = SelectedDate.AddHours(8);
+            }
+            else
+            {
+                TimeEntry lastTimeEntry = TimeEntries.Last();
+                dialogStartDateTime = lastTimeEntry.EndTime;
+            }
+
+                CreateNewTimeEntryDialog dlg =
+                    DialogService.PromptUserWithCreateNewTimeEntryDialog(
+                        CurrentBook, dialogStartDateTime);
 
             if (dlg.DialogResult == true)
             {
@@ -324,7 +345,7 @@ namespace Cronus.ViewModels
         /// </summary>
         private void OnSelectedDateChanged()
         {
-            OnPropertyChanged(nameof(TimeEntries));
+            SortTimeEntriesByStartTime();
         }
 
         /// <summary>
@@ -380,7 +401,7 @@ namespace Cronus.ViewModels
         /// <param name="e"></param>
         private void OnTimeEntriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(TimeEntries));
+            SortTimeEntriesByStartTime();
         }
 
         /// <summary>
@@ -462,6 +483,18 @@ namespace Cronus.ViewModels
             DateTime endDateTime = date + endTimeSpan;
 
             return (startDateTime, endDateTime);
+        }
+
+        /// <summary>
+        /// Sorts the day's time entries by the
+        /// <see cref="TimeEntry.StartTime"/> property.
+        /// </summary>
+        private void SortTimeEntriesByStartTime()
+        {
+            List<TimeEntry> timeEntries = CurrentBook.TimeEntries.
+                Where(t => t.Date == DateOnly.FromDateTime(SelectedDate)).ToList<TimeEntry>();
+            timeEntries = timeEntries.OrderBy(t => t.StartTime).ToList();
+            TimeEntries = new ObservableCollection<TimeEntry>(timeEntries);
         }
     }
 }

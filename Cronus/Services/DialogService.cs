@@ -81,9 +81,9 @@ namespace Cronus.Services
         /// <param name="book"></param>
         /// <returns>The dialog window</returns>
         public static CreateNewTimeEntryDialog PromptUserWithCreateNewTimeEntryDialog(
-            Book book)
+            Book book, DateTime startDateTime)
         {
-            CreateNewTimeEntryDialog dlg = new(book.Projects);
+            CreateNewTimeEntryDialog dlg = new(book.Projects, startDateTime);
             Window mainWindow = Application.Current.MainWindow;
             dlg.Owner = mainWindow;
             dlg.TitleText = "New entry";
@@ -174,12 +174,12 @@ namespace Cronus.Services
             dlg.MessageText = message;
 
             // Dime the main window.
-            DimWindowVisuals(mainWindow);
+            //DimWindowVisuals(mainWindow);     THIS APPEARS TO NOT BE NEEDED FOR THE ERROR MESSAGE DIALOG.
 
             dlg.ShowDialog();
 
             // Restore the main window.
-            RestoreWindowVisuals(mainWindow);
+            //RestoreWindowVisuals(mainWindow);     THIS APPEARS TO NOT BE NEEDED FOR THE ERROR MESSAGE DIALOG.
         }
 
         /// <summary>

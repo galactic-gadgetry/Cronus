@@ -141,8 +141,7 @@
                                 Width="85"
                                 HorizontalAlignment="Right"
                                 Click="SaveButton_Click"
-                                IsDefault="True"
-                                IsEnabled="{Binding AreInputsValid}"/>
+                                IsDefault="True"/>
                         </Grid>
                     </Border>
                 </Grid>

@@ -126,6 +126,120 @@
       "StartTime": "2025-05-01T09:00:00-04:00",
       "TimeString": "09:00 AM - 10:00 AM",
       "Title": "Test Entry"
+    },
+    {
+      "AssignedProject": {
+        "Code": "HYDR",
+        "CreatedDateTime": "2025-04-23T15:52:53.5730461-04:00",
+        "CreatedDateString": "23 April 2025",
+        "ID": "9adb3c5e-e3bc-4603-8639-141536123081",
+        "Name": "Coulometer",
+        "Status": 0,
+        "StatusText": "Active",
+        "Wbs": "12345.67.89.10.11"
+      },
+      "Date": "2025-05-01",
+      "EndTime": "2025-05-01T08:00:00-04:00",
+      "Description": "",
+      "Duration": "01:00:00",
+      "StartTime": "2025-05-01T07:00:00-04:00",
+      "TimeString": "07:00 AM - 08:00 AM",
+      "Title": "Another Job!"
+    },
+    {
+      "AssignedProject": {
+        "Code": "HYDR",
+        "CreatedDateTime": "2025-04-23T15:52:53.5730461-04:00",
+        "CreatedDateString": "23 April 2025",
+        "ID": "9adb3c5e-e3bc-4603-8639-141536123081",
+        "Name": "Coulometer",
+        "Status": 0,
+        "StatusText": "Active",
+        "Wbs": "12345.67.89.10.11"
+      },
+      "Date": "2025-05-01",
+      "EndTime": "2025-05-01T07:00:00-04:00",
+      "Description": "",
+      "Duration": "01:00:00",
+      "StartTime": "2025-05-01T06:00:00-04:00",
+      "TimeString": "06:00 AM - 07:00 AM",
+      "Title": "Another Wee Job"
+    },
+    {
+      "AssignedProject": {
+        "Code": "HYDR",
+        "CreatedDateTime": "2025-04-23T15:52:53.5730461-04:00",
+        "CreatedDateString": "23 April 2025",
+        "ID": "9adb3c5e-e3bc-4603-8639-141536123081",
+        "Name": "Coulometer",
+        "Status": 0,
+        "StatusText": "Active",
+        "Wbs": "12345.67.89.10.11"
+      },
+      "Date": "2025-05-02",
+      "EndTime": "2025-05-02T09:00:00-04:00",
+      "Description": "This is an adminstrative task!",
+      "Duration": "01:00:00",
+      "StartTime": "2025-05-02T08:00:00-04:00",
+      "TimeString": "08:00 AM - 09:00 AM",
+      "Title": "Admin"
+    },
+    {
+      "AssignedProject": {
+        "Code": "CAPMAG",
+        "CreatedDateTime": "2025-04-28T13:41:06.9842059-04:00",
+        "CreatedDateString": "28 April 2025",
+        "ID": "22d31a39-2068-463a-92d7-fe6a5f78844a",
+        "Name": "CAPMAG",
+        "Status": 0,
+        "StatusText": "Active",
+        "Wbs": "22222"
+      },
+      "Date": "2025-05-02",
+      "EndTime": "2025-05-02T10:00:00-04:00",
+      "Description": "",
+      "Duration": "01:00:00",
+      "StartTime": "2025-05-02T09:00:00-04:00",
+      "TimeString": "09:00 AM - 10:00 AM",
+      "Title": "Work"
+    },
+    {
+      "AssignedProject": {
+        "Code": "HYDR",
+        "CreatedDateTime": "2025-04-23T15:52:53.5730461-04:00",
+        "CreatedDateString": "23 April 2025",
+        "ID": "9adb3c5e-e3bc-4603-8639-141536123081",
+        "Name": "Coulometer",
+        "Status": 0,
+        "StatusText": "Active",
+        "Wbs": "12345.67.89.10.11"
+      },
+      "Date": "2025-05-02",
+      "EndTime": "2025-05-02T23:00:00-04:00",
+      "Description": "This is a test description!",
+      "Duration": "01:00:00",
+      "StartTime": "2025-05-02T22:00:00-04:00",
+      "TimeString": "10:00 PM - 11:00 PM",
+      "Title": "Test Entry"
+    },
+    {
+      "AssignedProject": {
+        "Code": "HYDR",
+        "CreatedDateTime": "2025-04-23T15:52:53.5730461-04:00",
+        "CreatedDateString": "23 April 2025",
+        "ID": "9adb3c5e-e3bc-4603-8639-141536123081",
+        "Name": "Coulometer",
+        "Status": 0,
+        "StatusText": "Active",
+        "Wbs": "12345.67.89.10.11"
+      },
+      "Date": "2025-05-02",
+      "EndTime": "2025-05-02T23:15:00-04:00",
+      "Description": "I've been a bad boy.",
+      "Duration": "00:15:00",
+      "StartTime": "2025-05-02T23:00:00-04:00",
+      "TimeString": "11:00 PM - 11:15 PM",
+      "Title": "Delete Me"
     }
   ]
 }

@@ -202,6 +202,11 @@ namespace Cronus.ViewModels
                 DialogService.PromptUserWithErrorMessageWithOKButtonDialog(
                     caption, message);
             }
+            else
+            {
+                OnInfoUpdated($"New Time Entry '{dto.Title}' " +
+                    "created");
+            }
         }
 
         /// <summary>

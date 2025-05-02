@@ -131,6 +131,10 @@ namespace Cronus.ViewModels
                 DialogService.PromptUserWithErrorMessageWithOKButtonDialog(
                     caption, message);
             }
+            else
+            {
+                OnInfoUpdated($"New project '{dto.Name}' created");
+            }
         }
 
         /// <summary>

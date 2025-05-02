@@ -109,7 +109,8 @@
                                         Height="100"
                                         HorizontalAlignment="Stretch"
                                         VerticalContentAlignment="Top"
-                                        MaxLength="1024"/>
+                                        MaxLength="1024"
+                                        TextWrapping="Wrap"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

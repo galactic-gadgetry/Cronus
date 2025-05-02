@@ -215,31 +215,12 @@
         "Wbs": "12345.67.89.10.11"
       },
       "Date": "2025-05-02",
-      "EndTime": "2025-05-02T23:00:00-04:00",
-      "Description": "This is a test description!",
+      "EndTime": "2025-05-02T11:00:00-04:00",
+      "Description": "",
       "Duration": "01:00:00",
-      "StartTime": "2025-05-02T22:00:00-04:00",
-      "TimeString": "10:00 PM - 11:00 PM",
-      "Title": "Test Entry"
-    },
-    {
-      "AssignedProject": {
-        "Code": "HYDR",
-        "CreatedDateTime": "2025-04-23T15:52:53.5730461-04:00",
-        "CreatedDateString": "23 April 2025",
-        "ID": "9adb3c5e-e3bc-4603-8639-141536123081",
-        "Name": "Coulometer",
-        "Status": 0,
-        "StatusText": "Active",
-        "Wbs": "12345.67.89.10.11"
-      },
-      "Date": "2025-05-02",
-      "EndTime": "2025-05-02T23:15:00-04:00",
-      "Description": "I've been a bad boy.",
-      "Duration": "00:15:00",
-      "StartTime": "2025-05-02T23:00:00-04:00",
-      "TimeString": "11:00 PM - 11:15 PM",
-      "Title": "Delete Me"
+      "StartTime": "2025-05-02T10:00:00-04:00",
+      "TimeString": "10:00 AM - 11:00 AM",
+      "Title": "Proposal Discussion"
     }
   ]
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,31 +8,96 @@ using System.Windows;
 
 namespace Cronus.Models
 {
-    public class TimeEntry : IConfirmDeletion
+    public class TimeEntry : IConfirmDeletion, INotifyPropertyChanged
     {
+        // Backing Fields
+        private Project? assignedProject = null;
+        private DateOnly date;
+        private DateTime endTime;
+        private string description = string.Empty;
+        private DateTime startTime;
+        public string title = string.Empty;
 
-        public Project? AssignedProject { get; set; } = null;
 
 
-        public DateOnly Date { get; set; }
+        public Project? AssignedProject
+        {
+            get => assignedProject;
+            set
+            {
+                assignedProject = value;
+                OnPropertyChanged(nameof(AssignedProject));
+            }
+        }
 
 
-        public DateTime EndTime { get; set; }
+        public DateOnly Date
+        {
+            get => date;
+            set
+            {
+                date = value;
+                OnPropertyChanged(nameof(Date));
+            }
+        }
 
 
-        public string Description { get; set; } = string.Empty;
+        public DateTime EndTime
+        {
+            get => endTime;
+            set
+            {
+                endTime = value;
+                OnPropertyChanged(nameof(EndTime));
+                OnPropertyChanged(nameof(Duration));
+                OnPropertyChanged(nameof(TimeString));
+            }
+        }
+
+
+        public string Description
+        {
+            get => description;
+            set
+            {
+                description = value;
+                OnPropertyChanged(nameof(Description));
+            }
+        }
 
 
         public TimeSpan Duration => EndTime - StartTime;
 
 
-        public DateTime StartTime { get; set; }
+        public DateTime StartTime
+        {
+            get => startTime;
+            set
+            {
+                startTime = value;
+                OnPropertyChanged(nameof(StartTime));
+                OnPropertyChanged(nameof(Duration));
+                OnPropertyChanged(nameof(TimeString));
+            }
+        }
 
 
         public string TimeString => $"{StartTime.ToString("hh:mm tt")} - {EndTime.ToString("hh:mm tt")}";
 
 
-        public string Title { get; set; } = string.Empty;
+        public string Title
+        {
+            get => title;
+            set
+            {
+                title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
+
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
 
 
@@ -59,6 +125,13 @@ namespace Cronus.Models
         public string GetModelTypeString()
         {
             return "Time Entry";
+        }
+
+
+        public virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this,
+                new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -14,6 +14,9 @@ namespace Cronus.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+
+        public virtual void Dispose() { }
+
         public virtual void OnInfoUpdated(string info)
         {
             InfoUpdated?.Invoke(this, info);

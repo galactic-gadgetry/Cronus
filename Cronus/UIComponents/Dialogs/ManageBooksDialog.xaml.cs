@@ -42,6 +42,12 @@ namespace Cronus.UIComponents.Dialogs
         /// </summary>
         private readonly NavigationStore _navigationStore;
 
+
+        private readonly INavigate _nullLayoutNavigationService;
+
+
+        private readonly INavigate _nullNavBarNavigationService;
+
         /// <summary>
         /// Used to navigate to the Start Screen view.
         /// </summary>
@@ -146,6 +152,16 @@ namespace Cronus.UIComponents.Dialogs
             _bookDetailsNavigationService =
                 ServiceFactory.CreateNavigationService(
                     "book details",
+                    _bookStore,
+                    _navigationStore);
+            _nullLayoutNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "null layout",
+                    _bookStore,
+                    _navigationStore);
+            _nullNavBarNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "null nav bar",
                     _bookStore,
                     _navigationStore);
             _startScreenNavigationService =
@@ -294,7 +310,11 @@ namespace Cronus.UIComponents.Dialogs
             // Open the selected book.
             BookService.LoadBookToBookStoreFromJson(_bookStore, header.BookSaveFilePath);
 
+            // First, null out the views so that the old views
+            // are not kept alive.
             // Navigate to the Book Details view.
+            _nullLayoutNavigationService.Navigate();
+            _nullNavBarNavigationService.Navigate();
             _bookDetailsNavigationService.Navigate();
 
             // Close the Manage Books Dialog.

@@ -38,6 +38,7 @@ namespace Cronus.ViewModels
         private DateTime selectedDate;
         private TimeEntry? selectedTimeEntry;
         private ObservableCollection<TimeEntry> timeEntries = new();
+        private string totalTimeString = string.Empty;
 
         /// <summary>
         /// Returns the book store's current <see cref="Book"/>.
@@ -58,6 +59,9 @@ namespace Cronus.ViewModels
                 OnPropertyChanged(nameof(SelectedDate));
             }
         }
+
+
+        public ObservableCollection<ProjectStatistic> ProjectStatistics { get; set; } = new();
 
         /// <summary>
         /// The currently selected <see cref="TimeEntry"/> in the
@@ -83,6 +87,17 @@ namespace Cronus.ViewModels
             {
                 timeEntries = value;
                 OnPropertyChanged(nameof(TimeEntries));
+            }
+        }
+
+
+        public string TotalTimeString
+        {
+            get => totalTimeString;
+            set
+            {
+                totalTimeString = value;
+                OnPropertyChanged(nameof(TotalTimeString));
             }
         }
 
@@ -163,6 +178,8 @@ namespace Cronus.ViewModels
                 new Action<object?>(OnTodayButtonClicked));
 
             CurrentBook.TimeEntries.CollectionChanged += OnTimeEntriesChanged;
+
+            //SetProjectStatistics();
         }
 
 
@@ -247,11 +264,13 @@ namespace Cronus.ViewModels
                 TimeEntryService.EditTimeEntryDetails(_bookStore, timeEntry, dto);
             if (result)
             {
-                // Save the book and called the OnPropertyChanged
+                // Save the book and call the OnPropertyChanged
                 // method on the TimeEntries collection.
                 BookService.SaveCurrentBookToJson(_bookStore);
                 OnPropertyChanged(nameof(SelectedTimeEntry));
                 OnPropertyChanged(nameof(TimeEntries));
+
+                SetProjectStatistics();
             }
             else
             {
@@ -351,6 +370,7 @@ namespace Cronus.ViewModels
         private void OnSelectedDateChanged()
         {
             SortTimeEntriesByStartTime();
+            SetProjectStatistics();
         }
 
         /// <summary>
@@ -407,6 +427,7 @@ namespace Cronus.ViewModels
         private void OnTimeEntriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             SortTimeEntriesByStartTime();
+            SetProjectStatistics();
         }
 
         /// <summary>
@@ -471,13 +492,21 @@ namespace Cronus.ViewModels
 
             // If either of the times is post meridiem, add 12 to
             // the integer.
-            if (startMeridiem.ToLower() == "pm")
+            if (startMeridiem.ToLower() == "pm" && startHour != 12)
             {
                 startHour += 12;
             }
-            if (endMeridiem.ToLower() == "pm")
+            else if (startMeridiem.ToLower() == "am" && startHour == 12)
+            {
+                startHour = 0;
+            }
+            if (endMeridiem.ToLower() == "pm" && endHour != 12)
             {
                 endHour += 12;
+            }
+            else if (endMeridiem.ToLower() == "am" && endHour == 12)
+            {
+                endHour = 0;
             }
 
             // Set the start and end date times.
@@ -488,6 +517,44 @@ namespace Cronus.ViewModels
             DateTime endDateTime = date + endTimeSpan;
 
             return (startDateTime, endDateTime);
+        }
+
+
+        private void SetProjectStatistics()
+        {
+            // Reset the collection and total time.
+            ProjectStatistics = new();
+            TimeSpan totalTimeSpan = TimeSpan.Zero;
+
+            foreach (Project p in CurrentBook.Projects)
+            {
+                // Get the total duration of the time entries for the
+                // project.
+                TimeSpan timeSpan = TimeSpan.Zero;
+                List<TimeEntry> timeEntries = TimeEntries.
+                    Where(t => t.AssignedProject.ID == p.ID).ToList();
+                foreach (TimeEntry t in timeEntries)
+                {
+                    timeSpan += t.Duration;
+                }
+
+                // Create a new ProjectStatistic instance for
+                // displaying the statistic.
+                ProjectStatistic statistic = new()
+                {
+                    Name = p.Name,
+                    Duration = timeSpan,
+                };
+
+                // Update the total time.
+                totalTimeSpan += timeSpan;
+
+                // Add the ProjectStatistics to the collection.
+                ProjectStatistics.Add(statistic);
+            }
+
+            TotalTimeString = totalTimeSpan.ToString("hh':'mm");
+            OnPropertyChanged(nameof(ProjectStatistics));
         }
 
         /// <summary>

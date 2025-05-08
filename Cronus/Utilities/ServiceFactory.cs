@@ -41,6 +41,14 @@ namespace Cronus.Utilities
                     return new NavBarNavigationService<NavigationBarViewModel>(
                         navigationStore,
                         () => new NavigationBarViewModel(bookStore, navigationStore));
+                case "null layout":
+                    return new LayoutNavigationService<LayoutViewModel>(
+                        navigationStore,
+                        () => null);
+                case "null nav bar":
+                    return new NavBarNavigationService<NavigationBarViewModel>(
+                        navigationStore,
+                        () => null);
                 case "null side content":
                     return new SideContentNavigationService<XButtonSideBarViewModel>(
                         navigationStore,

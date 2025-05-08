@@ -52,9 +52,9 @@ namespace Cronus
             }
             else
             {
-                INavigate bookDetailsNavigationService =
+                INavigate dailyTimesheetNavigationService =
                     ServiceFactory.CreateNavigationService(
-                        "book details",
+                        "daily timesheet",
                         _bookStore,
                         _navigationStore);
                 INavigate layoutNavigationService =
@@ -63,7 +63,7 @@ namespace Cronus
                         _bookStore,
                         _navigationStore);
                 layoutNavigationService.Navigate();
-                bookDetailsNavigationService.Navigate();
+                dailyTimesheetNavigationService.Navigate();
             }
 
                 MainViewModel mainViewModel = new(_bookStore, _navigationStore);

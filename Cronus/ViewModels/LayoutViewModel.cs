@@ -63,12 +63,12 @@ namespace Cronus.ViewModels
 
         private void NavigateDefaultView()
         {
-            INavigate projectsNavigationService =
+            INavigate dailyTimesheetNavigationService =
                 ServiceFactory.CreateNavigationService(
-                    "projects",
+                    "daily timesheet",
                     _bookStore,
                     _navigationStore);
-            projectsNavigationService.Navigate();
+            dailyTimesheetNavigationService.Navigate();
         }
 
 

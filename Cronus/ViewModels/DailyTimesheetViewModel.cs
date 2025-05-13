@@ -519,7 +519,9 @@ namespace Cronus.ViewModels
             return (startDateTime, endDateTime);
         }
 
-
+        /// <summary>
+        /// Sets the properties needed for project statistics.
+        /// </summary>
         private void SetProjectStatistics()
         {
             // Reset the collection and total time.

@@ -42,10 +42,14 @@ namespace Cronus.UIComponents.Dialogs
         /// </summary>
         private readonly NavigationStore _navigationStore;
 
-
+        /// <summary>
+        /// Used to navigate to a null layout content view.
+        /// </summary>
         private readonly INavigate _nullLayoutNavigationService;
 
-
+        /// <summary>
+        /// Used to navigate to a null navigation bar view.
+        /// </summary>
         private readonly INavigate _nullNavBarNavigationService;
 
         /// <summary>

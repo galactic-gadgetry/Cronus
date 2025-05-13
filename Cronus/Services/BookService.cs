@@ -14,6 +14,25 @@ namespace Cronus.Services
 {
     public static class BookService
     {
+
+        public static (bool, string?) AddProjectToBook(Book book,
+            Project project)
+        {
+            ArgumentNullException.ThrowIfNull(nameof(book), nameof(book));
+            ArgumentNullException.ThrowIfNull(project, nameof(project));
+
+            // Validate the project properties and return false if
+            // invalid.
+            (bool result, string? detail) = ValidateProjectIsUnique(book, project);
+            if (result == false)
+            {
+                return (false, detail);
+            }
+
+            book.Projects.Add(project);
+            return (true, detail);
+        }
+
         /// <summary>
         /// Adds the project to the current book's
         /// <see cref="Book.Projects"/> collection.
@@ -34,7 +53,7 @@ namespace Cronus.Services
             //    throw new NotImplementedException();
             //}
 
-            // Validate that the project properties and return false
+            // Validate the project properties and return false
             // if invalid.
             Book book = bookStore.CurrentBook;
             (bool result, string? detail) = ValidateProjectIsUnique(book, project);
@@ -71,6 +90,19 @@ namespace Cronus.Services
 
             book.TimeEntries.Add(timeEntry);
             return (true, detail);
+        }
+
+        /// <summary>
+        /// Gets a new "Unassigned" project and adds it to the
+        /// book's <see cref="Book.Projects"/> collection.
+        /// </summary>
+        /// <param name="book"></param>
+        public static void AddUnassignedProject(Book book)
+        {
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+
+            Project project = ProjectService.GetNewUnassignedProject();
+            book.Projects.Insert(0, project);
         }
 
         /// <summary>
@@ -144,6 +176,16 @@ namespace Cronus.Services
             {
                 Name = dto.Name,
             };
+
+            // Initialize the new book.
+            (bool result, string? detail) = InitializeNewBook(book);
+
+            // Throw an error if the book could not be initalized.
+            if (result == false)
+            {
+                throw new Exception("The new book could not be " +
+                    "initialized");
+            }
 
             return book;
         }
@@ -291,6 +333,15 @@ namespace Cronus.Services
             DeleteTimeEntryFromBook(bookStore.CurrentBook, timeEntry);
         }
 
+
+        public static void EditBookDetails(BookDTO dto, Book book)
+        {
+            ArgumentNullException.ThrowIfNull(dto, nameof(dto));
+            ArgumentNullException.ThrowIfNull(book, nameof(book));
+
+            book.Name = dto.Name;
+        }
+
         /// <summary>
         /// Retrieves the saved book headers on file.
         /// </summary>
@@ -312,12 +363,12 @@ namespace Cronus.Services
         }
 
 
-        public static void EditBookDetails(BookDTO dto, Book book)
+        public static (bool, string?) InitializeNewBook(Book book)
         {
-            ArgumentNullException.ThrowIfNull(dto, nameof(dto));
-            ArgumentNullException.ThrowIfNull(book, nameof(book));
+            // Get the unassigned project.
+            Project unassignedProject = ProjectService.GetNewUnassignedProject();
 
-            book.Name = dto.Name;
+            return AddProjectToBook(book, unassignedProject);
         }
 
         /// <summary>
@@ -328,6 +379,30 @@ namespace Cronus.Services
         public static BookHeader LoadBookHeaderFromJson(string filePath)
         {
             return JsonService.LoadBookHeaderFromJsonFile(filePath);
+        }
+
+        /// <summary>
+        /// Loads a <see cref="Book"/> instance from a JSON file and
+        /// sets it as the book store's current book.
+        /// </summary>
+        /// <param name="bookStore"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static BookStore LoadBookToBookStoreFromJson(
+            BookStore bookStore, string filePath)
+        {
+            Book book = JsonService.LoadBookFromJsonFile(filePath);
+
+            // Check if the book has the "Unassigned" project, and
+            // add one if needed.
+            if (!book.Projects.Any(p => p.IsUnassignedProject == true))
+            {
+                AddUnassignedProject(book);
+            }
+            SetBookStoreCurrentBook(bookStore, book);
+            SaveCurrentBookToJson(bookStore);
+
+            return bookStore;
         }
 
         /// <summary>
@@ -355,22 +430,6 @@ namespace Cronus.Services
 
             JsonService.SaveObject(header, header.SaveFilePath);
             JsonService.SaveObject(book, book.SaveFilePath);
-        }
-
-        /// <summary>
-        /// Loads a <see cref="Book"/> instance from a JSON file and
-        /// sets it as the book store's current book.
-        /// </summary>
-        /// <param name="bookStore"></param>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
-        public static BookStore LoadBookToBookStoreFromJson(
-            BookStore bookStore, string filePath)
-        {
-            Book book = JsonService.LoadBookFromJsonFile(filePath);
-            SetBookStoreCurrentBook(bookStore, book);
-
-            return bookStore;
         }
 
         /// <summary>

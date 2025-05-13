@@ -65,7 +65,10 @@
                         Content="Create Entry"
                         Style="{StaticResource AccentButtonStyle}"
                         Margin="0,0,15,0"
-                        Command="{Binding CreateEntryButtonClickedCommand}"/>
+                        Command="{Binding CreateEntryButtonClickedCommand}"
+                        IsEnabled="{Binding IsCreateEntryButtonEnabled}"
+                        ToolTip="{Binding CreateEntryButtonToolTipText}"
+                        ToolTipService.ShowOnDisabled="True"/>
                 </Grid>
 
                 <!-- #View Contents -->

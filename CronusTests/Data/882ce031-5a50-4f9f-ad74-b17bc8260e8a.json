@@ -5,8 +5,10 @@
   "HeaderSaveFilePath": "C:\\Users\\nbspangl\\Documents\\coding\\WPF\\Cronus\\CronusTests\\Data\\882ce031-5a50-4f9f-ad74-b17bc8260e8a_head.json",
   "ID": "882ce031-5a50-4f9f-ad74-b17bc8260e8a",
   "IsBookVoid": false,
-  "Name": "Main",
+  "Name": "Empty Book",
+  "Projects": [],
   "SaveFilePath": "C:\\Users\\nbspangl\\Documents\\coding\\WPF\\Cronus\\CronusTests\\Data\\882ce031-5a50-4f9f-ad74-b17bc8260e8a.json",
   "Status": 0,
-  "StatusText": "Active"
+  "StatusText": "Active",
+  "TimeEntries": []
 }

@@ -12,12 +12,13 @@ namespace Cronus.Services
 {
     public static class ProjectService
     {
-
+        
         public static Project CreateNewProject(ProjectDTO dto)
         {
             Project project = new()
             {
                 Code = dto.Code,
+                IsUnassignedProject = dto.IsUnassignedProject,
                 Name = dto.Name,
                 Wbs = dto.Wbs,
             };
@@ -90,6 +91,24 @@ namespace Cronus.Services
             BookService.SetCurrentBookHasUnsavedChanges(bookStore, true);
 
             return (true, detail);
+        }
+
+        /// <summary>
+        /// Returns a new "Unassigned" project.
+        /// </summary>
+        /// <returns></returns>
+        public static Project GetNewUnassignedProject()
+        {
+            ProjectDTO dto = new()
+            {
+                Code = "UNSN",
+                IsUnassignedProject = true,
+                Name = "Unassigned",
+                Wbs = "00000.00.00.00.00"
+            };
+
+            return CreateNewProject(dto);
+
         }
 
         /// <summary>

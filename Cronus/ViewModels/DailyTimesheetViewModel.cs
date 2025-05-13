@@ -40,6 +40,26 @@ namespace Cronus.ViewModels
         private ObservableCollection<TimeEntry> timeEntries = new();
         private string totalTimeString = string.Empty;
 
+
+        /// <summary>
+        /// Text for the Create Entry button's tool tip.
+        /// </summary>
+        public string CreateEntryButtonToolTipText
+        {
+            get
+            {
+                if (IsCreateEntryButtonEnabled)
+                {
+                    return "Create New Time Entry";
+                }
+                else
+                {
+                    return "There are no projects in the current " +
+                        "book";
+                }
+            }
+        }
+
         /// <summary>
         /// Returns the book store's current <see cref="Book"/>.
         /// </summary>
@@ -60,7 +80,16 @@ namespace Cronus.ViewModels
             }
         }
 
+        /// <summary>
+        /// True if current book's project count is greater than
+        /// zero, false otherwise.
+        /// </summary>
+        public bool IsCreateEntryButtonEnabled =>
+            CurrentBook.Projects.Count > 0;
 
+        /// <summary>
+        /// Collection of project statistics instances.
+        /// </summary>
         public ObservableCollection<ProjectStatistic> ProjectStatistics { get; set; } = new();
 
         /// <summary>
@@ -90,7 +119,10 @@ namespace Cronus.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// Text for the total time of the entries for the current
+        /// date.
+        /// </summary>
         public string TotalTimeString
         {
             get => totalTimeString;
@@ -160,6 +192,9 @@ namespace Cronus.ViewModels
             SelectedDate = DateTime.Today;
             SelectedTimeEntry = null;
 
+            // Check if the Create Entry button should be enabled.
+            SetCreateEntryButtonProperties();
+
             CreateEntryButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnCreateEntryButtonClicked));
             NextDayButtonClickedCommand = new RelayCommand(
@@ -178,8 +213,6 @@ namespace Cronus.ViewModels
                 new Action<object?>(OnTodayButtonClicked));
 
             CurrentBook.TimeEntries.CollectionChanged += OnTimeEntriesChanged;
-
-            //SetProjectStatistics();
         }
 
 
@@ -517,6 +550,16 @@ namespace Cronus.ViewModels
             DateTime endDateTime = date + endTimeSpan;
 
             return (startDateTime, endDateTime);
+        }
+
+        /// <summary>
+        /// Sets the properties for binding with the Create Entry
+        /// button.
+        /// </summary>
+        private void SetCreateEntryButtonProperties()
+        {
+            OnPropertyChanged(nameof(IsCreateEntryButtonEnabled));
+            OnPropertyChanged(nameof(CreateEntryButtonToolTipText));
         }
 
         /// <summary>

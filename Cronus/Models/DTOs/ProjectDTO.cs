@@ -11,6 +11,8 @@ namespace Cronus.Models.DTOs
 
         public string Code { get; set; } = string.Empty;
 
+        public bool IsUnassignedProject { get; set; } = false;
+
         public string Name { get; set; } = string.Empty;
 
         public string Wbs { get; set; } = string.Empty;

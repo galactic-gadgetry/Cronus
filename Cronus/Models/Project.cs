@@ -46,6 +46,9 @@ namespace Cronus.Models
         public Guid ID { get; init; }
 
 
+        public bool IsUnassignedProject { get; init; } = false;
+
+
         public string Name
         {
             get => name;

@@ -1,0 +1,26 @@
+{
+  "CreatedDateString": "13 May 2025",
+  "CreatedDateTime": "2025-05-13T11:00:22.0921267-04:00",
+  "HasUnsavedChanges": false,
+  "HeaderSaveFilePath": "C:\\Users\\nbspangl\\Documents\\coding\\WPF\\Cronus\\CronusTests\\Data\\3e82ff64-e981-49a3-ab2d-a7e09077d257_head.json",
+  "ID": "3e82ff64-e981-49a3-ab2d-a7e09077d257",
+  "IsBookVoid": false,
+  "Name": "Main",
+  "Projects": [
+    {
+      "Code": "UNSN",
+      "CreatedDateTime": "2025-05-13T11:00:22.0927553-04:00",
+      "CreatedDateString": "13 May 2025",
+      "ID": "4ba1ba04-4510-47e4-88e3-484ee4efd2a8",
+      "IsUnassignedProject": true,
+      "Name": "Unassigned",
+      "Status": 0,
+      "StatusText": "Active",
+      "Wbs": "00000.00.00.00.00"
+    }
+  ],
+  "SaveFilePath": "C:\\Users\\nbspangl\\Documents\\coding\\WPF\\Cronus\\CronusTests\\Data\\3e82ff64-e981-49a3-ab2d-a7e09077d257.json",
+  "Status": 0,
+  "StatusText": "Active",
+  "TimeEntries": []
+}

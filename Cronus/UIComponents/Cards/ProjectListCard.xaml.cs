@@ -84,6 +84,20 @@ namespace Cronus.UIComponents.Cards
                 typeof(ProjectListCard),
                 new PropertyMetadata(string.Empty));
 
+        public static readonly DependencyProperty TimeEntriesCountTextProperty =
+            DependencyProperty.Register(
+                nameof(TimeEntriesCountText),
+                typeof(string),
+                typeof(ProjectListCard),
+                new PropertyMetadata(string.Empty));
+
+        public static readonly DependencyProperty TotalTimeTextProperty =
+            DependencyProperty.Register(
+                nameof(TotalTimeText),
+                typeof(string),
+                typeof(ProjectListCard),
+                new PropertyMetadata(string.Empty));
+
         public static readonly DependencyProperty WbsTextProperty =
             DependencyProperty.Register(
                 nameof(WbsText),
@@ -144,6 +158,24 @@ namespace Cronus.UIComponents.Cards
         {
             get => (string)GetValue(StatusTextProperty);
             set => SetValue(StatusTextProperty, value);
+        }
+
+        /// <summary>
+        /// Text for the Time Entries label.
+        /// </summary>
+        public string TimeEntriesCountText
+        {
+            get => (string)GetValue(TimeEntriesCountTextProperty);
+            set => SetValue(TimeEntriesCountTextProperty, value);
+        }
+
+        /// <summary>
+        /// Text for the Total Time label.
+        /// </summary>
+        public string TotalTimeText
+        {
+            get => (string)GetValue(TotalTimeTextProperty);
+            set => SetValue(TotalTimeTextProperty, value);
         }
 
         /// <summary>

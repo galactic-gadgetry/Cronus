@@ -39,13 +39,24 @@ namespace Cronus.ViewModels
         /// </summary>
         private readonly INavigate _projectDetailsNavigationService;
 
+        /// <summary>
+        /// Returns the book store's current <see cref="Book"/>.
+        /// </summary>
+        public Book CurrentBook => _bookStore.CurrentBook;
+
 
         /// <summary>
         /// Returns the current book's
         /// <see cref="Book.Projects"/> collection.
         /// </summary>
         public ObservableCollection<Project> Projects =>
-            _bookStore.CurrentBook.Projects;
+            CurrentBook.Projects;
+
+        /// <summary>
+        /// Collection of project statistics instances for the
+        /// current book.
+        /// </summary>
+        public ObservableCollection<ProjectStatistic> ProjectStatistics { get; set; } = new();
 
 
         /// <summary>
@@ -81,6 +92,9 @@ namespace Cronus.ViewModels
         {
             _bookStore = bookStore;
             _navigationStore = navigationStore;
+
+            // Set the project statistics for each project.
+            SetProjectStatistics();
 
             CreateProjectButtonClickedCommand = new RelayCommand(
                 new Action<object?>(OnCreateProjectButtonClicked));
@@ -133,6 +147,7 @@ namespace Cronus.ViewModels
             }
             else
             {
+                SetProjectStatistics();
                 OnInfoUpdated($"New project '{dto.Name}' created");
             }
         }
@@ -145,6 +160,7 @@ namespace Cronus.ViewModels
         private void DeleteProjectRequested(Project project)
         {
             BookService.DeleteProjectFromCurrentBook(_bookStore, project);
+            SetProjectStatistics();
 
             //  Update the info bar.
             OnInfoUpdated($"Project '{project.Name}' deleted");
@@ -172,11 +188,22 @@ namespace Cronus.ViewModels
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void OnProjectCardDeleteButtonClicked(object? obj)
         {
-            Project? selectedProject = obj as Project;
-            if (selectedProject == null)
+            Project? selectedProject;
+            ProjectStatistic? selectedProjectStatistic = obj as ProjectStatistic;
+            if (selectedProjectStatistic == null)
             {
                 throw new ArgumentOutOfRangeException("The caller must be " +
-                    "a Project object");
+                    "a ProjectStatistic object");
+            }
+            else
+            {
+                selectedProject = Projects.FirstOrDefault(p => p.ID == selectedProjectStatistic.ID);
+                if (selectedProject == null)
+                {
+                    throw new ArgumentOutOfRangeException("The " +
+                        "Project instance could not be found in the " +
+                        "collection");
+                }
             }
 
             if (DialogService.PromptUserWithDeleteConfirmationDialog(
@@ -193,11 +220,22 @@ namespace Cronus.ViewModels
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void OnProjectCardEditButtonClicked(object? obj)
         {
-            Project? selectedProject = obj as Project;
-            if (selectedProject == null)
+            Project? selectedProject;
+            ProjectStatistic? selectedProjectStatistic = obj as ProjectStatistic;
+            if (selectedProjectStatistic == null)
             {
                 throw new ArgumentOutOfRangeException("The caller must be " +
-                    "a Project object");
+                    "a ProjectStatistic object");
+            }
+            else
+            {
+                selectedProject = Projects.FirstOrDefault(p => p.ID == selectedProjectStatistic.ID);
+                if (selectedProject == null)
+                {
+                    throw new ArgumentOutOfRangeException("The " +
+                        "Project instance could not be found in the " +
+                        "collection");
+                }
             }
 
             // Set the selected project  as the current book's
@@ -226,6 +264,45 @@ namespace Cronus.ViewModels
             BookService.SetBookStoreCurrentFocusedProject(_bookStore, selectedProject);
 
             _projectDetailsNavigationService.Navigate();
+        }
+
+        /// <summary>
+        /// Sets the properties needed for project statistics.
+        /// </summary>
+        private void SetProjectStatistics()
+        {
+            // Reset the collection.
+            ProjectStatistics = new();
+
+            TimeSpan totalTimeSpan = TimeSpan.Zero;
+            int timeEntryCount = 0;
+
+            foreach (Project p in Projects)
+            {
+                // Get the total duration of the time entries for the
+                // project.
+                TimeSpan timeSpan = TimeSpan.Zero;
+                List<TimeEntry> timeEntries = CurrentBook.TimeEntries.
+                    Where(t => t.AssignedProject.ID == p.ID).ToList();
+                timeEntryCount = timeEntries.Count;
+                foreach (TimeEntry t in timeEntries)
+                {
+                    timeSpan += t.Duration;
+                }
+
+                // Create a new ProjectStatistic instance for
+                // displaying the statistic.
+                ProjectStatistic statistic = new(p)
+                {
+                    Duration = timeSpan,
+                    TimeEntriesCount = timeEntryCount,
+                };
+
+                // Add the ProjectStatistics to the collection.
+                ProjectStatistics.Add(statistic);
+            }
+
+            OnPropertyChanged(nameof(ProjectStatistics));
         }
     }
 }

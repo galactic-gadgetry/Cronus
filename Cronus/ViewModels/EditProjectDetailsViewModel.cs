@@ -30,6 +30,11 @@ namespace Cronus.ViewModels
         /// </summary>
         private readonly INavigate _previousLayoutContentNavigationService;
 
+        /// <summary>
+        /// Used to navigate to the Projects view.
+        /// </summary>
+        private readonly INavigate _projectsNavigationService;
+
 
         // Backing Fields
         private string codeText = string.Empty;
@@ -140,6 +145,11 @@ namespace Cronus.ViewModels
                     "previous",
                     _bookStore,
                     _navigationStore);
+            _projectsNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "projects",
+                    _bookStore,
+                    _navigationStore);
 
             ResetInputFields();
         }
@@ -173,7 +183,7 @@ namespace Cronus.ViewModels
             {
                 // Save the book and navigate to the previous view.
                 BookService.SaveCurrentBookToJson(_bookStore);
-                _previousLayoutContentNavigationService.Navigate();
+                _projectsNavigationService.Navigate();
             }
             else
             {
@@ -182,7 +192,6 @@ namespace Cronus.ViewModels
                     $"to another project. A project's {detail} must " +
                     "be unique.";
                 DialogService.PromptUserWithErrorMessageWithOKButtonDialog(caption, message);
-
             }
         }
 

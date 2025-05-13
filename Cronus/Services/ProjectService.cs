@@ -108,7 +108,6 @@ namespace Cronus.Services
             };
 
             return CreateNewProject(dto);
-
         }
 
         /// <summary>

@@ -53,7 +53,7 @@
                         <!-- #Projects List -->
                         <ListView
                             x:Name="ProjectsListView"
-                            ItemsSource="{Binding Projects}">
+                            ItemsSource="{Binding ProjectStatistics}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <card:ProjectListCard
@@ -61,6 +61,8 @@
                                         CodeText="{Binding Code}"
                                         WbsText="{Binding Wbs}"
                                         StatusText="{Binding StatusText}"
+                                        TotalTimeText="{Binding DurationString}"
+                                        TimeEntriesCountText="{Binding TimeEntriesCountString}"
                                         DeleteButtonClickedCommand="{Binding DataContext.ProjectCardDeleteButtonClickedCommand, ElementName=ProjectsListView}"
                                         DeleteButtonClickedCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}"
                                         EditButtonClickedCommand="{Binding DataContext.ProjectCardEditButtonClickedCommand, ElementName=ProjectsListView}"

@@ -65,7 +65,7 @@
 
                                     <Label
                                         Grid.Column="0"
-                                        Content="SpaceY"
+                                        Content="{Binding FocusedProject.Name}"
                                         Style="{StaticResource ViewTitleLabelStyle}"
                                         FontSize="16" FontWeight="Bold"
                                         Margin="20"/>
@@ -109,7 +109,7 @@
                                                 Content="NAME"
                                                 Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
                                             <Label
-                                                Content="SpaceY"
+                                                Content="{Binding FocusedProject.Name}"
                                                 Style="{StaticResource DetailsFieldLabelStyle}"/>
                                         </StackPanel>
 
@@ -118,7 +118,7 @@
                                                 Content="CREATED ON"
                                                 Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
                                             <Label
-                                                Content="18 April 2025"
+                                                Content="{Binding FocusedProject.CreatedDateString}"
                                                 Style="{StaticResource DetailsFieldLabelStyle}"/>
                                         </StackPanel>
 
@@ -127,7 +127,7 @@
                                                 Content="CODE"
                                                 Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
                                             <Label
-                                                Content="SPCY"
+                                                Content="{Binding FocusedProject.Code}"
                                                 Style="{StaticResource DetailsFieldLabelStyle}"/>
                                         </StackPanel>
 
@@ -136,7 +136,7 @@
                                                 Content="WBS"
                                                 Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
                                             <Label
-                                                Content="12345.67.89.10.11"
+                                                Content="{Binding FocusedProject.Wbs}"
                                                 Style="{StaticResource DetailsFieldLabelStyle}"/>
                                         </StackPanel>
 
@@ -145,7 +145,7 @@
                                                 Content="STATUS"
                                                 Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
                                             <Label
-                                                Content="Active"
+                                                Content="{Binding FocusedProject.StatusText}"
                                                 Style="{StaticResource DetailsFieldLabelStyle}"/>
                                         </StackPanel>
                                     </Grid>

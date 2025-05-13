@@ -252,17 +252,27 @@ namespace Cronus.ViewModels
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void OnProjectCardNameHyperlinkClicked(object? obj)
         {
-            Project? selectedProject = obj as Project;
-            if (selectedProject == null)
+            Project? selectedProject;
+            ProjectStatistic? selectedProjectStatistic = obj as ProjectStatistic;
+            if (selectedProjectStatistic == null)
             {
                 throw new ArgumentOutOfRangeException("The caller must be " +
-                    "a Project object");
+                    "a ProjectStatistic object");
+            }
+            else
+            {
+                selectedProject = Projects.FirstOrDefault(p => p.ID == selectedProjectStatistic.ID);
+                if (selectedProject == null)
+                {
+                    throw new ArgumentOutOfRangeException("The " +
+                        "Project instance could not be found in the " +
+                        "collection");
+                }
             }
 
             // Set the book store's currently focused project to the
             // selected project.
             BookService.SetBookStoreCurrentFocusedProject(_bookStore, selectedProject);
-
             _projectDetailsNavigationService.Navigate();
         }
 

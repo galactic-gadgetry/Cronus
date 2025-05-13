@@ -20,7 +20,9 @@ namespace Cronus.ViewModels
         /// </summary>
         private readonly BookStore _bookStore;
 
-
+        /// <summary>
+        /// Used to navigate to the Edit Project Details view.
+        /// </summary>
         private readonly INavigate _editProjectDetailsNavigationService;
 
         /// <summary>

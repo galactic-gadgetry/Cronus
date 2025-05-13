@@ -354,13 +354,15 @@
                                 Style="{StaticResource DetailsFieldLabelStyle}"/>
                         </StackPanel>
 
-                                    <StackPanel>
+                        <StackPanel>
                             <Label
                                 Content="PROJECT"
                                 Style="{StaticResource DetailsFieldHeaderLabelStyle}"/>
-                            <Label
-                                Content="{Binding SelectedTimeEntry.AssignedProject.Name}"
-                                Style="{StaticResource DetailsFieldLabelStyle}"/>
+                            <TextBlock>
+                                <Hyperlink>
+                                    <TextBlock Text="{Binding SelectedTimeEntry.AssignedProject.Name}"/>
+                                </Hyperlink>
+                            </TextBlock>
                         </StackPanel>
 
                         <StackPanel>

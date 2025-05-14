@@ -42,7 +42,7 @@ namespace Cronus.ViewModels
         /// <summary>
         /// Used to navigate to the Saved Books view.
         /// </summary>
-        private readonly INavigate _saveBooksNavigationService;
+        private readonly INavigate _savedBooksNavigationService;
 
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Cronus.ViewModels
                     "layout",
                     _bookStore,
                     _navigationStore);
-            _saveBooksNavigationService =
+            _savedBooksNavigationService =
                 ServiceFactory.CreateNavigationService(
                     "saved books",
                     _bookStore,
@@ -124,7 +124,7 @@ namespace Cronus.ViewModels
         private void OnLoadExistingLogBookButtonClicked(object? obj)
         {
             _layoutNavigationService.Navigate();
-            _saveBooksNavigationService.Navigate();
+            _savedBooksNavigationService.Navigate();
         }
 
         /// <summary>
@@ -138,10 +138,10 @@ namespace Cronus.ViewModels
             if (dlg.DialogResult == true)
             {
                 CreateNewLogBookRequested(dlg);
-            }
 
-            // Navigate to the Book Details view.
-            NavigateBookDetailsView();
+                // Navigate to the Book Details view.
+                NavigateBookDetailsView();
+            }
         }
     }
 }

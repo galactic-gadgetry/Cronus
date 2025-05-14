@@ -6,7 +6,19 @@
   "ID": "882ce031-5a50-4f9f-ad74-b17bc8260e8a",
   "IsBookVoid": false,
   "Name": "Empty Book",
-  "Projects": [],
+  "Projects": [
+    {
+      "Code": "UNSN",
+      "CreatedDateTime": "2025-05-13T15:47:10.6120899-04:00",
+      "CreatedDateString": "13 May 2025",
+      "ID": "f59d02b8-350b-490b-8fbb-9287b2e8b3a9",
+      "IsUnassignedProject": true,
+      "Name": "Unassigned",
+      "Status": 0,
+      "StatusText": "Active",
+      "Wbs": "00000.00.00.00.00"
+    }
+  ],
   "SaveFilePath": "C:\\Users\\nbspangl\\Documents\\coding\\WPF\\Cronus\\CronusTests\\Data\\882ce031-5a50-4f9f-ad74-b17bc8260e8a.json",
   "Status": 0,
   "StatusText": "Active",

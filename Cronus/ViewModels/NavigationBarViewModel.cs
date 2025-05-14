@@ -44,6 +44,21 @@ namespace Cronus.ViewModels
         private readonly NavigationStore _navigationStore;
 
         /// <summary>
+        /// Used to null the layout view-model.
+        /// </summary>
+        private readonly INavigate _nullLayoutNavigationService;
+
+        /// <summary>
+        /// Used to null the navigation bar view-model.
+        /// </summary>
+        private readonly INavigate _nullNavBarNavigationService;
+
+        /// <summary>
+        /// used to null the side content view-model.
+        /// </summary>
+        private readonly INavigate _nullSideContentNavigationService;
+
+        /// <summary>
         /// Used to navigate to the Projects view.
         /// </summary>
         private readonly INavigate _projectsNavigationService;
@@ -202,6 +217,21 @@ namespace Cronus.ViewModels
                     "edit book details",
                     _bookStore,
                     _navigationStore);
+            _nullLayoutNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "null layout",
+                    _bookStore,
+                    _navigationStore);
+            _nullNavBarNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "null nav bar",
+                    _bookStore,
+                    _navigationStore);
+            _nullSideContentNavigationService =
+                ServiceFactory.CreateNavigationService(
+                    "null side content",
+                    _bookStore,
+                    _navigationStore);
             _projectsNavigationService =
                 ServiceFactory.CreateNavigationService(
                     "projects",
@@ -294,6 +324,9 @@ namespace Cronus.ViewModels
         {
             CloseBookBarPopup();
             BookService.CloseCurrentBook(_bookStore);
+            _nullNavBarNavigationService.Navigate();
+            _nullSideContentNavigationService.Navigate();
+            _nullLayoutNavigationService.Navigate();
             _startScreenNavigationService.Navigate();
         }
 

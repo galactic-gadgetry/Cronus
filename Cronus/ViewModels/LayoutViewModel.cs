@@ -116,10 +116,11 @@ namespace Cronus.ViewModels
             {
                 NavigateSettingsViewConstituents();
             }
-            else if (CurrentContentViewModel is null)
-            {
-                NavigateDefaultView();
-            }
+            // We probably don't need this.
+            //else if (CurrentContentViewModel is null)
+            //{
+            //    NavigateDefaultView();
+            //}
 
             OnPropertyChanged(nameof(CurrentContentViewModel));
         }
